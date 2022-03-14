@@ -1,0 +1,28 @@
+.DS_Store
+
+node_modules
+**/*/node_modules
+
+.idea
+/.vscode/
+.npmrc
+
+dist
+dist-ssr
+TODOs.md
+*.log
+temp
+explorations
+*.local
+*.cpuprofile
+*.iml
+.history
+
+# lock
+package-lock.json
+**/*/package-lock.json
+yarn.lock
+**/*/yarn.lock
+
+# debug
+*debug.log
