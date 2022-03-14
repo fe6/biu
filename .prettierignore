@@ -1,0 +1,5 @@
+*.yaml
+*.hbs
+*.yml
+dist/
+changelog.md
