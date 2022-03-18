@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "build": "pnpm ttsc",
-    "build:deps": "pnpm esno ../../scripts/bundleDeps.ts",
+    "build:deps": "pnpm esno ../../scripts/bundle-deps.ts",
     "start": "pnpm ttsc -w"
   },
   "repository": {
