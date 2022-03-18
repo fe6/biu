@@ -4,7 +4,7 @@
   "scripts": {
     "bootstrap": "esno scripts/bootstrap.ts",
     "build": "pnpm build:pkg",
-    "build:pkg": "pnpm run --filter=@efox/emp build && pnpm run --filter=@efox/*  --filter=!@efox/emp --parallel build",
+    "build:pkg": "pnpm run --filter=@fe6/biu build && pnpm run --filter=@fe6/*  --filter=!@fe6/biu --parallel build",
     "docs:dev": "vitepress dev docs --host",
     "docs:build": "vitepress build docs",
     "docs:start": "vitepress serve docs --host",
