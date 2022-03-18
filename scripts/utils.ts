@@ -1,9 +1,9 @@
 /** @format */
 
 // Fork from https://github.com/umijs/umi-next/blob/master/scripts/utils.ts
-// import * as logger from '@umijs/utils/src/logger';
 import { existsSync, readdirSync, readFileSync, writeFileSync } from 'fs';
 import { join } from 'path';
+import { logger } from '@fe6/biu-utils';
 
 export function getPkgs(opts?: { base?: string }): string[] {
   const base = opts?.base || join(__dirname, '../packages');
@@ -35,8 +35,7 @@ export function eachPkg(
 
 export function assert(v: unknown, message: string) {
   if (!v) {
-    // logger.error(message);
-    process.exit(1);
+    logger.error(message);
   }
 }
 
