@@ -10,7 +10,10 @@
     "strict": true,
     "skipLibCheck": true,
     "target": "es2015",
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "paths": {
+      "@fe6/biu-utils": ["./packages/utils"]
+    }
   },
   "exclude": [
     "**/node_modules",
