@@ -1,6 +1,6 @@
 /** @format */
 
-import chalk from 'chalk';
+import chalk from '../compiled/chalk';
 
 const nameChalk = chalk.hex('#ff85c0');
 export const pkgName = `${nameChalk('[BIU]')} `;
@@ -19,45 +19,49 @@ export const prefixes = {
   debug: `${pkgName}${chalk.gray('[debug]')} -`,
 };
 
+export function empty() {
+  console.log();
+}
+
 export function wait(...message: any[]) {
   console.log(prefixes.wait, ...message);
-  console.log();
+  empty();
 }
 
 export function error(...message: any[]) {
   console.error(prefixes.error, ...message);
-  console.log();
+  empty();
 }
 
 export function errorExit(...message: any[]) {
   console.error(prefixes.error, ...message);
-  console.log();
+  empty();
   process.exit(1);
 }
 
 export function warn(...message: any[]) {
   console.warn(prefixes.warn, ...message);
-  console.log();
+  empty();
 }
 
 export function ready(...message: any[]) {
   console.log(prefixes.ready, ...message);
-  console.log();
+  empty();
 }
 
 export function info(...message: any[]) {
   console.log(prefixes.info, ...message);
-  console.log();
+  empty();
 }
 
 export function event(...message: any[]) {
   console.log(prefixes.event, ...message);
-  console.log();
+  empty();
 }
 
 export function debug(...message: any[]) {
   if (process.env.DEBUG) {
     console.log(prefixes.debug, ...message);
-    console.log();
+    empty();
   }
 }

@@ -40,7 +40,7 @@ import { setExcludeFolder } from './utils';
             files: ['dist'],
             scripts: {
               build: 'pnpm tsc',
-              'build:deps': 'pnpm esno ../../scripts/bundleDeps.ts',
+              'build:deps': 'pnpm esno ../../scripts/bundle-deps.ts',
               start: 'pnpm build -- --watch',
             },
             repository: {
