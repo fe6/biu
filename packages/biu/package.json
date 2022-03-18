@@ -1,0 +1,28 @@
+{
+  "name": "@fe6/biu",
+  "version": "0.0.0",
+  "description": "@fe6/biu",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "pnpm ttsc",
+    "build:deps": "pnpm esno ../../scripts/bundleDeps.ts",
+    "start": "pnpm ttsc -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fe6/biu.git",
+    "directory": "packages/biu"
+  },
+  "authors": [
+    "tainyi <649076408@qq.com> (https://github.com/iq9891)"
+  ],
+  "license": "MIT",
+  "bugs": "https://github.com/fe6/biu/issues",
+  "publishConfig": {
+    "access": "public"
+  }
+}
