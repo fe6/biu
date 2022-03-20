@@ -24,5 +24,16 @@
   "bugs": "https://github.com/fe6/biu/issues",
   "publishConfig": {
     "access": "public"
+  },
+  "devDependencies": {
+    "commander": "^9.1.0"
+  },
+  "compiledConfig": {
+    "deps": [
+      "commander"
+    ],
+    "externals": {
+      "commander": "$$LOCAL"
+    }
   }
 }
