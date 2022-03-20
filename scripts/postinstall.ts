@@ -2,6 +2,7 @@
 
 import { readFileSync, writeFileSync } from 'fs';
 import { join } from 'path';
+import { logger } from '@fe6/biu-utils';
 
 // FIX bundle deps error
 // ref: https://github.com/isaacs/node-graceful-fs/commit/e61a20a052b838f420b98195c232a824a6ac04ee
@@ -22,7 +23,7 @@ const replaces = [
   ],
 ];
 
-console.log('patch ncc');
+logger.wait('patch ncc');
 const path = join(
   __dirname,
   '../node_modules/@vercel/ncc/dist/ncc/index.js.cache.js',
@@ -31,10 +32,11 @@ const content = readFileSync(path, 'utf-8');
 let ret = content;
 for (const replace of replaces) {
   if (ret.includes(replace[2])) {
-    console.log(`${replace[0]} already patched`);
+    logger.ready(`${replace[0]} already patched`);
   } else {
-    console.log(`${replace[0]} patching`);
+    logger.wait(`${replace[0]} patching`);
     ret = ret.replace(replace[1], replace[2]);
   }
 }
+
 writeFileSync(path, ret, 'utf-8');

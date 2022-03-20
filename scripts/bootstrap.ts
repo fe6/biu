@@ -4,6 +4,7 @@
 // NOTE 所有功能（$、cd、fetch等）都可以直接使用，无需任何导入。
 // NOTE 或者显式导入全局变量（以便在VS代码中更好地自动完成）。
 import 'zx/globals';
+import { logger } from '@fe6/biu-utils';
 import { setExcludeFolder } from './utils';
 
 (async () => {
@@ -14,9 +15,8 @@ import { setExcludeFolder } from './utils';
   async function renderPkg(opts: any): Promise<void> {
     const pkgDir = path.join(opts.pkgDir, opts.pkg);
     if (!opts.force && fs.existsSync(path.join(pkgDir, 'package.json'))) {
-      console.log();
-      console.log(chalk.yellow(`${opts.pkg} exists`));
-      console.log();
+      logger.error(`${opts.pkg} exists`);
+      logger.empty();
     } else {
       if (!fs.existsSync(pkgDir)) {
         await $`mkdir ${pkgDir}`;
@@ -112,9 +112,8 @@ export default () => {
 
       // set excludeFolder for webstorm
       setExcludeFolder({ pkg: opts.pkg, cwd: root });
-      console.log();
-      console.log(chalk.green(`${opts.pkg} bootstrapped`));
-      console.log();
+      logger.ready(`${opts.pkg} bootstrapped`);
+      logger.empty();
     }
   }
 
@@ -126,8 +125,8 @@ export default () => {
   if (_.length > 0) {
     const [pkgName] = _;
     if (fs.existsSync(path.join(pkgDir, pkgName))) {
-      console.log(chalk.yellow(`${pkgName} exists`));
-      console.log();
+      logger.warn(`${pkgName} exists`);
+      logger.empty();
     } else {
       await renderPkg({
         pkgDir,
