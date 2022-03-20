@@ -51,7 +51,10 @@ importers:
       zx: registry.npmmirror.com/zx/4.3.0
 
   packages/biu:
-    specifiers: {}
+    specifiers:
+      commander: ^9.1.0
+    devDependencies:
+      commander: registry.npmmirror.com/commander/9.1.0
 
   packages/utils:
     specifiers:
@@ -1212,6 +1215,13 @@ packages:
     engines: {node: '>= 0.8'}
     dependencies:
       delayed-stream: registry.npmmirror.com/delayed-stream/1.0.0
+    dev: true
+
+  registry.npmmirror.com/commander/9.1.0:
+    resolution: {integrity: sha512-i0/MaqBtdbnJ4XQs4Pmyb+oFQl+q0lsAmokVUH92SlSw4fkeAcG3bVon+Qt7hmtF+u3Het6o4VgrcY3qAoEB6w==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/commander/-/commander-9.1.0.tgz}
+    name: commander
+    version: 9.1.0
+    engines: {node: ^12.20.0 || >=14}
     dev: true
 
   registry.npmmirror.com/compare-func/2.0.0:
