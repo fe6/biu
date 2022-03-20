@@ -16,7 +16,7 @@ import { setExcludeFolder } from './utils';
     const pkgDir = path.join(opts.pkgDir, opts.pkg);
     if (!opts.force && fs.existsSync(path.join(pkgDir, 'package.json'))) {
       logger.error(`${opts.pkg} exists`);
-      console.log();
+      logger.empty();
     } else {
       if (!fs.existsSync(pkgDir)) {
         await $`mkdir ${pkgDir}`;
@@ -113,7 +113,7 @@ export default () => {
       // set excludeFolder for webstorm
       setExcludeFolder({ pkg: opts.pkg, cwd: root });
       logger.ready(`${opts.pkg} bootstrapped`);
-      console.log();
+      logger.empty();
     }
   }
 
@@ -126,7 +126,7 @@ export default () => {
     const [pkgName] = _;
     if (fs.existsSync(path.join(pkgDir, pkgName))) {
       logger.warn(`${pkgName} exists`);
-      console.log();
+      logger.empty();
     } else {
       await renderPkg({
         pkgDir,
