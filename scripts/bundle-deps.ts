@@ -332,6 +332,7 @@ Object.keys(exported).forEach(function (key) {
     ? extraDtsDeps
     : deps.concat(extraDtsDeps)) {
     const isDep = dep.charAt(0) !== '.';
+    logger.empty();
     await buildDep({
       ...(isDep ? { pkgName: dep } : { file: dep }),
       target: `compiled/${isDep ? dep : path.basename(path.dirname(dep))}`,

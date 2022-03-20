@@ -27,14 +27,18 @@
     "typings": "dist/index.d.ts"
   },
   "devDependencies": {
-    "chalk": "^5.0.1"
+    "@types/yargs-parser": "^21.0.0",
+    "chalk": "^5.0.1",
+    "yargs-parser": "^21.0.1"
   },
   "compiledConfig": {
     "deps": [
-      "chalk"
+      "chalk",
+      "yargs-parser"
     ],
     "externals": {
-      "chalk": "$$LOCAL"
+      "chalk": "$$LOCAL",
+      "yargs-parser": "$$LOCAL"
     }
   }
 }

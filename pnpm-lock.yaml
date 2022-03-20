@@ -55,9 +55,13 @@ importers:
 
   packages/utils:
     specifiers:
+      '@types/yargs-parser': ^21.0.0
       chalk: ^5.0.1
+      yargs-parser: ^21.0.1
     devDependencies:
+      '@types/yargs-parser': registry.npmmirror.com/@types/yargs-parser/21.0.0
       chalk: registry.npmmirror.com/chalk/5.0.1
+      yargs-parser: registry.npmmirror.com/yargs-parser/21.0.1
 
 packages:
 
@@ -696,6 +700,12 @@ packages:
     version: 1.0.0
     dependencies:
       '@types/node': registry.npmmirror.com/@types/node/17.0.21
+    dev: true
+
+  registry.npmmirror.com/@types/yargs-parser/21.0.0:
+    resolution: {integrity: sha512-iO9ZQHkZxHn4mSakYV0vFHAVDyEOIJQrV2uZ06HxEPcx+mt8swXoZHIbaaJ2crJYFfErySgktuTZ3BeLz+XmFA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/yargs-parser/-/yargs-parser-21.0.0.tgz}
+    name: '@types/yargs-parser'
+    version: 21.0.0
     dev: true
 
   registry.npmmirror.com/@vercel/ncc/0.33.3:
