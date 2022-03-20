@@ -1,5 +1,11 @@
 /** @format */
 
+// * utils
 import * as logger from './logger';
+// * utils
 
-export { logger };
+// ? deps
+import yParser from '../compiled/yargs-parser';
+// ? deps
+
+export { logger, yParser };
