@@ -5,12 +5,14 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
-    "dist"
+    "dist",
+    "bin"
   ],
+  "bin": "./bin/biu.js",
   "scripts": {
-    "build": "pnpm ttsc",
+    "build": "pnpm tsc",
     "build:deps": "pnpm esno ../../scripts/bundle-deps.ts",
-    "start": "pnpm ttsc -w"
+    "start": "pnpm build -- --watch"
   },
   "repository": {
     "type": "git",
@@ -35,5 +37,8 @@
     "externals": {
       "commander": "$$LOCAL"
     }
+  },
+  "dependencies": {
+    "@fe6/biu-utils": "workspace:*"
   }
 }

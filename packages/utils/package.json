@@ -2,8 +2,10 @@
   "name": "@fe6/biu-utils",
   "version": "0.0.0",
   "description": "@fe6/biu-utils",
-  "main": "src/index.ts",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
   "files": [
+    "compiled",
     "dist"
   ],
   "scripts": {
@@ -22,22 +24,24 @@
   "license": "MIT",
   "bugs": "https://github.com/fe6/biu/issues",
   "publishConfig": {
-    "access": "public",
-    "main": "dist/index.js",
-    "typings": "dist/index.d.ts"
+    "access": "public"
   },
   "devDependencies": {
+    "@types/cross-spawn": "^6.0.2",
     "@types/yargs-parser": "^21.0.0",
     "chalk": "^5.0.1",
+    "cross-spawn": "^7.0.3",
     "yargs-parser": "^21.0.1"
   },
   "compiledConfig": {
     "deps": [
       "chalk",
-      "yargs-parser"
+      "yargs-parser",
+      "cross-spawn"
     ],
     "externals": {
       "chalk": "$$LOCAL",
+      "cross-spawn": "$$LOCAL",
       "yargs-parser": "$$LOCAL"
     }
   }

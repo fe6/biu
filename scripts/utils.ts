@@ -1,9 +1,10 @@
 /** @format */
 
 // Fork from https://github.com/umijs/umi-next/blob/master/scripts/utils.ts
+
 import { existsSync, readdirSync, readFileSync, writeFileSync } from 'fs';
 import { join } from 'path';
-import { logger } from '@fe6/biu-utils';
+import * as logger from '@fe6/biu-utils/src/logger';
 
 export function getPkgs(opts?: { base?: string }): string[] {
   const base = opts?.base || join(__dirname, '../packages');

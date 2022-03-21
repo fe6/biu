@@ -14,9 +14,10 @@ export const prefixes = {
   error: `${pkgName}${errorChalk('[error]')} -`,
   warn: `${pkgName}${warnChalk('[warn]')}  -`,
   ready: `${pkgName}${chalk.green('[ready]')} -`,
-  info: `${pkgName}${chalk.blue('[info]')}  -`,
   event: `${pkgName}${chalk.magenta('[event]')} -`,
   debug: `${pkgName}${chalk.gray('[debug]')} -`,
+  info: (type: string = 'info') =>
+    `${pkgName}${type ? chalk.blue(`[${type}]`) : ''} -`,
 };
 
 export function empty() {
@@ -50,7 +51,7 @@ export function ready(...message: any[]) {
 }
 
 export function info(...message: any[]) {
-  console.log(prefixes.info, ...message);
+  console.log(prefixes.info(), ...message);
   empty();
 }
 

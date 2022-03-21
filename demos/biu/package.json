@@ -1,0 +1,9 @@
+{
+  "name": "demo-biu",
+  "scripts": {
+    "start": "biu"
+  },
+  "devDependencies": {
+    "@fe6/biu": "workspace:*"
+  }
+}
