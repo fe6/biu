@@ -3,6 +3,7 @@
   "description": "Pluggable enterprise-level application framework.",
   "scripts": {
     "bootstrap": "esno scripts/bootstrap.ts",
+    "start": "esno scripts/turbo.ts --cmd start",
     "build": "pnpm build:pkg",
     "build:pkg": "pnpm run --filter=@fe6/biu build && pnpm run --filter=@fe6/*  --filter=!@fe6/biu --parallel build",
     "docs:dev": "vitepress dev docs --host",
@@ -43,7 +44,7 @@
     "resolve": "^1.22.0",
     "ts-node": "^10.7.0",
     "ts-transform-paths": "^2.0.3",
-    "ttypescript": "^1.5.13",
+    "turbo": "^1.1.6",
     "typescript": "^4.6.2",
     "vitepress": "^0.22.3",
     "zx": "4.3.0"

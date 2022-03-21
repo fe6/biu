@@ -6,6 +6,8 @@ import * as logger from './logger';
 
 // ? deps
 import yParser from '../compiled/yargs-parser';
+import chalk from '../compiled/chalk';
+import crossSpawn from '../compiled/cross-spawn';
 // ? deps
 
-export { logger, yParser };
+export { logger, yParser, chalk, crossSpawn };

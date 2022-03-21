@@ -1,12 +1,12 @@
 /** @format */
 
-// fork from https://github.com/umijs/umi-next/blob/master/scripts/bundleDeps.ts
+// Fork from https://github.com/umijs/umi-next/blob/master/scripts/bundleDeps.ts
 // @ts-ignore
 import ncc from '@vercel/ncc';
 import { Package } from 'dts-packer';
 import resolve from 'resolve';
 import 'zx/globals';
-import { logger } from '@fe6/biu-utils';
+import * as logger from '@fe6/biu-utils/src/logger';
 
 export async function buildDep(opts: any) {
   logger.info(`Build dep ${opts.pkgName || opts.file}`);

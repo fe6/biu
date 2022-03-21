@@ -1,8 +1,10 @@
 /** @format */
 
+// Fork https://github.com/umijs/umi-next/blob/master/scripts/postinstall.ts
+
 import { readFileSync, writeFileSync } from 'fs';
 import { join } from 'path';
-import { logger } from '@fe6/biu-utils';
+import * as logger from '@fe6/biu-utils/src/logger';
 
 // FIX bundle deps error
 // ref: https://github.com/isaacs/node-graceful-fs/commit/e61a20a052b838f420b98195c232a824a6ac04ee

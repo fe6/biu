@@ -10,16 +10,15 @@
     "strict": true,
     "skipLibCheck": true,
     "target": "es2015",
-    "jsx": "preserve",
-    "paths": {
-      "@fe6/biu-utils": ["./packages/utils"]
-    }
+    "jsx": "preserve"
   },
   "exclude": [
     "**/node_modules",
     "**/examples",
     "**/dist",
     "**/fixtures",
-    "**/*.test.ts"
+    "**/*.test.ts",
+    "script",
+    "compiled"
   ]
 }

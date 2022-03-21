@@ -1,6 +1,7 @@
 /** @format */
 
 // Fork from https://github.com/umijs/umi-next/blob/master/scripts/utils.ts
+
 // NOTE 所有功能（$、cd、fetch等）都可以直接使用，无需任何导入。
 // NOTE 或者显式导入全局变量（以便在VS代码中更好地自动完成）。
 import 'zx/globals';
@@ -86,7 +87,7 @@ import { setExcludeFolder } from './utils';
         `{
   "extends": "../tsconfig.base.json",
   "compilerOptions": {
-    "baseUrl": ".",
+    "rootDir": "./src",
     "outDir": "dist"
   },
   "include": ["src"]
