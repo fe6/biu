@@ -4,6 +4,7 @@ import path from 'path';
 import { lodash } from '@fe6/biu-utils';
 import { TCmdOptions, TPkg, ENUM_ENV } from '../types';
 import { mergeConfig, TConfig, Config } from '../config';
+import BiuShare from '../config/options/biu-share';
 
 class BiuCache {
   constructor() {}
@@ -38,6 +39,38 @@ class BiuCache {
    * 项目配置
    */
   public config: TConfig = mergeConfig();
+
+  /**
+   * 源码地址 绝对路径
+   */
+  public appSrc = '';
+  /**
+   * 源码生成目录 绝对路径
+   */
+  public outDir = '';
+  /**
+   * 静态文件目录 绝对路径
+   */
+  public publicDir = '';
+  /**
+   * 缓存目录 绝对路径
+   */
+  public cacheDir = '';
+  public biuShare = new BiuShare();
+  /**
+   * 获取项目 根目录绝对路径
+   * @param relativePath
+   * @returns
+   */
+  public resolve = (relativePath: string) =>
+    path.resolve(this.root, relativePath);
+  /**
+   * 获取项目 emp内部根目录绝对路径
+   * @param relativePath
+   * @returns
+   */
+  public biuResolve = (relativePath: string) =>
+    path.resolve(this.biuRoot, relativePath);
   /**
    * 获取项目 根目录绝对路径
    * @param relativePath
@@ -58,6 +91,22 @@ class BiuCache {
     });
     this.config = lodash.cloneDeep(configManager.currentConfig);
     this.isESM = ['es3', 'es5'].indexOf(this.config.build.target) === -1;
+    //设置绝对路径
+    this.setAbsPaths();
+    // TODO Lib
+    // if (!this.config.build.lib) {
+    //   // lib 模式下 忽略 biuShare 设置
+    //   // biuShare 初始化
+    //   await this.biuShare.setup()
+    // }
+    await this.biuShare.setup();
+  }
+  private setAbsPaths() {
+    //
+    this.appSrc = this.resolve(this.config.appSrc);
+    this.outDir = this.resolve(this.config.build.outDir);
+    this.publicDir = this.resolve(this.config.publicDir);
+    this.cacheDir = this.resolve(this.config.cacheDir);
   }
 }
 

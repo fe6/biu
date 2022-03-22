@@ -48,11 +48,11 @@ export const initHtml = (o: WebpackHtmlPluginOption = {}): TInitHtml => {
     // template = store.getProjectResolve(template)
     console.log(template, 'TODO template');
     // if (!fs.existsSync(template)) {
-    //   template = store.empResolve('template/index.html')
+    //   template = store.biuResolve('template/index.html')
     // }
     // favicon = store.getProjectResolve(favicon)
     // if (!fs.existsSync(favicon)) {
-    //   favicon = store.empResolve('template/favicon.ico')
+    //   favicon = store.biuResolve('template/favicon.ico')
     // }
   }
   const title = 'EMP';

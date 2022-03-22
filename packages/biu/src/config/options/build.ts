@@ -97,7 +97,7 @@ export type TBuildOptions = {
    */
   jsToJsx?: boolean;
 };
-export type RquireBuildOptions = TOverride<
+export type TRquireBuildOptions = TOverride<
   Required<TBuildOptions>,
   {
     // TODO
@@ -106,7 +106,7 @@ export type RquireBuildOptions = TOverride<
     minOptions?: TerserOptions;
   }
 >;
-export const initBuild = (op?: TBuildOptions): RquireBuildOptions => {
+export const initBuild = (op?: TBuildOptions): TRquireBuildOptions => {
   return {
     ...{
       sync: false,

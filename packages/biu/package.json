@@ -28,6 +28,7 @@
     "access": "public"
   },
   "devDependencies": {
+    "@swc/core": "^1.2.160",
     "commander": "^9.1.0"
   },
   "compiledConfig": {
