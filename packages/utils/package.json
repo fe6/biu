@@ -28,21 +28,48 @@
   },
   "devDependencies": {
     "@types/cross-spawn": "^6.0.2",
+    "@types/lodash": "^4.14.180",
     "@types/yargs-parser": "^21.0.0",
     "chalk": "^5.0.1",
     "cross-spawn": "^7.0.3",
+    "esbuild": "^0.14.27",
+    "fs-extra": "^10.0.1",
+    "lodash": "^4.17.21",
+    "pirates": "^4.0.5",
+    "schema-utils": "^4.0.0",
+    "webpack": "^5.70.0",
     "yargs-parser": "^21.0.1"
   },
   "compiledConfig": {
     "deps": [
       "chalk",
+      "fs-extra",
+      "esbuild",
+      "lodash",
       "yargs-parser",
-      "cross-spawn"
+      "cross-spawn",
+      "schema-utils",
+      "webpack",
+      "pirates"
     ],
     "externals": {
       "chalk": "$$LOCAL",
+      "fs-extra": "$$LOCAL",
       "cross-spawn": "$$LOCAL",
-      "yargs-parser": "$$LOCAL"
-    }
+      "yargs-parser": "$$LOCAL",
+      "esbuild": "$$LOCAL",
+      "webpack": "$$LOCAL",
+      "lodash": "$$LOCAL",
+      "pirates": "$$LOCAL"
+    },
+    "extraDtsDeps": [
+      "webpack"
+    ],
+    "extraDtsExternals": [
+      "@swc/core",
+      "esbuild",
+      "uglify-js",
+      "webpack"
+    ]
   }
 }
