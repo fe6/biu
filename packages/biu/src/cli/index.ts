@@ -4,8 +4,8 @@ import fs from 'fs';
 import path from 'path';
 import { logger } from '@fe6/biu-utils';
 import { Command } from '../../compiled/commander';
-import biuExec from './core';
 import { ENUM_ENV } from '../types';
+import biuExec from './core';
 
 export const run = () => {
   const pkg = fs.readFileSync(

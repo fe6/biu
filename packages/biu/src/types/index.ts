@@ -1,12 +1,9 @@
 /** @format */
 
-import { ResolveOptions } from '@fe6/biu-utils/compiled/webpack';
-export type TModeType =
-  | 'development'
-  | 'test'
-  | 'production'
-  | 'none'
-  | undefined;
+import { ResolveOptions as WebpackResolveOptions } from '@fe6/biu-utils/compiled/webpack';
+import { IHtmlOptions } from '../config/options/html';
+
+export type TMode = 'development' | 'test' | 'production' | 'none' | undefined;
 
 export enum ENUM_ENV {
   development = 'development',
@@ -14,7 +11,7 @@ export enum ENUM_ENV {
   test = 'test',
 }
 
-export type TCmdOptionsType = { [key: string]: string | number | boolean } & {
+export type TCmdOptions = { [key: string]: string | number | boolean } & {
   /**
    * 全局环境变量
    * dotenv 先根据env做判断、否则再按照 webpack mode 做判断
@@ -24,19 +21,47 @@ export type TCmdOptionsType = { [key: string]: string | number | boolean } & {
   typingsPath?: string;
 };
 
-export type Override<What, With> = Omit<What, keyof With> & With;
+export type TOverride<What, With> = Omit<What, keyof With> & With;
+export type TEntries = { [entryFilename: string]: IHtmlOptions };
+export declare type TJscTarget =
+  | 'es3'
+  | 'es5'
+  | 'es2015'
+  | 'es2016'
+  | 'es2017'
+  | 'es2018'
+  | 'es2019'
+  | 'es2020'
+  | 'es2021'
+  | 'es2022';
 
-export type ConfigResolveAliasType = { [index: string]: string };
-export type ConfigResolveType = {
-  modules: ResolveOptions['modules'];
-  alias: ConfigResolveAliasType;
-  extensions: ResolveOptions['extensions'];
+export type TConfigDebug = {
+  clearLog: boolean;
+  progress: boolean;
+  profile: boolean;
+  wplogger: boolean | string; // --wplogger [filename] 可以为 string
+  /**
+   * 日志级别
+   */
+  // level: LoggerType
+};
+
+export type TConfigResolveAlias = { [index: string]: string };
+export type TConfigResolve = {
+  modules: WebpackResolveOptions['modules'];
+  alias: TConfigResolveAlias;
+  extensions: WebpackResolveOptions['extensions'];
   extends: boolean;
 };
-export type TPkgType = {
+export type TPkg = {
   dependencies: any;
   devDependencies: any;
   version: string;
   name: string;
   [key: string]: any;
+};
+
+export type TExternalAssets = {
+  js: string[];
+  css: string[];
 };

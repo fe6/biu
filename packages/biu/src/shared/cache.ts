@@ -2,7 +2,7 @@
 
 import path from 'path';
 import { lodash } from '@fe6/biu-utils';
-import { TCmdOptionsType, TPkgType, ENUM_ENV } from '../types';
+import { TCmdOptions, TPkg, ENUM_ENV } from '../types';
 import { mergeConfig, TConfig, Config } from '../config';
 
 class BiuCache {
@@ -10,7 +10,7 @@ class BiuCache {
   /**
    * 项目pkg信息
    */
-  public pkg: TPkgType = {
+  public pkg: TPkg = {
     dependencies: {},
     devDependencies: {},
     version: '0.0.0',
@@ -21,7 +21,10 @@ class BiuCache {
    * @default path.resolve(__dirname, '../../')
    */
   public biuRoot = path.resolve(__dirname, '../../');
-
+  /**
+   * 是否 ESM 模块
+   */
+  public isESM = false;
   /**
    * 项目根目录绝对路径
    * @default process.cwd()
@@ -43,7 +46,7 @@ class BiuCache {
   public getProjectResolve = (relativePath: string) =>
     path.resolve(this.root, relativePath);
 
-  async setup(mode: ENUM_ENV, cmdOptions: TCmdOptionsType) {
+  async setup(mode: ENUM_ENV, cmdOptions: TCmdOptions) {
     // 项目 package.json
     const pkg = require(this.getProjectResolve('package.json'));
     this.pkg = { ...this.pkg, ...pkg };
@@ -54,6 +57,7 @@ class BiuCache {
       cmdOptions,
     });
     this.config = lodash.cloneDeep(configManager.currentConfig);
+    this.isESM = ['es3', 'es5'].indexOf(this.config.build.target) === -1;
   }
 }
 
