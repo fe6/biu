@@ -2,10 +2,10 @@
 
 import path from 'path';
 import { RuleSetRule as WebpackRuleSetRule } from '@fe6/biu-utils/compiled/webpack';
+import { TConfigDebug } from '../types';
 import { initBuild } from './options/build';
 import { initServer } from './options/server';
 import { initHtml } from './options/html';
-import { TConfigDebug } from '../types';
 
 import { TConfig } from './types';
 

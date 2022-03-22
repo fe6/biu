@@ -204,6 +204,11 @@ Object.keys(exported).forEach(function (key) {
           fs.copySync(filePath, path.join(target, 'common'));
         }
 
+        if (opts.pkgName === 'webpack') {
+          const filePath = path.join(nodeModulesPath, opts.pkgName, 'hot');
+          fs.copySync(filePath, path.join(target, 'hot'));
+        }
+
         // patch
         if (opts.pkgName === 'webpack-5-chain') {
           const filePath = path.join(target, 'types/index.d.ts');
@@ -335,7 +340,7 @@ Object.keys(exported).forEach(function (key) {
         );
       }
 
-      // FIX raceful-fs
+      // FIX require
       const racefulFsFilePath = path.join(target, 'lib/Server.js');
       fs.writeFileSync(
         racefulFsFilePath,
@@ -345,7 +350,84 @@ Object.keys(exported).forEach(function (key) {
           .replace(`schema-utils`, `@fe6/biu-utils/compiled/schema-utils`)
           .replace(`"express`, `"@fe6/biu-utils/compiled/express`)
           .replace(`default-gateway`, `@fe6/biu-utils/compiled/default-gateway`)
-          .replace(`ipaddr.js`, `@fe6/biu-utils/compiled/ipaddr.js`),
+          .replace(`ipaddr.js`, `@fe6/biu-utils/compiled/ipaddr.js`)
+          .replace(
+            `require("webpack-dev-middleware`,
+            `require("@fe6/biu-utils/compiled/webpack-dev-middleware`,
+          )
+          .replace(
+            `require("compression`,
+            `require("@fe6/biu-utils/compiled/compression`,
+          )
+          .replace(
+            `require("connect-history-api-fallback`,
+            `require("@fe6/biu-utils/compiled/connect-history-api-fallback`,
+          )
+          .replace(
+            `require("serve-index`,
+            `require("@fe6/biu-utils/compiled/serve-index`,
+          )
+          .replace(`require("open`, `require("@fe6/biu-utils/compiled/open`)
+          .replace(
+            `require("bonjour`,
+            `require("@fe6/biu-utils/compiled/bonjour`,
+          )
+          .replace(
+            `require("colorette`,
+            `require("@fe6/biu-utils/compiled/colorette`,
+          )
+          .replace(
+            `require("chokidar`,
+            `require("@fe6/biu-utils/compiled/chokidar`,
+          )
+          .replace(
+            `require("colorette`,
+            `require("@fe6/biu-utils/compiled/colorette`,
+          )
+          .replace(
+            `require.resolve("webpack/hot/only-dev-server`,
+            `require.resolve("@fe6/biu-utils/compiled/webpack/hot/only-dev-server`,
+          )
+          .replace(
+            `require.resolve("webpack/hot/dev-server`,
+            `require.resolve("@fe6/biu-utils/compiled/webpack/hot/dev-server`,
+          )
+          .replace(
+            `require("webpack"`,
+            `require("@fe6/biu-utils/compiled/webpack"`,
+          ),
+        'utf-8',
+      );
+    } else if (dep === 'webpack-federated-stats-plugin') {
+      logger.info(`Build dep ${dep}`);
+      fs.ensureDirSync(target);
+      const pkgRoot = path.dirname(
+        resolve.sync(`${dep}/package.json`, {
+          basedir: base,
+        }),
+      );
+      if (fs.existsSync(path.join(pkgRoot, 'index.js'))) {
+        fs.writeFileSync(
+          path.join(target, 'index.js'),
+          fs.readFileSync(path.join(pkgRoot, 'index.js'), 'utf-8'),
+          'utf-8',
+        );
+      }
+      if (fs.existsSync(path.join(pkgRoot, 'package.json'))) {
+        fs.writeFileSync(
+          path.join(target, 'package.json'),
+          fs.readFileSync(path.join(pkgRoot, 'package.json'), 'utf-8'),
+          'utf-8',
+        );
+      }
+
+      // FIX require
+      const racefulFsFilePath = path.join(target, 'index.js');
+      fs.writeFileSync(
+        racefulFsFilePath,
+        fs
+          .readFileSync(racefulFsFilePath, 'utf-8')
+          .replace(`"webpack`, `"@fe6/biu-utils/compiled/webpack`),
         'utf-8',
       );
     } else {

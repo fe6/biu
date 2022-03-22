@@ -1,7 +1,14 @@
 /** @format */
 
 import { RuleSetRule as WebpackRuleSetRule } from '@fe6/biu-utils/compiled/webpack';
-import { ENUM_ENV, TOverride, TEntries, TMode, TConfigDebug } from '../types';
+import {
+  ENUM_ENV,
+  TOverride,
+  TEntries,
+  TMode,
+  TConfigDebug,
+  TConfigResolve,
+} from '../types';
 import { TBiuShareExport } from '../types/biu-share';
 import { WPChain } from '../shared/wp-chain';
 import { TExternals } from '../types/externals';
@@ -74,7 +81,7 @@ export type TBiuConfig = {
   /**
    * resolve
    */
-  // resolve?: ConfigResolveType
+  resolve?: TConfigResolve;
   /**
    * biu plugins
    */

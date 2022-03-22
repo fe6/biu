@@ -616,12 +616,12 @@ class Server {
     }
 
     if (this.options.hot === "only") {
-      additionalEntries.push(require.resolve("webpack/hot/only-dev-server"));
+      additionalEntries.push(require.resolve("@fe6/biu-utils/compiled/webpack/hot/only-dev-server"));
     } else if (this.options.hot) {
-      additionalEntries.push(require.resolve("webpack/hot/dev-server"));
+      additionalEntries.push(require.resolve("@fe6/biu-utils/compiled/webpack/hot/dev-server"));
     }
 
-    const webpack = compiler.webpack || require("webpack");
+    const webpack = compiler.webpack || require("@fe6/biu-utils/compiled/webpack");
 
     // use a hook to add entries if available
     if (typeof webpack.EntryPlugin !== "undefined") {
@@ -1936,7 +1936,7 @@ class Server {
    * @returns {void}
    */
   setupDevMiddleware() {
-    const webpackDevMiddleware = require("webpack-dev-middleware");
+    const webpackDevMiddleware = require("@fe6/biu-utils/compiled/webpack-dev-middleware");
 
     // middleware for serving webpack bundle
     this.middleware = webpackDevMiddleware(
@@ -2095,7 +2095,7 @@ class Server {
 
     // compress is placed last and uses unshift so that it will be the first middleware used
     if (this.options.compress) {
-      const compression = require("compression");
+      const compression = require("@fe6/biu-utils/compiled/compression");
 
       middlewares.push({ name: "compression", middleware: compression() });
     }
@@ -2270,7 +2270,7 @@ class Server {
     }
 
     if (this.options.historyApiFallback) {
-      const connectHistoryApiFallback = require("connect-history-api-fallback");
+      const connectHistoryApiFallback = require("@fe6/biu-utils/compiled/connect-history-api-fallback");
       const { historyApiFallback } = this.options;
 
       if (
@@ -2326,7 +2326,7 @@ class Server {
     }
 
     if (/** @type {NormalizedStatic[]} */ (this.options.static).length > 0) {
-      const serveIndex = require("serve-index");
+      const serveIndex = require("@fe6/biu-utils/compiled/serve-index");
 
       /** @type {NormalizedStatic[]} */
       (this.options.static).forEach((staticOption) => {
@@ -2545,7 +2545,7 @@ class Server {
    * @returns {void}
    */
   openBrowser(defaultOpenTarget) {
-    const open = require("open");
+    const open = require("@fe6/biu-utils/compiled/open");
 
     Promise.all(
       /** @type {NormalizedOpen[]} */
@@ -2596,7 +2596,7 @@ class Server {
      * @private
      * @type {import("bonjour").Bonjour | undefined}
      */
-    this.bonjour = require("bonjour")();
+    this.bonjour = require("@fe6/biu-utils/compiled/bonjour")();
     this.bonjour.publish({
       name: `Webpack Dev Server ${os.hostname()}:${this.options.port}`,
       port: /** @type {number} */ (this.options.port),
@@ -2629,7 +2629,7 @@ class Server {
    * @returns {void}
    */
   logStatus() {
-    const { isColorSupported, cyan, red } = require("colorette");
+    const { isColorSupported, cyan, red } = require("@fe6/biu-utils/compiled/colorette");
 
     /**
      * @param {Compiler["options"]} compilerOptions
@@ -3120,7 +3120,7 @@ class Server {
    * @param {WatchOptions} [watchOptions]
    */
   watchFiles(watchPath, watchOptions) {
-    const chokidar = require("chokidar");
+    const chokidar = require("@fe6/biu-utils/compiled/chokidar");
     const watcher = chokidar.watch(watchPath, watchOptions);
 
     // disabling refreshing on changing the content

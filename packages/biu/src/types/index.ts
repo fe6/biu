@@ -35,6 +35,8 @@ export declare type TJscTarget =
   | 'es2021'
   | 'es2022';
 
+export type TLoggerLevel = 'debug' | 'info' | 'warn' | 'error';
+
 export type TConfigDebug = {
   clearLog: boolean;
   progress: boolean;
@@ -43,7 +45,7 @@ export type TConfigDebug = {
   /**
    * 日志级别
    */
-  // level: LoggerType
+  level: TLoggerLevel;
 };
 
 export type TConfigResolveAlias = { [index: string]: string };

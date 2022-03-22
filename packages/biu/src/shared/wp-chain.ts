@@ -12,7 +12,7 @@ export const getConfig = (): WebpackConfiguration => {
   const conf = wpChain.toConfig();
 
   const { wplogger } = store.config.debug;
-  // TODO  && !store.config.build.lib
+  // TODO Lib && !store.config.build.lib
   if (wplogger) {
     if (typeof wplogger === 'string') {
       fsExtra
