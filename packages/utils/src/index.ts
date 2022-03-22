@@ -17,6 +17,13 @@ import esbuild from '../compiled/esbuild';
 import crossSpawn from '../compiled/cross-spawn';
 import fsExtra from '../compiled/fs-extra';
 import lodash from '../compiled/lodash';
+// FIX cli 中找不到
+// import { Configuration as WebpackConfiguration, ResolveOptions as WebpackResolveOptions, RuleSetRule as WebpackRuleSetRule, container as webpackContainer } from '../compiled/webpack'
+import { Options as WebpackHtmlPluginOption } from '../compiled/html-webpack-plugin';
+import webpackServer, {
+  Configuration as WebpackServerConfiguration,
+} from '../compiled/webpack-dev-server/lib/Server';
+import webpackChain from '../compiled/webpack-5-chain/index';
 // ? deps
 
 export {
@@ -28,4 +35,13 @@ export {
   fsExtra,
   lodash,
   webpack,
+  // FIX cli 中找不到
+  // webpackContainer,
+  // WebpackRuleSetRule,
+  // WebpackConfiguration,
+  // WebpackResolveOptions,
+  WebpackHtmlPluginOption,
+  webpackServer,
+  WebpackServerConfiguration,
+  webpackChain,
 };

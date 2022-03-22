@@ -143,50 +143,6 @@ Object.keys(exported).forEach(function (key) {
       if (opts.pkgName === 'fork-ts-checker-webpack-plugin') {
         fs.removeSync(path.join(target, 'typescript.js'));
       }
-
-      // for bundler-vite
-      // if (opts.pkgName === 'vite') {
-      //   const COMPILED_DIR = path.join(opts.base, 'compiled');
-      //   const { compiledConfig } = require(`${opts.base}/package.json`);
-
-      //   // generate externalized type from sibling packages (such as @umijs/bundler-utils)
-      //   Object.entries<string>(compiledConfig.externals)
-      //     .filter(
-      //       ([name, target]) =>
-      //         target.startsWith('@umijs/') &&
-      //         compiledConfig.extraDtsExternals.includes(name),
-      //     )
-      //     .forEach(([name, target]) => {
-      //       fs.writeFileSync(
-      //         path.join(COMPILED_DIR, `${name}.d.ts`),
-      //         `export * from '${target}';`,
-      //         'utf-8',
-      //       );
-      //     });
-
-      //   // copy sourcemap for vite client scripts
-      //   fs.copyFileSync(
-      //     require.resolve('vite/dist/client/client.mjs.map', {
-      //       paths: [opts.base],
-      //     }),
-      //     path.join(COMPILED_DIR, 'vite', 'client.mjs.map'),
-      //   );
-      //   fs.copyFileSync(
-      //     require.resolve('vite/dist/client/env.mjs.map', {
-      //       paths: [opts.base],
-      //     }),
-      //     path.join(COMPILED_DIR, 'vite', 'env.mjs.map'),
-      //   );
-      // }
-
-      // for bundler-webpack
-      // if (opts.pkgName === 'webpack') {
-      //   fs.writeFileSync(
-      //     path.join(opts.base, 'compiled/express.d.ts'),
-      //     `import e = require('@umijs/bundler-utils/compiled/express');\nexport = e;`,
-      //     'utf-8',
-      //   );
-      // }
     }
   }
 
@@ -249,23 +205,25 @@ Object.keys(exported).forEach(function (key) {
         }
 
         // patch
-        // if (opts.pkgName === 'webpack-5-chain') {
-        //   const filePath = path.join(target, 'types/index.d.ts');
-        //   fs.writeFileSync(
-        //     filePath,
-        //     fs
-        //       .readFileSync(filePath, 'utf-8')
-        //       .replace(
-        //         `} from 'webpack';`,
-        //         `} from '@umijs/bunder-webpack/compiled/webpack';`,
-        //       ),
-        //     'utf-8',
-        //   );
-        // }
-        // if (opts.pkgName === 'lodash') {
-        //   // TODO
-        //   // fs.copySync()
-        // }
+        if (opts.pkgName === 'webpack-5-chain') {
+          const filePath = path.join(target, 'types/index.d.ts');
+          fs.writeFileSync(
+            filePath,
+            fs
+              .readFileSync(filePath, 'utf-8')
+              .replace(
+                `} from 'webpack';`,
+                `} from '@fe6/biu-utils/compiled/webpack';`,
+              ),
+            'utf-8',
+          );
+          fs.writeFileSync(
+            path.join(target, 'index.d.ts'),
+            fs.readFileSync(filePath, 'utf-8'),
+            'utf-8',
+          );
+          fs.removeSync(path.join(target, 'types'));
+        }
 
         // for bundler-utils
         // if (opts.pkgName === 'less') {
@@ -344,18 +302,66 @@ Object.keys(exported).forEach(function (key) {
     : deps.concat(extraDtsDeps)) {
     const isDep = dep.charAt(0) !== '.';
     logger.empty();
-    await buildDep({
-      ...(isDep ? { pkgName: dep } : { file: dep }),
-      target: `compiled/${isDep ? dep : path.basename(path.dirname(dep))}`,
-      base,
-      webpackExternals,
-      dtsExternals,
-      clean: argv.clean,
-      minify: !noMinify.includes(dep),
-      dtsOnly: extraDtsDeps.includes(dep),
-      noDts: excludeDtsDeps.includes(dep),
-      isDependency: dep in pkgDeps,
-    });
+
+    const target = `compiled/${isDep ? dep : path.basename(path.dirname(dep))}`;
+
+    if (dep === 'webpack-dev-server') {
+      logger.info(`Build dep ${dep}`);
+      fs.ensureDirSync(target);
+      const nodeModulesPath = path.join(base, 'node_modules');
+      const theTarget = path.join(base, target);
+      const filePath = (fileName: string = '') =>
+        path.join(nodeModulesPath, dep, fileName);
+      fs.copySync(filePath('lib'), path.join(theTarget, 'lib'));
+      fs.copySync(filePath('client'), path.join(theTarget, 'client'));
+      fs.copySync(filePath('types/lib'), path.join(theTarget, 'lib'));
+      const pkgRoot = path.dirname(
+        resolve.sync(`${dep}/package.json`, {
+          basedir: base,
+        }),
+      );
+      if (fs.existsSync(path.join(pkgRoot, 'LICENSE'))) {
+        fs.writeFileSync(
+          path.join(target, 'LICENSE'),
+          fs.readFileSync(path.join(pkgRoot, 'LICENSE'), 'utf-8'),
+          'utf-8',
+        );
+      }
+      if (fs.existsSync(path.join(pkgRoot, 'package.json'))) {
+        fs.writeFileSync(
+          path.join(target, 'package.json'),
+          fs.readFileSync(path.join(pkgRoot, 'package.json'), 'utf-8'),
+          'utf-8',
+        );
+      }
+
+      // FIX raceful-fs
+      const racefulFsFilePath = path.join(target, 'lib/Server.js');
+      fs.writeFileSync(
+        racefulFsFilePath,
+        fs
+          .readFileSync(racefulFsFilePath, 'utf-8')
+          .replace(`graceful-fs`, `@fe6/biu-utils/compiled/fs-extra`)
+          .replace(`schema-utils`, `@fe6/biu-utils/compiled/schema-utils`)
+          .replace(`"express`, `"@fe6/biu-utils/compiled/express`)
+          .replace(`default-gateway`, `@fe6/biu-utils/compiled/default-gateway`)
+          .replace(`ipaddr.js`, `@fe6/biu-utils/compiled/ipaddr.js`),
+        'utf-8',
+      );
+    } else {
+      await buildDep({
+        ...(isDep ? { pkgName: dep } : { file: dep }),
+        target,
+        base,
+        webpackExternals,
+        dtsExternals,
+        clean: argv.clean,
+        minify: !noMinify.includes(dep),
+        dtsOnly: extraDtsDeps.includes(dep),
+        noDts: excludeDtsDeps.includes(dep),
+        isDependency: dep in pkgDeps,
+      });
+    }
   }
 
   logger.empty();

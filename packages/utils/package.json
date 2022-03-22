@@ -28,16 +28,24 @@
   },
   "devDependencies": {
     "@types/cross-spawn": "^6.0.2",
+    "@types/default-gateway": "^3.0.1",
     "@types/lodash": "^4.14.180",
     "@types/yargs-parser": "^21.0.0",
     "chalk": "^5.0.1",
     "cross-spawn": "^7.0.3",
+    "default-gateway": "^6.0.3",
     "esbuild": "^0.14.27",
+    "express": "^4.17.3",
     "fs-extra": "^10.0.1",
+    "html-webpack-plugin": "^5.5.0",
+    "ipaddr.js": "^2.0.1",
     "lodash": "^4.17.21",
     "pirates": "^4.0.5",
     "schema-utils": "^4.0.0",
+    "terser-webpack-plugin": "^5.3.1",
     "webpack": "^5.70.0",
+    "webpack-5-chain": "^8.0.0",
+    "webpack-dev-server": "^4.7.4",
     "yargs-parser": "^21.0.1"
   },
   "compiledConfig": {
@@ -50,6 +58,13 @@
       "cross-spawn",
       "schema-utils",
       "webpack",
+      "express",
+      "default-gateway",
+      "ipaddr.js",
+      "webpack-5-chain",
+      "html-webpack-plugin",
+      "webpack-dev-server",
+      "terser-webpack-plugin",
       "pirates"
     ],
     "externals": {
@@ -58,15 +73,25 @@
       "cross-spawn": "$$LOCAL",
       "yargs-parser": "$$LOCAL",
       "esbuild": "$$LOCAL",
+      "ipaddr.js": "$$LOCAL",
+      "express": "$$LOCAL",
+      "default-gateway": "$$LOCAL",
       "webpack": "$$LOCAL",
+      "webpack-5-chain": "$$LOCAL",
+      "html-webpack-plugin": "$$LOCAL",
+      "webpack-dev-server": "$$LOCAL",
       "lodash": "$$LOCAL",
+      "terser-webpack-plugin": "$$LOCAL",
       "pirates": "$$LOCAL"
     },
     "extraDtsDeps": [
       "webpack"
     ],
+    "noMinify": [
+      "./bundles/webpack/bundle",
+      "terser-webpack-plugin"
+    ],
     "extraDtsExternals": [
-      "@swc/core",
       "esbuild",
       "uglify-js",
       "webpack"

@@ -3,7 +3,7 @@
 import { existsSync } from 'fs';
 import { join } from 'path';
 import { fsExtra } from '@fe6/biu-utils';
-import { TCmdOptionsType, ENUM_ENV } from '../types';
+import { TCmdOptions, ENUM_ENV } from '../types';
 import { DEFAULT_CONFIG_FILES, SHORT_ENV, LOCAL_EXT } from '../contant';
 import { TBiuConfigExport } from './types';
 import { mergeConfig } from './def-conf';
@@ -11,7 +11,7 @@ import { mergeConfig } from './def-conf';
 interface IOpts {
   cwd: string;
   mode: ENUM_ENV;
-  cmdOptions: TCmdOptionsType;
+  cmdOptions: TCmdOptions;
   // specifiedEnv?: string;
 }
 
@@ -40,7 +40,7 @@ export class Config {
     return mainConfigFile;
   }
 
-  async setConfig(mode: ENUM_ENV, cmdOptions: TCmdOptionsType) {
+  async setConfig(mode: ENUM_ENV, cmdOptions: TCmdOptions) {
     if (fsExtra.existsSync(this.mainConfigFile)) {
       const configExport: TBiuConfigExport = require(this.mainConfigFile);
       if (typeof configExport === 'function') {

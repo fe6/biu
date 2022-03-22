@@ -1,11 +1,25 @@
 /** @format */
 
-import { ENUM_ENV, Override, TModeType } from '../types';
+import { RuleSetRule as WebpackRuleSetRule } from '@fe6/biu-utils/compiled/webpack';
+import { ENUM_ENV, TOverride, TEntries, TMode, TConfigDebug } from '../types';
+import { TBiuShareExport } from '../types/biu-share';
+import { WPChain } from '../shared/wp-chain';
+import { TExternals } from '../types/externals';
+import { TMFExport } from '../types/module-federation';
+import { TBuildOptions } from './options/build';
+import { TServerOptions } from './options/server';
+import { IHtmlOptions, TInitHtml } from './options/html';
+import { TWebpackChain } from './options/chain';
 
 export interface IConfigEnv {
   mode: ENUM_ENV;
-  env?: TModeType;
+  env?: TMode;
   [key: string]: any;
+}
+
+export interface IModuleTransform {
+  exclude?: WebpackRuleSetRule['exclude'][];
+  include?: WebpackRuleSetRule['include'][];
 }
 
 export type TBiuConfig = {
@@ -44,6 +58,7 @@ export type TBiuConfig = {
   cacheDir?: string;
   /**
    * 调试模式为 development
+   * 测试模式为 test
    * 构建模式为 production
    * 正式环境为 none
    */
@@ -60,41 +75,41 @@ export type TBiuConfig = {
    * resolve
    */
   // resolve?: ConfigResolveType
-  // /**
-  //  * emp plugins
-  //  */
-  // plugins?: ConfigPluginType[]
-  // /**
-  //  * dev server
-  //  */
-  // server?: ServerOptions
-  // /**
-  //  * build options
-  //  */
-  // build?: BuildOptions
-  // /**
-  //  * library externals
-  //  */
-  // externals?: ExternalsType
-  // /**
-  //  * debug 选项
-  //  */
-  // debug?: ConfigDebugType
-  // /**
-  //  * webpackChain 暴露到 emp-config
-  //  */
-  // webpackChain?: WebpackChainType
+  /**
+   * biu plugins
+   */
+  plugins?: TConfigPlugin[];
+  /**
+   * dev server
+   */
+  server?: TServerOptions;
+  /**
+   * build options
+   */
+  build?: TBuildOptions;
+  /**
+   * library externals
+   */
+  externals?: TExternals;
+  /**
+   * debug 选项
+   */
+  debug?: TConfigDebug;
+  /**
+   * webpackChain 暴露到 biu-config
+   */
+  webpackChain?: TWebpackChain;
 
   /**
    * module federation 配置
    */
-  // moduleFederation?: MFExport
+  moduleFederation?: TMFExport;
   /**
-   * emp share 配置
+   * biu share 配置
    * 实现3重共享模型
-   * empshare 与 module federation 只能选择一个配置
+   * biushare 与 module federation 只能选择一个配置
    */
-  // empShare?: EMPShareExport
+  biuShare?: TBiuShareExport;
   /**
    * 启用 import.meta
    * 需要在 script type=module 才可以执行
@@ -116,12 +131,12 @@ export type TBiuConfig = {
    * html-webpack-plugin 相关操作
    * (*)entries 设置后 会继承这里的操作
    */
-  // html?: HtmlOptions
+  html?: IHtmlOptions;
   /**
    * 多页面模式
    * entryFilename 为基于 src目录如 `info/index`
    */
-  // entries?: EntriesType
+  entries?: TEntries;
   /**
    * React Runtime 手动切换jsx模式
    * 当 external react时需要设置
@@ -139,7 +154,7 @@ export type TBiuConfig = {
    * 模块编译
    * 如 node_modules 模块 是否加入编译
    */
-  // moduleTransform?: ModuleTransform
+  moduleTransform?: IModuleTransform;
   /**
    * initTemplates
    * 暂无场景 弃置
@@ -147,25 +162,25 @@ export type TBiuConfig = {
   // initTemplates?: {[key: string]: string | boolean}
 };
 
-export type TConfig = Override<
+export type TConfig = TOverride<
   Required<TBiuConfig>,
   {
-    // build: Required<BuildOptions>
-    // server: Required<ServerOptions>
-    // moduleFederation?: MFExport
-    // externals?: ExternalsType
-    // empShare?: EMPShareExport
-    // webpackChain?: WebpackChainType
+    build: Required<TBuildOptions>;
+    server: Required<TServerOptions>;
+    moduleFederation?: TMFExport;
+    externals?: TExternals;
+    biuShare?: TBiuShareExport;
+    webpackChain?: TWebpackChain;
     reactRuntime?: 'automatic' | 'classic';
     base?: string;
-    // html: InitHtmlType
-    // entries?: EntriesType
-    // debug: ConfigDebugType
+    html: TInitHtml;
+    entries?: TEntries;
+    debug: TConfigDebug;
     env?: IConfigEnv['env'];
     mode: ENUM_ENV;
     dtsPath: { [key: string]: string };
-    // moduleTransform: ModuleTransform
-    // moduleTransformExclude: RuleSetRule['exclude']
+    moduleTransform: IModuleTransform;
+    moduleTransformExclude: WebpackRuleSetRule['exclude'];
     // initTemplates: {[key: string]: string | boolean}
   }
 >;
@@ -175,3 +190,9 @@ export type TBiuConfigFn = (
 ) => TBiuConfig | Promise<TBiuConfig>;
 
 export type TBiuConfigExport = TBiuConfig | TBiuConfigFn;
+
+export type TConfigPluginOptions = {
+  wpChain: WPChain;
+  config: TConfig;
+};
+export type TConfigPlugin = (o: TConfigPluginOptions) => void | Promise<void>;
