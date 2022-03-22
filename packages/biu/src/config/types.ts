@@ -1,0 +1,177 @@
+/** @format */
+
+import { ENUM_ENV, Override, TModeType } from '../types';
+
+export interface IConfigEnv {
+  mode: ENUM_ENV;
+  env?: TModeType;
+  [key: string]: any;
+}
+
+export type TBiuConfig = {
+  /**
+   * 项目根目录绝对路径 提供给 plugin 使用 一般不需要设置
+   * @default process.cwd()
+   */
+  root?: string;
+  /**
+   * 项目代码路径
+   * @default 'src'
+   */
+  appSrc?: string;
+  /**
+   * 项目代码入口文件 如 `src/index.js`
+   * (*)entries 设置后 该选项失效
+   * @default 'index.js'
+   */
+  appEntry?: string;
+  /**
+   * publicPath 根路径 可参考webpack,库模式 默认为 '' 避免加入 auto判断,业务模式默认为 auto
+   * html 部分 publicPath 默认为 undefined,可设置全量域名或子目录适配，也可以单独在html设置 Public
+   *
+   * @default undefined
+   */
+  base?: string;
+  /**
+   * 静态文件路径
+   * @default 'public'
+   */
+  publicDir?: string;
+  /**
+   * 缓存目录
+   * @default 'node_modules/.emp-cache'
+   */
+  cacheDir?: string;
+  /**
+   * 调试模式为 development
+   * 构建模式为 production
+   * 正式环境为 none
+   */
+  mode?: ENUM_ENV;
+  /**
+   * 通过命令行指令 `--env` 赋值
+   */
+  env?: IConfigEnv['env'];
+  /**
+   * 全局环境替换
+   */
+  define?: Record<string, any>;
+  /**
+   * resolve
+   */
+  // resolve?: ConfigResolveType
+  // /**
+  //  * emp plugins
+  //  */
+  // plugins?: ConfigPluginType[]
+  // /**
+  //  * dev server
+  //  */
+  // server?: ServerOptions
+  // /**
+  //  * build options
+  //  */
+  // build?: BuildOptions
+  // /**
+  //  * library externals
+  //  */
+  // externals?: ExternalsType
+  // /**
+  //  * debug 选项
+  //  */
+  // debug?: ConfigDebugType
+  // /**
+  //  * webpackChain 暴露到 emp-config
+  //  */
+  // webpackChain?: WebpackChainType
+
+  /**
+   * module federation 配置
+   */
+  // moduleFederation?: MFExport
+  /**
+   * emp share 配置
+   * 实现3重共享模型
+   * empshare 与 module federation 只能选择一个配置
+   */
+  // empShare?: EMPShareExport
+  /**
+   * 启用 import.meta
+   * 需要在 script type=module 才可以执行
+   * @default false
+   */
+  useImportMeta?: boolean;
+  /**
+   * 启用 ForkTsChecker or Eslint
+   * @default false
+   */
+  jsCheck?: boolean;
+  /**
+   * 启动 mini-css-extract-plugin
+   * 分离 js里的css
+   * @default true
+   */
+  splitCss?: boolean;
+  /**
+   * html-webpack-plugin 相关操作
+   * (*)entries 设置后 会继承这里的操作
+   */
+  // html?: HtmlOptions
+  /**
+   * 多页面模式
+   * entryFilename 为基于 src目录如 `info/index`
+   */
+  // entries?: EntriesType
+  /**
+   * React Runtime 手动切换jsx模式
+   * 当 external react时需要设置
+   * 本地安装时会自动判断 不需要设置
+   * @default undefined
+   */
+  reactRuntime?: 'automatic' | 'classic';
+  /**
+   * typingsPath
+   * @default ./src/empShareType
+   * emp dts 类型同步
+   */
+  typingsPath?: string;
+  /**
+   * 模块编译
+   * 如 node_modules 模块 是否加入编译
+   */
+  // moduleTransform?: ModuleTransform
+  /**
+   * initTemplates
+   * 暂无场景 弃置
+   */
+  // initTemplates?: {[key: string]: string | boolean}
+};
+
+export type TConfig = Override<
+  Required<TBiuConfig>,
+  {
+    // build: Required<BuildOptions>
+    // server: Required<ServerOptions>
+    // moduleFederation?: MFExport
+    // externals?: ExternalsType
+    // empShare?: EMPShareExport
+    // webpackChain?: WebpackChainType
+    reactRuntime?: 'automatic' | 'classic';
+    base?: string;
+    // html: InitHtmlType
+    // entries?: EntriesType
+    // debug: ConfigDebugType
+    env?: IConfigEnv['env'];
+    mode: ENUM_ENV;
+    dtsPath: { [key: string]: string };
+    // moduleTransform: ModuleTransform
+    // moduleTransformExclude: RuleSetRule['exclude']
+    // initTemplates: {[key: string]: string | boolean}
+  }
+>;
+
+export type TBiuConfigFn = (
+  configEnv: IConfigEnv,
+) => TBiuConfig | Promise<TBiuConfig>;
+
+export type TBiuConfigExport = TBiuConfig | TBiuConfigFn;

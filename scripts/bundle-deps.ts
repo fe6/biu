@@ -239,6 +239,15 @@ Object.keys(exported).forEach(function (key) {
           externals: opts.dtsExternals,
         });
 
+        if (opts.pkgName === 'lodash') {
+          const filePath = path.join(
+            nodeModulesPath,
+            `@types/${opts.pkgName}`,
+            'common',
+          );
+          fs.copySync(filePath, path.join(target, 'common'));
+        }
+
         // patch
         // if (opts.pkgName === 'webpack-5-chain') {
         //   const filePath = path.join(target, 'types/index.d.ts');
