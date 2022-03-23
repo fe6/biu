@@ -61,7 +61,8 @@ class WPEntries {
         `${store.config.appSrc}/index.{ts,tsx,jsx,js}`,
       ]);
       if (!elist[0]) {
-        throw new Error('找不到入口文件!');
+        logger.empty();
+        logger.errorExit('找不到入口文件');
       }
       entry = elist[0];
     } else {

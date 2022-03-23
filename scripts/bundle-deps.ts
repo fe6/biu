@@ -204,10 +204,10 @@ Object.keys(exported).forEach(function (key) {
           fs.copySync(filePath, path.join(target, 'common'));
         }
 
-        if (opts.pkgName === 'webpack') {
-          const filePath = path.join(nodeModulesPath, opts.pkgName, 'hot');
-          fs.copySync(filePath, path.join(target, 'hot'));
-        }
+        // if (opts.pkgName === 'webpack') {
+        //   const filePath = path.join(nodeModulesPath, opts.pkgName, 'hot');
+        //   fs.copySync(filePath, path.join(target, 'hot'));
+        // }
 
         // patch
         if (opts.pkgName === 'webpack-5-chain') {
@@ -447,5 +447,5 @@ Object.keys(exported).forEach(function (key) {
   }
 
   logger.empty();
-  logger.ready(`Dep builded`);
+  logger.success(`Dep builded`);
 })();

@@ -1,6 +1,7 @@
 /** @format */
 
 import path from 'path';
+import { reactRefreshWebpack } from '@fe6/biu-utils';
 import wpChain from '../shared/wp-chain';
 import store from '../shared/cache';
 
@@ -57,7 +58,7 @@ class WPModule {
       .oneOf('workerInline')
       .resourceQuery(/worker/)
       .use('workerLoader')
-      .loader(require.resolve('worker-loader'))
+      .loader(require.resolve('@fe6/biu-utils/compiled/worker-loader/index'))
       .options({
         inline: 'no-fallback',
         filename: '[name].[contenthash].worker.js',
@@ -73,16 +74,13 @@ class WPModule {
   }
   private setScriptReactLoader() {
     const isDev = store.config.mode === 'development';
-    //const isAntd = pkg.dependencies.antd || pkg.devDependencies.antd ? true : false
     // 增加插件支持
     if (isDev && store.config.server.hot && !!store.config.reactRuntime)
-      wpChain
-        .plugin('reactRefresh')
-        .use(require('@pmmmwh/react-refresh-webpack-plugin'), [
-          {
-            overlay: false, // 切换到默认overlay
-          },
-        ]);
+      wpChain.plugin('reactRefresh').use(reactRefreshWebpack, [
+        {
+          overlay: false, // 切换到默认overlay
+        },
+      ]);
   }
 }
 export default WPModule;

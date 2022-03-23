@@ -1,0 +1,6 @@
+{
+  "name": "postcss-loader",
+  "version": "6.2.1",
+  "author": "Andrey Sitnik <andrey@sitnik.ru>",
+  "license": "MIT"
+}

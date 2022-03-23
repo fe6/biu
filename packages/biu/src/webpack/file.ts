@@ -21,14 +21,8 @@ class WPFile {
                 ),
                 options: store.config.build,
               },
-              svgr: {
-                loader: require.resolve('@svgr/webpack'),
-                options: {
-                  babel: false,
-                },
-              },
               url: {
-                loader: require.resolve('url-loader'), //解决 ReactComponent 无法获取问题
+                loader: require.resolve('@fe6/biu-utils/compiled/url-loader'), //解决 ReactComponent 无法获取问题
                 options: {
                   esModule: false,
                 },
