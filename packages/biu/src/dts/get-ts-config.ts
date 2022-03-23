@@ -13,7 +13,7 @@ function getTSConfigPath(cwd: string) {
 function getTSConfig(cwd: string): ts.CompilerOptions | undefined {
   const tsconfigPath = getTSConfigPath(cwd);
   if (!tsconfigPath) {
-    throw new Error("Could not find a valid 'tsconfig.json'.");
+    logger.errorExit("Could not find a valid 'tsconfig.json'.");
   }
 
   try {
@@ -22,7 +22,7 @@ function getTSConfig(cwd: string): ts.CompilerOptions | undefined {
      * 不一定是JSON，所以需要 eval 执行。
      * 如果通过 require 方式引入，格式不符合 JSON 则会根据格式报错，
      */
-    const tsconfigStr = fs.readFileSync(tsconfigPath, 'utf8');
+    const tsconfigStr = fs.readFileSync(tsconfigPath || '', 'utf8');
     const tsconfig = eval(`module.exports = ${tsconfigStr}`);
     // return tsconfig.compilerOptions
     logger.debug('tsconfig', tsconfig);

@@ -83,7 +83,8 @@ class WPEntries {
       faviconAbs.includes(store.publicDir) ||
       templateAbs.includes(store.publicDir)
     ) {
-      throw new Error(
+      // TODO 检查模板
+      logger.errorExit(
         'Template 与 favicon 不能放到./public,推荐放到 ./src or ./template',
       );
     }
