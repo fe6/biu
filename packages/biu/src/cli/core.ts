@@ -19,6 +19,9 @@ const biuExec = async (
   await configPlugins.setup();
   // webpack Chain
   await configChain.setup();
+  // 执行cli脚本
+  const cilScript = await import(`./${name}`);
+  await cilScript.default.setup(cmdOptions);
 };
 
 export default biuExec;

@@ -88,10 +88,6 @@ async function SWCLoader(
         legacyDecorator: true,
         decoratorMetadata: isTypescript,
         react,
-        // 默认到 emp 里面获取
-        // regenerator: {
-        //   importPath: require.resolve('regenerator-runtime'),
-        // },
       },
     },
   };
@@ -102,7 +98,11 @@ async function SWCLoader(
      */
     if (swcOptions.jsc) {
       const jscTransform: any = {
-        regenerator: { importPath: require.resolve('regenerator-runtime') },
+        regenerator: {
+          importPath: require.resolve(
+            '@fe6/biu-utils/compiled/regenerator-runtime',
+          ),
+        },
       };
       swcOptions.jsc.transform = {
         ...swcOptions.jsc.transform,

@@ -1,6 +1,1 @@
-{
-  "name": "css-loader",
-  "version": "6.7.1",
-  "author": "Tobias Koppers @sokra",
-  "license": "MIT"
-}
+{"name":"css-loader","version":"6.7.1","author":"Tobias Koppers @sokra","license":"MIT"}

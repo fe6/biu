@@ -186,7 +186,8 @@ Object.keys(exported).forEach(function (key) {
 
       // dts
       if (opts.noDts) {
-        logger.warn(`Do not build dts for ${opts.pkgName}`);
+        logger.empty();
+        logger.warnOnly(`Do not build dts for ${opts.pkgName}`);
       } else {
         new Package({
           cwd: opts.base,
@@ -204,10 +205,53 @@ Object.keys(exported).forEach(function (key) {
           fs.copySync(filePath, path.join(target, 'common'));
         }
 
-        // if (opts.pkgName === 'webpack') {
-        //   const filePath = path.join(nodeModulesPath, opts.pkgName, 'hot');
-        //   fs.copySync(filePath, path.join(target, 'hot'));
-        // }
+        if (opts.pkgName === 'webpack') {
+          const filePath = path.join(nodeModulesPath, opts.pkgName, 'hot');
+          fs.copySync(filePath, path.join(target, 'hot'));
+
+          const webpackEmitterFilePath = path.join(target, 'hot/emitter.js');
+          fs.writeFileSync(
+            webpackEmitterFilePath,
+            fs
+              .readFileSync(webpackEmitterFilePath, 'utf-8')
+              .replace(
+                `require("events")`,
+                `require("@fe6/biu-utils/compiled/events").default`,
+              ),
+            'utf-8',
+          );
+        }
+
+        // events require 引入的是一个对象，取 default
+        const eventsList: any = {
+          bonjour: '/index.js',
+          chokidar: '/index.js',
+          'default-gateway': 'index.js',
+          eslint: 'index.js',
+          express: 'index.js',
+          'fast-glob': 'index.js',
+          'serve-index': 'index.js',
+          webpack: 'index.js',
+          'webpack-dev-middleware': 'index.js',
+          'worker-loader': 'index.js',
+          ws: 'index.js',
+        };
+        if (eventsList?.[opts.pkgName as any]) {
+          const eventsFilePath = path.join(
+            target,
+            eventsList?.[opts.pkgName as any],
+          );
+          fs.writeFileSync(
+            eventsFilePath,
+            fs
+              .readFileSync(eventsFilePath, 'utf-8')
+              .replace(
+                `require("@fe6/biu-utils/compiled/events")`,
+                `require("@fe6/biu-utils/compiled/events").default`,
+              ),
+            'utf-8',
+          );
+        }
 
         // patch
         if (opts.pkgName === 'webpack-5-chain') {
@@ -341,11 +385,11 @@ Object.keys(exported).forEach(function (key) {
       }
 
       // FIX require
-      const racefulFsFilePath = path.join(target, 'lib/Server.js');
+      const webpackServerFsFilePath = path.join(target, 'lib/Server.js');
       fs.writeFileSync(
-        racefulFsFilePath,
+        webpackServerFsFilePath,
         fs
-          .readFileSync(racefulFsFilePath, 'utf-8')
+          .readFileSync(webpackServerFsFilePath, 'utf-8')
           .replace(`graceful-fs`, `@fe6/biu-utils/compiled/fs-extra`)
           .replace(`schema-utils`, `@fe6/biu-utils/compiled/schema-utils`)
           .replace(`"express`, `"@fe6/biu-utils/compiled/express`)
@@ -392,10 +436,25 @@ Object.keys(exported).forEach(function (key) {
             `require.resolve("webpack/hot/dev-server`,
             `require.resolve("@fe6/biu-utils/compiled/webpack/hot/dev-server`,
           )
+          .replace(`p-retry`, `@fe6/biu-utils/compiled/p-retry`)
+          .replace(`return pRetry(()`, `return pRetry.default(()`)
+          .replace(`"portfinder`, `"@fe6/biu-utils/compiled/portfinder`)
           .replace(
             `require("webpack"`,
             `require("@fe6/biu-utils/compiled/webpack"`,
           ),
+        'utf-8',
+      );
+
+      const webpackWebsocketServerFilePath = path.join(
+        target,
+        'lib/servers/WebsocketServer.js',
+      );
+      fs.writeFileSync(
+        webpackWebsocketServerFilePath,
+        fs
+          .readFileSync(webpackWebsocketServerFilePath, 'utf-8')
+          .replace(`require("ws"`, `require("@fe6/biu-utils/compiled/ws"`),
         'utf-8',
       );
     } else if (dep === 'webpack-federated-stats-plugin') {
@@ -422,11 +481,11 @@ Object.keys(exported).forEach(function (key) {
       }
 
       // FIX require
-      const racefulFsFilePath = path.join(target, 'index.js');
+      const federatedFilePath = path.join(target, 'index.js');
       fs.writeFileSync(
-        racefulFsFilePath,
+        federatedFilePath,
         fs
-          .readFileSync(racefulFsFilePath, 'utf-8')
+          .readFileSync(federatedFilePath, 'utf-8')
           .replace(`"webpack`, `"@fe6/biu-utils/compiled/webpack`),
         'utf-8',
       );

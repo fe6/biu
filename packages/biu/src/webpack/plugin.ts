@@ -84,7 +84,7 @@ class WPPlugin {
         options.profile = true;
       }
       config.plugin.progress = {
-        plugin: require.resolve('@fe6/biu-utils/compiled/webpackbar'),
+        plugin: require('@fe6/biu-utils/compiled/webpackbar'),
         args: [options],
       };
     }

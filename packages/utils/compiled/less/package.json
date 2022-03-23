@@ -1,9 +1,1 @@
-{
-  "name": "less",
-  "version": "4.1.2",
-  "author": {
-    "name": "Alexis Sellier",
-    "email": "self@cloudhead.net"
-  },
-  "license": "Apache-2.0"
-}
+{"name":"less","version":"4.1.2","author":{"name":"Alexis Sellier","email":"self@cloudhead.net"},"license":"Apache-2.0"}
