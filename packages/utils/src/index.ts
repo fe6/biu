@@ -8,6 +8,7 @@ import type webpack from '../compiled/webpack';
 // * utils
 import * as logger from './logger';
 export * as register from './register';
+export * as utils from './utils';
 // * utils
 
 // ? deps

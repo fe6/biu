@@ -46,6 +46,10 @@ export function warn(...message: any[]) {
   empty();
 }
 
+export function warnOnly(...message: any[]) {
+  console.warn(prefixes.warn, ...message);
+}
+
 export function ready(...message: any[]) {
   console.log(prefixes.ready(), ...message);
   empty();

@@ -1,6 +1,6 @@
 "use strict";
 
-const WebSocket = require("ws");
+const WebSocket = require("@fe6/biu-utils/compiled/ws");
 const BaseServer = require("./BaseServer");
 
 /** @typedef {import("../Server").WebSocketServerConfiguration} WebSocketServerConfiguration */

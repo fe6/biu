@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 /*
   MIT License http://www.opensource.org/licenses/mit-license.php
@@ -9,44 +9,42 @@ module.exports = function (cssWithMappingToString) {
 
   list.toString = function toString() {
     return this.map(function (item) {
-      var content = '';
-      var needLayer = typeof item[5] !== 'undefined';
+      var content = "";
+      var needLayer = typeof item[5] !== "undefined";
 
       if (item[4]) {
-        content += '@supports ('.concat(item[4], ') {');
+        content += "@supports (".concat(item[4], ") {");
       }
 
       if (item[2]) {
-        content += '@media '.concat(item[2], ' {');
+        content += "@media ".concat(item[2], " {");
       }
 
       if (needLayer) {
-        content += '@layer'.concat(
-          item[5].length > 0 ? ' '.concat(item[5]) : '',
-          ' {',
-        );
+        content += "@layer".concat(item[5].length > 0 ? " ".concat(item[5]) : "", " {");
       }
 
       content += cssWithMappingToString(item);
 
       if (needLayer) {
-        content += '}';
+        content += "}";
       }
 
       if (item[2]) {
-        content += '}';
+        content += "}";
       }
 
       if (item[4]) {
-        content += '}';
+        content += "}";
       }
 
       return content;
-    }).join('');
+    }).join("");
   }; // import a list of modules into the list
 
+
   list.i = function i(modules, media, dedupe, supports, layer) {
-    if (typeof modules === 'string') {
+    if (typeof modules === "string") {
       modules = [[null, modules, undefined]];
     }
 
@@ -69,13 +67,11 @@ module.exports = function (cssWithMappingToString) {
         continue;
       }
 
-      if (typeof layer !== 'undefined') {
-        if (typeof item[5] === 'undefined') {
+      if (typeof layer !== "undefined") {
+        if (typeof item[5] === "undefined") {
           item[5] = layer;
         } else {
-          item[1] = '@layer'
-            .concat(item[5].length > 0 ? ' '.concat(item[5]) : '', ' {')
-            .concat(item[1], '}');
+          item[1] = "@layer".concat(item[5].length > 0 ? " ".concat(item[5]) : "", " {").concat(item[1], "}");
           item[5] = layer;
         }
       }
@@ -84,16 +80,16 @@ module.exports = function (cssWithMappingToString) {
         if (!item[2]) {
           item[2] = media;
         } else {
-          item[1] = '@media '.concat(item[2], ' {').concat(item[1], '}');
+          item[1] = "@media ".concat(item[2], " {").concat(item[1], "}");
           item[2] = media;
         }
       }
 
       if (supports) {
         if (!item[4]) {
-          item[4] = ''.concat(supports);
+          item[4] = "".concat(supports);
         } else {
-          item[1] = '@supports ('.concat(item[4], ') {').concat(item[1], '}');
+          item[1] = "@supports (".concat(item[4], ") {").concat(item[1], "}");
           item[4] = supports;
         }
       }

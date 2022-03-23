@@ -393,8 +393,8 @@ class Server {
       return port;
     }
 
-    const pRetry = require("p-retry");
-    const portfinder = require("portfinder");
+    const pRetry = require("@fe6/biu-utils/compiled/p-retry");
+    const portfinder = require("@fe6/biu-utils/compiled/portfinder");
 
     portfinder.basePort =
       typeof process.env.WEBPACK_DEV_SERVER_BASE_PORT !== "undefined"
@@ -408,7 +408,7 @@ class Server {
         ? parseInt(process.env.WEBPACK_DEV_SERVER_PORT_RETRY, 10)
         : 3;
 
-    return pRetry(() => portfinder.getPortPromise(), {
+    return pRetry.default(() => portfinder.getPortPromise(), {
       retries: defaultPortRetry,
     });
   }

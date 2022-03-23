@@ -1,6 +1,1 @@
-{
-  "name": "sass-loader",
-  "version": "12.6.0",
-  "author": "J. Tangelder",
-  "license": "MIT"
-}
+{"name":"sass-loader","version":"12.6.0","author":"J. Tangelder","license":"MIT"}
