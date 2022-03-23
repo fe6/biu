@@ -57,9 +57,7 @@ class WPEntries {
   async setIndexEntry() {
     let entry = '';
     if (!store.config.appEntry) {
-      const elist = await glob([
-        `${store.config.appSrc}/index.{ts,tsx,jsx,js}`,
-      ]);
+      const elist = await glob([`${store.config.appSrc}/main.{ts,tsx,jsx,js}`]);
       if (!elist[0]) {
         logger.empty();
         logger.errorExit('找不到入口文件');
