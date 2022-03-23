@@ -41,9 +41,9 @@ export type TBiuConfig = {
    */
   appSrc?: string;
   /**
-   * 项目代码入口文件 如 `src/index.js`
+   * 项目代码入口文件 如 `src/main.js`
    * (*)entries 设置后 该选项失效
-   * @default 'index.js'
+   * @default 'main.js'
    */
   appEntry?: string;
   /**
