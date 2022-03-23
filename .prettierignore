@@ -4,3 +4,4 @@
 dist/
 changelog.md
 compiled/
+compiled/**.*

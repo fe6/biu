@@ -10,10 +10,11 @@ const errorChalk = chalk.hex('#f5222d');
 const warnChalk = chalk.hex('#faad14');
 
 export const prefixes = {
-  wait: `${pkgName}${waitChalk('[wait]')}  -`,
+  wait: `${pkgName}${waitChalk('[wait]')} -`,
   error: `${pkgName}${errorChalk('[error]')} -`,
-  warn: `${pkgName}${warnChalk('[warn]')}  -`,
-  ready: `${pkgName}${chalk.green('[ready]')} -`,
+  warn: `${pkgName}${warnChalk('[warn]')} -`,
+  ready: (type: string = 'ready') =>
+    `${pkgName}${type ? chalk.green(`[${type}]`) : ''} -`,
   event: `${pkgName}${chalk.magenta('[event]')} -`,
   debug: `${pkgName}${chalk.gray('[debug]')} -`,
   info: (type: string = 'info') =>
@@ -46,7 +47,12 @@ export function warn(...message: any[]) {
 }
 
 export function ready(...message: any[]) {
-  console.log(prefixes.ready, ...message);
+  console.log(prefixes.ready(), ...message);
+  empty();
+}
+
+export function success(...message: any[]) {
+  console.log(prefixes.ready('success'), ...message);
   empty();
 }
 

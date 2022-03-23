@@ -23,7 +23,8 @@ import { Options as WebpackHtmlPluginOption } from '../compiled/html-webpack-plu
 import webpackServer, {
   Configuration as WebpackServerConfiguration,
 } from '../compiled/webpack-dev-server/lib/Server';
-import webpackChain from '../compiled/webpack-5-chain/index';
+import webpackChain from '../compiled/webpack-5-chain';
+import reactRefreshWebpack from '@pmmmwh/react-refresh-webpack-plugin';
 // ? deps
 
 export {
@@ -40,6 +41,7 @@ export {
   // WebpackRuleSetRule,
   // WebpackConfiguration,
   // WebpackResolveOptions,
+  reactRefreshWebpack,
   WebpackHtmlPluginOption,
   webpackServer,
   WebpackServerConfiguration,

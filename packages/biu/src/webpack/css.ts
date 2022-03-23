@@ -124,7 +124,7 @@ class WPCss {
     const options = store.config.base ? { publicPath: store.config.base } : {}; //修复css 绝对路径的问题[改进项]
     return this.isStyleLoader
       ? {
-          loader: require.resolve('style-loader'),
+          loader: require.resolve('@fe6/biu-utils/compiled/style-loader'),
           options: {},
         }
       : {
@@ -135,7 +135,7 @@ class WPCss {
   get css() {
     const { localIdentName, isModules } = this;
     return {
-      loader: require.resolve('css-loader'),
+      loader: require.resolve('@fe6/biu-utils/compiled/css-loader'),
       options: {
         modules: isModules ? { localIdentName } : isModules,
       },
@@ -144,9 +144,9 @@ class WPCss {
   get sass() {
     const { isDev } = this;
     return {
-      loader: require.resolve('sass-loader'),
+      loader: require.resolve('@fe6/biu-utils/compiled/sass-loader'),
       options: {
-        implementation: require('sass'),
+        implementation: require('@fe6/biu-utils/compiled/sass'),
         sourceMap: isDev,
       },
     };
@@ -154,9 +154,9 @@ class WPCss {
   get less() {
     const { isModules } = this;
     return isModules
-      ? { loader: require.resolve('less-loader') }
+      ? { loader: require.resolve('@fe6/biu-utils/compiled/less-loader') }
       : {
-          loader: require.resolve('less-loader'),
+          loader: require.resolve('@fe6/biu-utils/compiled/less-loader'),
           options: {
             lessOptions: { javascriptEnabled: true },
           },
@@ -164,7 +164,7 @@ class WPCss {
   }
   get postcss() {
     return {
-      loader: require.resolve('postcss-loader'),
+      loader: require.resolve('@fe6/biu-utils/compiled/postcss-loader'),
       options: {
         postcssOptions: {
           hideNothingWarning: true,

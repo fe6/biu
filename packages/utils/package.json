@@ -11,6 +11,7 @@
   "scripts": {
     "build": "pnpm tsc",
     "build:deps": "pnpm esno ../../scripts/bundle-deps.ts",
+    "generate:webpackPackages": "zx ./scripts/generate-webpack-packages.mjs",
     "start": "pnpm build -- --watch"
   },
   "repository": {
@@ -32,7 +33,9 @@
     "@types/default-gateway": "^3.0.1",
     "@types/dotenv-webpack": "^7.0.3",
     "@types/eslint": "^8.4.1",
+    "@types/less": "^3.0.3",
     "@types/lodash": "^4.14.180",
+    "@types/sass": "^1.43.1",
     "@types/serve-index": "^1.9.1",
     "@types/webpack-bundle-analyzer": "^4.4.1",
     "@types/webpack-manifest-plugin": "^3.0.5",
@@ -45,6 +48,7 @@
     "connect-history-api-fallback": "^1.6.0",
     "copy-webpack-plugin": "^10.2.4",
     "cross-spawn": "^7.0.3",
+    "css-loader": "^6.7.1",
     "css-minimizer-webpack-plugin": "^3.4.1",
     "default-gateway": "^6.0.3",
     "dotenv-webpack": "^7.1.0",
@@ -57,13 +61,21 @@
     "fs-extra": "^10.0.1",
     "html-webpack-plugin": "^5.5.0",
     "ipaddr.js": "^2.0.1",
+    "less": "^4.1.2",
+    "less-loader": "^10.2.0",
     "lodash": "^4.17.21",
     "mini-css-extract-plugin": "^2.6.0",
     "open": "^8.4.0",
     "pirates": "^4.0.5",
+    "postcss-loader": "^6.2.1",
+    "react-refresh": "^0.11.0",
+    "sass": "^1.49.9",
+    "sass-loader": "^12.6.0",
     "schema-utils": "^4.0.0",
     "serve-index": "^1.9.1",
+    "style-loader": "^3.3.1",
     "terser-webpack-plugin": "^5.3.1",
+    "url-loader": "^4.1.1",
     "webpack": "^5.70.0",
     "webpack-5-chain": "^8.0.0",
     "webpack-bundle-analyzer": "^4.5.0",
@@ -72,6 +84,7 @@
     "webpack-federated-stats-plugin": "^2.0.9",
     "webpack-manifest-plugin": "^5.0.0",
     "webpackbar": "^5.0.2",
+    "worker-loader": "^3.0.8",
     "yargs-parser": "^21.0.1"
   },
   "compiledConfig": {
@@ -83,7 +96,6 @@
       "yargs-parser",
       "cross-spawn",
       "schema-utils",
-      "webpack",
       "express",
       "default-gateway",
       "ipaddr.js",
@@ -111,7 +123,18 @@
       "webpack-bundle-analyzer",
       "fork-ts-checker-webpack-plugin",
       "eslint-webpack-plugin",
-      "eslint"
+      "eslint",
+      "worker-loader",
+      "url-loader",
+      "css-loader",
+      "sass-loader",
+      "postcss-loader",
+      "less-loader",
+      "style-loader",
+      "less",
+      "sass",
+      "./bundles/webpack/bundle",
+      "./bundles/react-refresh/babel"
     ],
     "externals": {
       "chalk": "$$LOCAL",
@@ -123,6 +146,7 @@
       "express": "$$LOCAL",
       "default-gateway": "$$LOCAL",
       "webpack": "$$LOCAL",
+      "webpack/lib/NormalModule": "../webpack/NormalModule",
       "webpack-5-chain": "$$LOCAL",
       "html-webpack-plugin": "$$LOCAL",
       "webpack-dev-server": "$$LOCAL",
@@ -130,11 +154,6 @@
       "terser-webpack-plugin": "$$LOCAL",
       "pirates": "$$LOCAL",
       "fast-glob": "$$LOCAL",
-      "mini-css-extract-plugin": "$$LOCAL",
-      "css-minimizer-webpack-plugin": "$$LOCAL",
-      "dotenv-webpack": "$$LOCAL",
-      "copy-webpack-plugin": "$$LOCAL",
-      "webpack-manifest-plugin": "$$LOCAL",
       "compression": "$$LOCAL",
       "connect-history-api-fallback": "$$LOCAL",
       "serve-index": "$$LOCAL",
@@ -142,25 +161,49 @@
       "bonjour": "$$LOCAL",
       "colorette": "$$LOCAL",
       "chokidar": "$$LOCAL",
-      "webpack-federated-stats-plugin": "$$LOCAL",
       "webpackbar": "$$LOCAL",
       "webpack-bundle-analyzer": "$$LOCAL",
       "fork-ts-checker-webpack-plugin": "$$LOCAL",
       "eslint-webpack-plugin": "$$LOCAL",
-      "eslint": "$$LOCAL"
+      "eslint": "$$LOCAL",
+      "postcss": "postcss",
+      "less": "$$LOCAL",
+      "sass": "$$LOCAL"
     },
     "extraDtsDeps": [
-      "webpack",
-      "webpack-dev-middleware"
+      "webpack"
     ],
     "noMinify": [
       "./bundles/webpack/bundle",
-      "terser-webpack-plugin"
+      "terser-webpack-plugin",
+      "mini-css-extract-plugin"
+    ],
+    "excludeDtsDeps": [
+      "copy-webpack-plugin",
+      "css-minimizer-webpack-plugin",
+      "fork-ts-checker-webpack-plugin",
+      "mini-css-extract-plugin",
+      "webpack-bundle-analyzer",
+      "webpack-dev-middleware",
+      "webpack-manifest-plugin",
+      "webpack-federated-stats-plugin",
+      "dotenv-webpack",
+      "worker-loader",
+      "url-loader",
+      "css-loader",
+      "sass-loader",
+      "less-loader",
+      "postcss-loader",
+      "style-loader"
     ],
     "extraDtsExternals": [
       "esbuild",
       "uglify-js",
       "webpack"
     ]
+  },
+  "dependencies": {
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.4",
+    "postcss": "^8.4.12"
   }
 }
