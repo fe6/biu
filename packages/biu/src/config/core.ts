@@ -54,5 +54,8 @@ export class Config {
     } else {
       this.currentConfig = mergeConfig({ env: mode });
     }
+    //初始化 构建 模式 环境变量
+    this.currentConfig.mode = mode;
+    this.currentConfig.env = cmdOptions.env;
   }
 }
