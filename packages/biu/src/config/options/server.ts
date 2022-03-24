@@ -13,11 +13,6 @@ export type TServerConfig = {
    * @default 8000
    */
   port?: number;
-  /**
-   * 自动切换端口
-   * @default true
-   */
-  strictPort?: boolean;
   // https?: WebpackServerConfiguration['https']
   // proxy?: WebpackServerConfiguration['proxy'] | boolean
   /**
@@ -38,7 +33,6 @@ export const initServer = (op?: TServerOptions): TResolveServerConfig => ({
   ...{
     host: '0.0.0.0',
     port: 8000,
-    strictPort: true,
     // https: false,
     open: false,
     // proxy: false,
