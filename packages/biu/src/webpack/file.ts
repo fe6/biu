@@ -22,7 +22,7 @@ class WPFile {
                 options: store.config.build,
               },
               url: {
-                loader: require.resolve('@fe6/biu-utils/compiled/url-loader'), //解决 ReactComponent 无法获取问题
+                loader: require.resolve('@fe6/biu-deps/compiled/url-loader'), //解决 ReactComponent 无法获取问题
                 options: {
                   esModule: false,
                 },

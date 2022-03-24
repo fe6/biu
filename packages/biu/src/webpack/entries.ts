@@ -1,8 +1,8 @@
 /** @format */
 
 import path from 'path';
-import glob from '@fe6/biu-utils/compiled/fast-glob';
-import HtmlWebpackPlugin from '@fe6/biu-utils/compiled/html-webpack-plugin';
+import glob from '@fe6/biu-deps/compiled/fast-glob';
+import HtmlWebpackPlugin from '@fe6/biu-deps/compiled/html-webpack-plugin';
 import { logger } from '@fe6/biu-utils';
 import wpChain from '../shared/wp-chain';
 import store from '../shared/cache';

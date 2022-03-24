@@ -2,9 +2,9 @@
 
 // Fork from https://github.com/umijs/umi-next/blob/master/scripts/turbo.ts
 
-import * as logger from '@fe6/biu-utils/src/logger';
-import spawn from '@fe6/biu-utils/compiled/cross-spawn';
-import yArgs from '@fe6/biu-utils/compiled/yargs-parser';
+import { logger } from '@fe6/biu-utils';
+import spawn from '@fe6/biu-deps/compiled/cross-spawn';
+import yArgs from '@fe6/biu-deps/compiled/yargs-parser';
 import { join } from 'path';
 
 (async () => {

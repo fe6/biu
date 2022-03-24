@@ -1,6 +1,6 @@
 /** @format */
 
-import { RuleSetRule as WebpackRuleSetRule } from '@fe6/biu-utils/compiled/webpack';
+import { RuleSetRule as WebpackRuleSetRule } from '@fe6/biu-deps/compiled/webpack';
 import {
   ENUM_ENV,
   TOverride,

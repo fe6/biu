@@ -1,6 +1,6 @@
 /** @format */
 
-import chalk from '../compiled/chalk';
+import { chalk } from '@fe6/biu-deps';
 
 const nameChalk = chalk.hex('#ff85c0');
 export const pkgName = `${nameChalk('[BIU]')} `;

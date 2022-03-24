@@ -2,7 +2,7 @@
 
 import { existsSync } from 'fs';
 import { join } from 'path';
-import { fsExtra } from '@fe6/biu-utils';
+import { fsExtra } from '@fe6/biu-deps';
 import { TCmdOptions, ENUM_ENV } from '../types';
 import { DEFAULT_CONFIG_FILES, SHORT_ENV, LOCAL_EXT } from '../contant';
 import { TBiuConfigExport } from './types';

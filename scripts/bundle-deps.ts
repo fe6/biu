@@ -6,7 +6,7 @@ import ncc from '@vercel/ncc';
 import { Package } from 'dts-packer';
 import resolve from 'resolve';
 import 'zx/globals';
-import * as logger from '@fe6/biu-utils/src/logger';
+import { logger } from '@fe6/biu-utils';
 
 export async function buildDep(opts: any) {
   logger.info(`Build dep ${opts.pkgName || opts.file}`);
@@ -216,7 +216,7 @@ Object.keys(exported).forEach(function (key) {
               .readFileSync(webpackEmitterFilePath, 'utf-8')
               .replace(
                 `require("events")`,
-                `require("@fe6/biu-utils/compiled/events").default`,
+                `require("@fe6/biu-deps/compiled/events").default`,
               ),
             'utf-8',
           );
@@ -246,8 +246,8 @@ Object.keys(exported).forEach(function (key) {
             fs
               .readFileSync(eventsFilePath, 'utf-8')
               .replace(
-                `require("@fe6/biu-utils/compiled/events")`,
-                `require("@fe6/biu-utils/compiled/events").default`,
+                `require("@fe6/biu-deps/compiled/events")`,
+                `require("@fe6/biu-deps/compiled/events").default`,
               ),
             'utf-8',
           );
@@ -262,7 +262,7 @@ Object.keys(exported).forEach(function (key) {
               .readFileSync(filePath, 'utf-8')
               .replace(
                 `} from 'webpack';`,
-                `} from '@fe6/biu-utils/compiled/webpack';`,
+                `} from '@fe6/biu-deps/compiled/webpack';`,
               ),
             'utf-8',
           );
@@ -390,58 +390,58 @@ Object.keys(exported).forEach(function (key) {
         webpackServerFsFilePath,
         fs
           .readFileSync(webpackServerFsFilePath, 'utf-8')
-          .replace(`graceful-fs`, `@fe6/biu-utils/compiled/fs-extra`)
-          .replace(`schema-utils`, `@fe6/biu-utils/compiled/schema-utils`)
-          .replace(`"express`, `"@fe6/biu-utils/compiled/express`)
-          .replace(`default-gateway`, `@fe6/biu-utils/compiled/default-gateway`)
-          .replace(`ipaddr.js`, `@fe6/biu-utils/compiled/ipaddr.js`)
+          .replace(`graceful-fs`, `@fe6/biu-deps/compiled/fs-extra`)
+          .replace(`schema-utils`, `@fe6/biu-deps/compiled/schema-utils`)
+          .replace(`"express`, `"@fe6/biu-deps/compiled/express`)
+          .replace(`default-gateway`, `@fe6/biu-deps/compiled/default-gateway`)
+          .replace(`ipaddr.js`, `@fe6/biu-deps/compiled/ipaddr.js`)
           .replace(
             `require("webpack-dev-middleware`,
-            `require("@fe6/biu-utils/compiled/webpack-dev-middleware`,
+            `require("@fe6/biu-deps/compiled/webpack-dev-middleware`,
           )
           .replace(
             `require("compression`,
-            `require("@fe6/biu-utils/compiled/compression`,
+            `require("@fe6/biu-deps/compiled/compression`,
           )
           .replace(
             `require("connect-history-api-fallback`,
-            `require("@fe6/biu-utils/compiled/connect-history-api-fallback`,
+            `require("@fe6/biu-deps/compiled/connect-history-api-fallback`,
           )
           .replace(
             `require("serve-index`,
-            `require("@fe6/biu-utils/compiled/serve-index`,
+            `require("@fe6/biu-deps/compiled/serve-index`,
           )
-          .replace(`require("open`, `require("@fe6/biu-utils/compiled/open`)
+          .replace(`require("open`, `require("@fe6/biu-deps/compiled/open`)
           .replace(
             `require("bonjour`,
-            `require("@fe6/biu-utils/compiled/bonjour`,
+            `require("@fe6/biu-deps/compiled/bonjour`,
           )
           .replace(
             `require("colorette`,
-            `require("@fe6/biu-utils/compiled/colorette`,
+            `require("@fe6/biu-deps/compiled/colorette`,
           )
           .replace(
             `require("chokidar`,
-            `require("@fe6/biu-utils/compiled/chokidar`,
+            `require("@fe6/biu-deps/compiled/chokidar`,
           )
           .replace(
             `require("colorette`,
-            `require("@fe6/biu-utils/compiled/colorette`,
+            `require("@fe6/biu-deps/compiled/colorette`,
           )
           .replace(
             `require.resolve("webpack/hot/only-dev-server`,
-            `require.resolve("@fe6/biu-utils/compiled/webpack/hot/only-dev-server`,
+            `require.resolve("@fe6/biu-deps/compiled/webpack/hot/only-dev-server`,
           )
           .replace(
             `require.resolve("webpack/hot/dev-server`,
-            `require.resolve("@fe6/biu-utils/compiled/webpack/hot/dev-server`,
+            `require.resolve("@fe6/biu-deps/compiled/webpack/hot/dev-server`,
           )
-          .replace(`p-retry`, `@fe6/biu-utils/compiled/p-retry`)
+          .replace(`p-retry`, `@fe6/biu-deps/compiled/p-retry`)
           .replace(`return pRetry(()`, `return pRetry.default(()`)
-          .replace(`"portfinder`, `"@fe6/biu-utils/compiled/portfinder`)
+          .replace(`"portfinder`, `"@fe6/biu-deps/compiled/portfinder`)
           .replace(
             `require("webpack"`,
-            `require("@fe6/biu-utils/compiled/webpack"`,
+            `require("@fe6/biu-deps/compiled/webpack"`,
           ),
         'utf-8',
       );
@@ -454,7 +454,7 @@ Object.keys(exported).forEach(function (key) {
         webpackWebsocketServerFilePath,
         fs
           .readFileSync(webpackWebsocketServerFilePath, 'utf-8')
-          .replace(`require("ws"`, `require("@fe6/biu-utils/compiled/ws"`),
+          .replace(`require("ws"`, `require("@fe6/biu-deps/compiled/ws"`),
         'utf-8',
       );
     } else if (dep === 'webpack-federated-stats-plugin') {
@@ -486,7 +486,7 @@ Object.keys(exported).forEach(function (key) {
         federatedFilePath,
         fs
           .readFileSync(federatedFilePath, 'utf-8')
-          .replace(`"webpack`, `"@fe6/biu-utils/compiled/webpack`),
+          .replace(`"webpack`, `"@fe6/biu-deps/compiled/webpack`),
         'utf-8',
       );
     } else {

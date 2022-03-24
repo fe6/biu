@@ -1,9 +1,9 @@
 /** @format */
 
-import TerserPlugin from '@fe6/biu-utils/compiled/terser-webpack-plugin';
-import CopyWebpackPlugin from '@fe6/biu-utils/compiled/copy-webpack-plugin';
-import { Configuration } from '@fe6/biu-utils/compiled/webpack';
-import { WebpackManifestPlugin } from '@fe6/biu-utils/compiled/webpack-manifest-plugin';
+import TerserPlugin from '@fe6/biu-deps/compiled/terser-webpack-plugin';
+import CopyWebpackPlugin from '@fe6/biu-deps/compiled/copy-webpack-plugin';
+import { Configuration } from '@fe6/biu-deps/compiled/webpack';
+import { WebpackManifestPlugin } from '@fe6/biu-deps/compiled/webpack-manifest-plugin';
 import { logger } from '@fe6/biu-utils';
 
 import wpChain from '../shared/wp-chain';

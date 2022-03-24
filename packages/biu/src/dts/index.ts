@@ -1,6 +1,6 @@
 /** @format */
 
-import { Compiler } from '@fe6/biu-utils/compiled/webpack';
+import { Compiler } from '@fe6/biu-deps/compiled/webpack';
 import { Worker } from 'worker_threads';
 import store from '../shared/cache';
 import { DTSTLoadertype } from './dts';

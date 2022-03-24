@@ -3,7 +3,7 @@
 import fs from 'fs';
 import path from 'path';
 import { logger } from '@fe6/biu-utils';
-import { Command } from '../../compiled/commander';
+import { Command } from '@fe6/biu-deps';
 import { ENUM_ENV } from '../types';
 import biuExec from './core';
 

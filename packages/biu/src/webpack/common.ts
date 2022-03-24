@@ -2,7 +2,7 @@
 
 // import path from 'path'
 import fs from 'fs';
-import { Configuration } from '@fe6/biu-utils/compiled/webpack';
+import { Configuration } from '@fe6/biu-deps/compiled/webpack';
 import store from '../shared/cache';
 import wpChain from '../shared/wp-chain';
 

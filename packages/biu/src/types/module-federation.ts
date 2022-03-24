@@ -1,6 +1,6 @@
 /** @format */
 
-import { container as webpackContainer } from '@fe6/biu-utils/compiled/webpack';
+import { container as webpackContainer } from '@fe6/biu-deps/compiled/webpack';
 import { TConfig } from '../config';
 export type TMFOptions = ConstructorParameters<
   typeof webpackContainer.ModuleFederationPlugin
