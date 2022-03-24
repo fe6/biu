@@ -1,0 +1,32 @@
+{
+  "name": "@fe6/biu-plugin-vue",
+  "version": "0.0.0",
+  "description": "@fe6/biu-plugin-vue",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "pnpm tsc",
+    "build:deps": "pnpm esno ../../scripts/bundle-deps.ts",
+    "start": "pnpm build -- --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fe6/biu.git",
+    "directory": "packages/plugin-vue"
+  },
+  "authors": [
+    "tainyi <649076408@qq.com> (https://github.com/iq9891)"
+  ],
+  "license": "MIT",
+  "bugs": "https://github.com/fe6/biu/issues",
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@fe6/biu": "workspace:*",
+    "@fe6/biu-deps": "workspace:*"
+  }
+}

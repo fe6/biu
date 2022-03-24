@@ -5,3 +5,5 @@ dist/
 changelog.md
 compiled/
 compiled/**.*
+bundles/
+bundles/**.*
