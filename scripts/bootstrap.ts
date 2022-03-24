@@ -113,8 +113,8 @@ export default () => {
 
       // set excludeFolder for webstorm
       setExcludeFolder({ pkg: opts.pkg, cwd: root });
-      logger.ready(`${opts.pkg} bootstrapped`);
       logger.empty();
+      logger.success(`${opts.pkg} bootstrapped`);
     }
   }
 
