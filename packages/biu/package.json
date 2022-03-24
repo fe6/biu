@@ -28,18 +28,10 @@
     "access": "public"
   },
   "devDependencies": {
-    "@swc/core": "^1.2.160",
-    "commander": "^9.1.0"
-  },
-  "compiledConfig": {
-    "deps": [
-      "commander"
-    ],
-    "externals": {
-      "commander": "$$LOCAL"
-    }
+    "@swc/core": "^1.2.160"
   },
   "dependencies": {
+    "@fe6/biu-deps": "workspace:*",
     "@fe6/biu-utils": "workspace:*"
   }
 }

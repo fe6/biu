@@ -1,7 +1,7 @@
 /** @format */
 
-import webpack from '@fe6/biu-utils/compiled/webpack';
-import WebpackDevServer from '@fe6/biu-utils/compiled/webpack-dev-server/lib/Server';
+import webpack from '@fe6/biu-deps/compiled/webpack';
+import WebpackDevServer from '@fe6/biu-deps/compiled/webpack-dev-server/lib/Server';
 import { logger, utils } from '@fe6/biu-utils';
 import { getConfig } from '../shared/wp-chain';
 import store from '../shared/cache';

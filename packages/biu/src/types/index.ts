@@ -1,6 +1,6 @@
 /** @format */
 
-import { ResolveOptions as WebpackResolveOptions } from '@fe6/biu-utils/compiled/webpack';
+import { ResolveOptions as WebpackResolveOptions } from '@fe6/biu-deps/compiled/webpack';
 import { IHtmlOptions } from '../config/options/html';
 
 export type TMode = 'development' | 'test' | 'production' | 'none' | undefined;

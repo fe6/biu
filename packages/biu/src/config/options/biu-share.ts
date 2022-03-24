@@ -1,6 +1,6 @@
 /** @format */
 
-import { Configuration } from '@fe6/biu-utils/compiled/webpack';
+import { Configuration } from '@fe6/biu-deps/compiled/webpack';
 import store from '../../shared/cache';
 import { TExternalAssets } from '../../types';
 import { TMFOptions } from '../../types/module-federation';

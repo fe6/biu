@@ -1,9 +1,9 @@
 /** @format */
 
 import path from 'path';
-import webpack from '@fe6/biu-utils/compiled/webpack';
-import Dotenv from '@fe6/biu-utils/compiled/dotenv-webpack';
-import fs from '@fe6/biu-utils/compiled/fs-extra';
+import webpack from '@fe6/biu-deps/compiled/webpack';
+import Dotenv from '@fe6/biu-deps/compiled/dotenv-webpack';
+import fs from '@fe6/biu-deps/compiled/fs-extra';
 import { logger } from '@fe6/biu-utils';
 import wpChain from '../shared/wp-chain';
 import store from '../shared/cache';
@@ -73,7 +73,7 @@ class WPPlugin {
         args: [store.biuShare.moduleFederation],
       };
       config.plugin.mfStats = {
-        plugin: require('@fe6/biu-utils/compiled/webpack-federated-stats-plugin'),
+        plugin: require('@fe6/biu-deps/compiled/webpack-federated-stats-plugin'),
         args: [{ filename: 'biu.json' }],
       };
     }
@@ -85,14 +85,14 @@ class WPPlugin {
         options.profile = true;
       }
       config.plugin.progress = {
-        plugin: require('@fe6/biu-utils/compiled/webpackbar'),
+        plugin: require('@fe6/biu-deps/compiled/webpackbar'),
         args: [options],
       };
     }
     //analyzer
     if (store.config.build.analyze) {
       config.plugin.analyzer = {
-        plugin: require('@fe6/biu-utils/compiled/webpack-bundle-analyzer')
+        plugin: require('@fe6/biu-deps/compiled/webpack-bundle-analyzer')
           .BundleAnalyzerPlugin,
         args: [
           {
@@ -120,7 +120,7 @@ class WPPlugin {
       if (isTS) {
         config.plugin.tsCheck = {
           plugin: require.resolve(
-            '@fe6/biu-utils/compiled/fork-ts-checker-webpack-plugin',
+            '@fe6/biu-deps/compiled/fork-ts-checker-webpack-plugin',
           ),
           args: [
             {
@@ -144,7 +144,7 @@ class WPPlugin {
       } else {
         config.plugin.eslint = {
           plugin: require.resolve(
-            '@fe6/biu-utils/compiled/eslint-webpack-plugin',
+            '@fe6/biu-deps/compiled/eslint-webpack-plugin',
           ),
           args: [
             {

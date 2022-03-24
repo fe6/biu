@@ -1,6 +1,6 @@
 /** @format */
 
-import webpack from '@fe6/biu-utils/compiled/webpack';
+import webpack from '@fe6/biu-deps/compiled/webpack';
 import { TRquireBuildOptions } from '../../config/options/build';
 import {
   TransformConfig,
@@ -100,7 +100,7 @@ async function SWCLoader(
       const jscTransform: any = {
         regenerator: {
           importPath: require.resolve(
-            '@fe6/biu-utils/compiled/regenerator-runtime',
+            '@fe6/biu-deps/compiled/regenerator-runtime',
           ),
         },
       };

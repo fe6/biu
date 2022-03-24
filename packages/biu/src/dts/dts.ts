@@ -3,7 +3,7 @@
 import path from 'path';
 import ts from 'typescript';
 import { logger } from '@fe6/biu-utils';
-import fs from '@fe6/biu-utils/compiled/fs-extra';
+import fs from '@fe6/biu-deps/compiled/fs-extra';
 import { TRquireBuildOptions } from '../config/options/build';
 import { TMFOptions } from '../types/module-federation';
 import store from '../shared/cache';

@@ -4,7 +4,7 @@
 
 import { readFileSync, writeFileSync } from 'fs';
 import { join } from 'path';
-import * as logger from '@fe6/biu-utils/src/logger';
+import { logger } from '@fe6/biu-utils';
 
 // FIX bundle deps error
 // ref: https://github.com/isaacs/node-graceful-fs/commit/e61a20a052b838f420b98195c232a824a6ac04ee

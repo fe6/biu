@@ -1,6 +1,6 @@
 /** @format */
 
-import { Options as WebpackHtmlPluginOption } from '@fe6/biu-utils/compiled/html-webpack-plugin';
+import { Options as WebpackHtmlPluginOption } from '@fe6/biu-deps/compiled/html-webpack-plugin';
 import store from '../../shared/cache';
 // import fs from 'fs'
 import { TOverride } from '../../types';

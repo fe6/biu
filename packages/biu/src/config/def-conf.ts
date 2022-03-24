@@ -1,7 +1,7 @@
 /** @format */
 
 import path from 'path';
-import { RuleSetRule as WebpackRuleSetRule } from '@fe6/biu-utils/compiled/webpack';
+import { RuleSetRule as WebpackRuleSetRule } from '@fe6/biu-deps/compiled/webpack';
 import { TConfigDebug } from '../types';
 import { initBuild } from './options/build';
 import { initServer } from './options/server';

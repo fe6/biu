@@ -1,7 +1,7 @@
 /** @format */
 
 import path from 'path';
-import { lodash } from '@fe6/biu-utils';
+import { lodash } from '@fe6/biu-deps';
 import { TCmdOptions, TPkg, ENUM_ENV } from '../types';
 import { mergeConfig, TConfig, Config } from '../config';
 import BiuShare from '../config/options/biu-share';

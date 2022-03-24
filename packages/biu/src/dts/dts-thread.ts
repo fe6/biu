@@ -1,6 +1,6 @@
 /** @format */
 
-import glob from '@fe6/biu-utils/compiled/fast-glob';
+import glob from '@fe6/biu-deps/compiled/fast-glob';
 import { logger } from '@fe6/biu-utils';
 import store from '../shared/cache';
 import DTSEmitFile from './dts';

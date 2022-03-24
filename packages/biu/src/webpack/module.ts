@@ -1,7 +1,7 @@
 /** @format */
 
 import path from 'path';
-import { reactRefreshWebpack } from '@fe6/biu-utils';
+import { reactRefreshWebpack } from '@fe6/biu-deps';
 import wpChain from '../shared/wp-chain';
 import store from '../shared/cache';
 
@@ -58,7 +58,7 @@ class WPModule {
       .oneOf('workerInline')
       .resourceQuery(/worker/)
       .use('workerLoader')
-      .loader(require.resolve('@fe6/biu-utils/compiled/worker-loader/index'))
+      .loader(require.resolve('@fe6/biu-deps/compiled/worker-loader/index'))
       .options({
         inline: 'no-fallback',
         filename: '[name].[contenthash].worker.js',

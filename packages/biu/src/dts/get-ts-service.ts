@@ -1,7 +1,7 @@
 /** @format */
 
 import ts from 'typescript';
-import fs from '@fe6/biu-utils/compiled/fs-extra';
+import fs from '@fe6/biu-deps/compiled/fs-extra';
 import { getFileNames } from './get-ts-config';
 
 /**

@@ -2,7 +2,7 @@
 
 import ts from 'typescript';
 import path from 'path';
-import fs from '@fe6/biu-utils/compiled/fs-extra';
+import fs from '@fe6/biu-deps/compiled/fs-extra';
 import { logger } from '@fe6/biu-utils';
 
 function getTSConfigPath(cwd: string) {

@@ -4,7 +4,7 @@
 
 import { existsSync, readdirSync, readFileSync, writeFileSync } from 'fs';
 import { join } from 'path';
-import * as logger from '@fe6/biu-utils/src/logger';
+import { logger } from '@fe6/biu-utils';
 
 export function getPkgs(opts?: { base?: string }): string[] {
   const base = opts?.base || join(__dirname, '../packages');
