@@ -4,6 +4,7 @@ import path from 'path';
 import webpack from '@fe6/biu-utils/compiled/webpack';
 import Dotenv from '@fe6/biu-utils/compiled/dotenv-webpack';
 import fs from '@fe6/biu-utils/compiled/fs-extra';
+import { logger } from '@fe6/biu-utils';
 import wpChain from '../shared/wp-chain';
 import store from '../shared/cache';
 import { TMode } from '../types';
@@ -78,7 +79,7 @@ class WPPlugin {
     }
     // progress
     if (store.config.debug.progress !== false) {
-      const options: any = { name: `[EMP]` };
+      const options: any = { name: logger.pkgName };
       if (store.config.debug.profile) {
         options.reporters = ['fancy', 'profile'];
         options.profile = true;
