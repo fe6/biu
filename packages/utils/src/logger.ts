@@ -76,3 +76,10 @@ export function debug(...message: any[]) {
     empty();
   }
 }
+
+export function assert(condition: boolean, ...message: string[]) {
+  if (condition) {
+    console.log(prefixes.warn, ...message);
+    empty();
+  }
+}

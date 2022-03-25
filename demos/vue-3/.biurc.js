@@ -1,7 +1,7 @@
 /** @format */
 
-const pluginVue = require('@fe6/biu-plugin-vue');
+// const pluginVue = require('@fe6/biu-plugin-vue');
 
 module.exports = {
-  plugins: [pluginVue],
+  // plugins: [pluginVue],
 };

@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "@fe6/biu": "workspace:*",
-    "@fe6/biu-deps": "workspace:*"
+    "@fe6/biu-deps": "workspace:*",
+    "@fe6/biu-deps-babel": "workspace:*"
   }
 }

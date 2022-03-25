@@ -1,7 +1,7 @@
 /** @format */
 
 import path from 'path';
-import { reactRefreshWebpack } from '@fe6/biu-deps';
+import { reactRefreshWebpack, vueLoader } from '@fe6/biu-deps';
 import wpChain from '../shared/wp-chain';
 import store from '../shared/cache';
 
@@ -14,6 +14,8 @@ class WPModule {
     this.setConfig();
     this.setScriptReactLoader();
     this.setWebworker();
+    // TODO react 的判断支持
+    this.setVue();
   }
   private setConfig() {
     const config = {
@@ -52,13 +54,16 @@ class WPModule {
     };
     wpChain.merge(config);
   }
+  private setVue() {
+    vueLoader(wpChain);
+  }
   private setWebworker() {
     wpChain.module
       .rule('webworker')
       .oneOf('workerInline')
       .resourceQuery(/worker/)
       .use('workerLoader')
-      .loader(require.resolve('@fe6/biu-deps/compiled/worker-loader/index'))
+      .loader(require.resolve('@fe6/biu-deps/compiled/worker-loader'))
       .options({
         inline: 'no-fallback',
         filename: '[name].[contenthash].worker.js',
