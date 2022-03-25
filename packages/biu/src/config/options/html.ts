@@ -2,7 +2,7 @@
 
 import { Options as WebpackHtmlPluginOption } from '@fe6/biu-deps/compiled/html-webpack-plugin';
 import store from '../../shared/cache';
-// import fs from 'fs'
+import { fsExtra } from '@fe6/biu-deps';
 import { TOverride } from '../../types';
 
 export interface IHtmlOptions extends WebpackHtmlPluginOption {
@@ -45,16 +45,17 @@ export const initHtml = (o: WebpackHtmlPluginOption = {}): TInitHtml => {
   let template = o.template || 'src/index.html';
   let favicon = o.favicon || 'src/favicon.ico';
   if (store) {
-    // template = store.getProjectResolve(template)
+    template = store.getProjectResolve(template);
     console.log(template, 'TODO template');
-    // if (!fs.existsSync(template)) {
-    //   template = store.biuResolve('template/index.html')
-    // }
-    // favicon = store.getProjectResolve(favicon)
-    // if (!fs.existsSync(favicon)) {
-    //   favicon = store.biuResolve('template/favicon.ico')
-    // }
+    if (!fsExtra.existsSync(template)) {
+      template = store.biuResolve('template/index.html');
+    }
+    favicon = store.getProjectResolve(favicon);
+    if (!fsExtra.existsSync(favicon)) {
+      favicon = store.biuResolve('template/favicon.ico');
+    }
   }
-  const title = 'EMP';
+  const title = 'BIU';
+  console.log(template, 'template');
   return { title, files: { css: [], js: [] }, ...o, template, favicon };
 };

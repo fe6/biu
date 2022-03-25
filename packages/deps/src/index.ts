@@ -23,6 +23,10 @@ import webpackChain from '../compiled/webpack-5-chain';
 import reactRefreshWebpack from '@pmmmwh/react-refresh-webpack-plugin';
 // ? deps
 
+// vue
+export { vueLoader } from './vue';
+// vue
+
 export {
   yParser,
   chalk,
