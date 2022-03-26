@@ -79,6 +79,7 @@ importers:
       '@types/mini-css-extract-plugin': 2.5.1
       '@types/sass': 1.43.1
       '@types/serve-index': 1.9.1
+      '@types/tapable': ^2.2.2
       '@types/webpack-bundle-analyzer': 4.4.1
       '@types/webpack-manifest-plugin': 3.0.5
       '@types/ws': 8.5.3
@@ -122,6 +123,7 @@ importers:
       portfinder: 1.0.28
       postcss: 8.4.12
       postcss-loader: 6.2.1
+      pretty-error: ^4.0.0
       react-refresh: 0.11.0
       regenerator-runtime: 0.13.9
       sass: 1.49.9
@@ -129,6 +131,7 @@ importers:
       schema-utils: 4.0.0
       serve-index: 1.9.1
       style-loader: 3.3.1
+      tapable: ^2.2.1
       terser-webpack-plugin: 5.3.1
       url-loader: 4.1.1
       vue-loader: 17.0.0
@@ -160,6 +163,7 @@ importers:
       '@types/mini-css-extract-plugin': registry.npmmirror.com/@types/mini-css-extract-plugin/2.5.1_webpack@5.70.0
       '@types/sass': registry.npmmirror.com/@types/sass/1.43.1
       '@types/serve-index': registry.npmmirror.com/@types/serve-index/1.9.1
+      '@types/tapable': registry.npmmirror.com/@types/tapable/2.2.2
       '@types/webpack-bundle-analyzer': registry.npmmirror.com/@types/webpack-bundle-analyzer/4.4.1_esbuild@0.14.27
       '@types/webpack-manifest-plugin': registry.npmmirror.com/@types/webpack-manifest-plugin/3.0.5
       '@types/ws': registry.npmmirror.com/@types/ws/8.5.3
@@ -202,6 +206,7 @@ importers:
       pirates: registry.npmmirror.com/pirates/4.0.5
       portfinder: registry.npmmirror.com/portfinder/1.0.28
       postcss-loader: registry.npmmirror.com/postcss-loader/6.2.1_postcss@8.4.12+webpack@5.70.0
+      pretty-error: registry.npmmirror.com/pretty-error/4.0.0
       react-refresh: registry.npmmirror.com/react-refresh/0.11.0
       regenerator-runtime: registry.npmmirror.com/regenerator-runtime/0.13.9
       sass: registry.npmmirror.com/sass/1.49.9
@@ -209,6 +214,7 @@ importers:
       schema-utils: registry.npmmirror.com/schema-utils/4.0.0
       serve-index: registry.npmmirror.com/serve-index/1.9.1
       style-loader: registry.npmmirror.com/style-loader/3.3.1_webpack@5.70.0
+      tapable: registry.npmmirror.com/tapable/2.2.1
       terser-webpack-plugin: registry.npmmirror.com/terser-webpack-plugin/5.3.1_esbuild@0.14.27+webpack@5.70.0
       url-loader: registry.npmmirror.com/url-loader/4.1.1_webpack@5.70.0
       vue-loader: registry.npmmirror.com/vue-loader/17.0.0_webpack@5.70.0
@@ -3478,6 +3484,14 @@ packages:
     resolution: {integrity: sha512-ipixuVrh2OdNmauvtT51o3d8z12p6LtFW9in7U79der/kwejjdNchQC5UMn5u/KxNoM7VHHOs/l8KS8uHxhODQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/tapable/-/tapable-1.0.8.tgz}
     name: '@types/tapable'
     version: 1.0.8
+    dev: true
+
+  registry.npmmirror.com/@types/tapable/2.2.2:
+    resolution: {integrity: sha512-ujqOVJEeLcwpDVJPnp/k3u1UXmTKq5urJq9fO8aUKg8Vlel5RNOFbVKEfqfh6wGfF/M+HiTJlBJMLC1aDfyf0Q==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/tapable/-/tapable-2.2.2.tgz}
+    name: '@types/tapable'
+    version: 2.2.2
+    dependencies:
+      tapable: registry.npmmirror.com/tapable/2.2.1
     dev: true
 
   registry.npmmirror.com/@types/uglify-js/3.13.1:
