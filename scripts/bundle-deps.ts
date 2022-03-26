@@ -274,22 +274,6 @@ Object.keys(exported).forEach(function (key) {
           fs.copySync(filePath, path.join(target, 'common'));
         }
 
-        if (opts.pkgName === 'html-webpack-plugin') {
-          // FIX ERROR in   Error: Child compilation failed:
-          // FIX Module not found: Error: Can't resolve '3378'
-          const webpackHtmlPluginFilePath = path.join(target, 'index.js');
-          fs.writeFileSync(
-            webpackHtmlPluginFilePath,
-            fs
-              .readFileSync(webpackHtmlPluginFilePath, 'utf-8')
-              .replace(
-                `/*require.resolve*/(3378) + '!'`,
-                `'@fe6/biu-deps/compiled/html-loader!'`,
-              ),
-            'utf-8',
-          );
-        }
-
         if (opts.pkgName === 'webpack') {
           const filePath = path.join(nodeModulesPath, opts.pkgName, 'hot');
           fs.copySync(filePath, path.join(target, 'hot'));

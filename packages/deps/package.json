@@ -40,6 +40,7 @@
     "@types/mini-css-extract-plugin": "2.5.1",
     "@types/sass": "1.43.1",
     "@types/serve-index": "1.9.1",
+    "@types/tapable": "^2.2.2",
     "@types/webpack-bundle-analyzer": "4.4.1",
     "@types/webpack-manifest-plugin": "3.0.5",
     "@types/ws": "8.5.3",
@@ -82,6 +83,7 @@
     "pirates": "4.0.5",
     "portfinder": "1.0.28",
     "postcss-loader": "6.2.1",
+    "pretty-error": "^4.0.0",
     "react-refresh": "0.11.0",
     "regenerator-runtime": "0.13.9",
     "sass": "1.49.9",
@@ -89,6 +91,7 @@
     "schema-utils": "4.0.0",
     "serve-index": "1.9.1",
     "style-loader": "3.3.1",
+    "tapable": "^2.2.1",
     "terser-webpack-plugin": "5.3.1",
     "url-loader": "4.1.1",
     "vue-loader": "17.0.0",
@@ -123,7 +126,6 @@
       "default-gateway",
       "ipaddr.js",
       "webpack-5-chain",
-      "html-webpack-plugin",
       "webpack-dev-server",
       "terser-webpack-plugin",
       "pirates",
@@ -158,9 +160,12 @@
       "loader-utils",
       "find-cache-dir",
       "make-dir",
+      "pretty-error",
+      "tapable",
       "./bundles/events/bundle",
       "./bundles/webpack/bundle",
       "./bundles/react-refresh/babel",
+      "./bundles/html-webpack-plugin/index",
       "worker-loader",
       "url-loader",
       "css-loader",
@@ -214,7 +219,9 @@
       "ansi-html-community": "$$LOCAL",
       "html-entities": "$$LOCAL",
       "regenerator-runtime": "$$LOCAL",
-      "events": "$$LOCAL"
+      "events": "$$LOCAL",
+      "pretty-error": "$$LOCAL",
+      "tapable": "$$LOCAL"
     },
     "extraDtsDeps": [
       "webpack",
@@ -225,7 +232,7 @@
       "terser-webpack-plugin",
       "mini-css-extract-plugin",
       "vue-loader",
-      "html-webpack-plugin"
+      "./bundles/html-webpack-plugin/index"
     ],
     "excludeDtsDeps": [
       "fork-ts-checker-webpack-plugin",
@@ -246,7 +253,8 @@
       "regenerator-runtime",
       "html-entities",
       "ansi-html-community",
-      "events"
+      "events",
+      "pretty-error"
     ],
     "extraDtsExternals": [
       "esbuild",
@@ -257,7 +265,9 @@
       "regenerator-runtime",
       "html-entities",
       "ansi-html-community",
-      "events"
+      "events",
+      "html-webpack-plugin",
+      "pretty-error"
     ]
   }
 }
