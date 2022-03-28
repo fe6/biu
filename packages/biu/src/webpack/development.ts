@@ -1,6 +1,6 @@
 /** @format */
 
-import { Configuration } from '@fe6/biu-deps/compiled/webpack';
+import { Configuration } from '@fe6/biu-deps-webpack/compiled/webpack';
 import store from '../shared/cache';
 import wpChain from '../shared/wp-chain';
 

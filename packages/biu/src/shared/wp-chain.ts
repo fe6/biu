@@ -2,7 +2,7 @@
 
 import { webpackChain, fsExtra } from '@fe6/biu-deps';
 import { logger } from '@fe6/biu-utils';
-import { Configuration as WebpackConfiguration } from '@fe6/biu-deps/compiled/webpack';
+import { Configuration as WebpackConfiguration } from '@fe6/biu-deps-webpack/compiled/webpack';
 import store from '../shared/cache';
 
 export { webpackChain as WPChain };

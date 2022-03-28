@@ -277,49 +277,6 @@ Object.keys(exported).forEach(function (key) {
         if (opts.pkgName === 'webpack') {
           const filePath = path.join(nodeModulesPath, opts.pkgName, 'hot');
           fs.copySync(filePath, path.join(target, 'hot'));
-
-          const webpackEmitterFilePath = path.join(target, 'hot/emitter.js');
-          fs.writeFileSync(
-            webpackEmitterFilePath,
-            fs
-              .readFileSync(webpackEmitterFilePath, 'utf-8')
-              .replace(
-                `require("events")`,
-                `require("@fe6/biu-deps/compiled/events").default`,
-              ),
-            'utf-8',
-          );
-        }
-
-        // events require 引入的是一个对象，取 default
-        const eventsList: any = {
-          bonjour: '/index.js',
-          chokidar: '/index.js',
-          'default-gateway': 'index.js',
-          eslint: 'index.js',
-          express: 'index.js',
-          'fast-glob': 'index.js',
-          'serve-index': 'index.js',
-          webpack: 'index.js',
-          'webpack-dev-middleware': 'index.js',
-          'worker-loader': 'index.js',
-          ws: 'index.js',
-        };
-        if (eventsList?.[opts.pkgName as any]) {
-          const eventsFilePath = path.join(
-            target,
-            eventsList?.[opts.pkgName as any],
-          );
-          fs.writeFileSync(
-            eventsFilePath,
-            fs
-              .readFileSync(eventsFilePath, 'utf-8')
-              .replace(
-                `require("@fe6/biu-deps/compiled/events")`,
-                `require("@fe6/biu-deps/compiled/events").default`,
-              ),
-            'utf-8',
-          );
         }
 
         // patch
@@ -423,155 +380,18 @@ Object.keys(exported).forEach(function (key) {
 
     const target = `compiled/${isDep ? dep : path.basename(path.dirname(dep))}`;
 
-    if (dep === 'webpack-dev-server') {
-      logger.info(`Build dep ${dep}`);
-      fs.ensureDirSync(target);
-      const nodeModulesPath = path.join(base, 'node_modules');
-      const theTarget = path.join(base, target);
-      const filePath = (fileName: string = '') =>
-        path.join(nodeModulesPath, dep, fileName);
-      fs.copySync(filePath('lib'), path.join(theTarget, 'lib'));
-      fs.copySync(filePath('client'), path.join(theTarget, 'client'));
-      fs.copySync(filePath('types/lib'), path.join(theTarget, 'lib'));
-      const pkgRoot = path.dirname(
-        resolve.sync(`${dep}/package.json`, {
-          basedir: base,
-        }),
-      );
-      if (fs.existsSync(path.join(pkgRoot, 'LICENSE'))) {
-        fs.writeFileSync(
-          path.join(target, 'LICENSE'),
-          fs.readFileSync(path.join(pkgRoot, 'LICENSE'), 'utf-8'),
-          'utf-8',
-        );
-      }
-      if (fs.existsSync(path.join(pkgRoot, 'package.json'))) {
-        fs.writeFileSync(
-          path.join(target, 'package.json'),
-          fs.readFileSync(path.join(pkgRoot, 'package.json'), 'utf-8'),
-          'utf-8',
-        );
-      }
-
-      // FIX require
-      const webpackServerFsFilePath = path.join(target, 'lib/Server.js');
-      fs.writeFileSync(
-        webpackServerFsFilePath,
-        fs
-          .readFileSync(webpackServerFsFilePath, 'utf-8')
-          .replace(`graceful-fs`, `@fe6/biu-deps/compiled/fs-extra`)
-          .replace(`schema-utils`, `@fe6/biu-deps/compiled/schema-utils`)
-          .replace(`"express`, `"@fe6/biu-deps/compiled/express`)
-          .replace(`default-gateway`, `@fe6/biu-deps/compiled/default-gateway`)
-          .replace(`ipaddr.js`, `@fe6/biu-deps/compiled/ipaddr.js`)
-          .replace(
-            `require("webpack-dev-middleware`,
-            `require("@fe6/biu-deps/compiled/webpack-dev-middleware`,
-          )
-          .replace(
-            `require("compression`,
-            `require("@fe6/biu-deps/compiled/compression`,
-          )
-          .replace(
-            `require("connect-history-api-fallback`,
-            `require("@fe6/biu-deps/compiled/connect-history-api-fallback`,
-          )
-          .replace(
-            `require("serve-index`,
-            `require("@fe6/biu-deps/compiled/serve-index`,
-          )
-          .replace(`require("open`, `require("@fe6/biu-deps/compiled/open`)
-          .replace(
-            `require("bonjour`,
-            `require("@fe6/biu-deps/compiled/bonjour`,
-          )
-          .replace(
-            `require("colorette`,
-            `require("@fe6/biu-deps/compiled/colorette`,
-          )
-          .replace(
-            `require("chokidar`,
-            `require("@fe6/biu-deps/compiled/chokidar`,
-          )
-          .replace(
-            `require("colorette`,
-            `require("@fe6/biu-deps/compiled/colorette`,
-          )
-          .replace(
-            `require.resolve("webpack/hot/only-dev-server`,
-            `require.resolve("@fe6/biu-deps/compiled/webpack/hot/only-dev-server`,
-          )
-          .replace(
-            `require.resolve("webpack/hot/dev-server`,
-            `require.resolve("@fe6/biu-deps/compiled/webpack/hot/dev-server`,
-          )
-          .replace(`p-retry`, `@fe6/biu-deps/compiled/p-retry`)
-          .replace(`return pRetry(()`, `return pRetry.default(()`)
-          .replace(`"portfinder`, `"@fe6/biu-deps/compiled/portfinder`)
-          .replace(
-            `require("webpack"`,
-            `require("@fe6/biu-deps/compiled/webpack"`,
-          ),
-        'utf-8',
-      );
-
-      const webpackWebsocketServerFilePath = path.join(
-        target,
-        'lib/servers/WebsocketServer.js',
-      );
-      fs.writeFileSync(
-        webpackWebsocketServerFilePath,
-        fs
-          .readFileSync(webpackWebsocketServerFilePath, 'utf-8')
-          .replace(`require("ws"`, `require("@fe6/biu-deps/compiled/ws"`),
-        'utf-8',
-      );
-    } else if (dep === 'webpack-federated-stats-plugin') {
-      logger.info(`Build dep ${dep}`);
-      fs.ensureDirSync(target);
-      const pkgRoot = path.dirname(
-        resolve.sync(`${dep}/package.json`, {
-          basedir: base,
-        }),
-      );
-      if (fs.existsSync(path.join(pkgRoot, 'index.js'))) {
-        fs.writeFileSync(
-          path.join(target, 'index.js'),
-          fs.readFileSync(path.join(pkgRoot, 'index.js'), 'utf-8'),
-          'utf-8',
-        );
-      }
-      if (fs.existsSync(path.join(pkgRoot, 'package.json'))) {
-        fs.writeFileSync(
-          path.join(target, 'package.json'),
-          fs.readFileSync(path.join(pkgRoot, 'package.json'), 'utf-8'),
-          'utf-8',
-        );
-      }
-
-      // FIX require
-      const federatedFilePath = path.join(target, 'index.js');
-      fs.writeFileSync(
-        federatedFilePath,
-        fs
-          .readFileSync(federatedFilePath, 'utf-8')
-          .replace(`"webpack`, `"@fe6/biu-deps/compiled/webpack`),
-        'utf-8',
-      );
-    } else {
-      await buildDep({
-        ...(isDep ? { pkgName: dep } : { file: dep }),
-        target,
-        base,
-        webpackExternals,
-        dtsExternals,
-        clean: argv.clean,
-        minify: !noMinify.includes(dep),
-        dtsOnly: extraDtsDeps.includes(dep),
-        noDts: excludeDtsDeps.includes(dep),
-        isDependency: dep in pkgDeps,
-      });
-    }
+    await buildDep({
+      ...(isDep ? { pkgName: dep } : { file: dep }),
+      target,
+      base,
+      webpackExternals,
+      dtsExternals,
+      clean: argv.clean,
+      minify: !noMinify.includes(dep),
+      dtsOnly: extraDtsDeps.includes(dep),
+      noDts: excludeDtsDeps.includes(dep),
+      isDependency: dep in pkgDeps,
+    });
   }
 
   logger.empty();

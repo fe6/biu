@@ -5,6 +5,7 @@
     "start": "biu dev"
   },
   "dependencies": {
+    "@vue/reactivity": "^3.2.31",
     "dayjs": "^1.11.0",
     "vue": "^3.2.31"
   },
