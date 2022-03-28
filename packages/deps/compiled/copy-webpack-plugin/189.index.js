@@ -2,13 +2,13 @@ exports.id = 189;
 exports.ids = [189];
 exports.modules = {
 
-/***/ 9699:
+/***/ 699:
 /***/ (function(module, __unused_webpack_exports, __webpack_require__) {
 
 "use strict";
 
-const path = __webpack_require__(1017);
-const pathType = __webpack_require__(7228);
+const path = __webpack_require__(17);
+const pathType = __webpack_require__(228);
 
 const getExtensions = extensions => extensions.length > 1 ? `{${extensions.join(',')}}` : extensions[0];
 
@@ -85,7 +85,7 @@ module.exports.sync = (input, options) => {
 
 /***/ }),
 
-/***/ 5747:
+/***/ 747:
 /***/ (function(module) {
 
 // A simple implementation of make-array
@@ -695,7 +695,7 @@ if (
 
 /***/ }),
 
-/***/ 8740:
+/***/ 740:
 /***/ (function(module, __unused_webpack_exports, __webpack_require__) {
 
 "use strict";
@@ -707,7 +707,7 @@ if (
  * Copyright (c) 2014-2020 Teambition
  * Licensed under the MIT license.
  */
-const Stream = __webpack_require__(2781)
+const Stream = __webpack_require__(781)
 const PassThrough = Stream.PassThrough
 const slice = Array.prototype.slice
 
@@ -847,13 +847,13 @@ function pauseStreams (streams, options) {
 
 /***/ }),
 
-/***/ 7228:
+/***/ 228:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
 
-const {promisify} = __webpack_require__(3837);
-const fs = __webpack_require__(7147);
+const {promisify} = __webpack_require__(837);
+const fs = __webpack_require__(147);
 
 async function isType(fsStatType, statsMethodName, filePath) {
 	if (typeof filePath !== 'string') {
@@ -898,7 +898,7 @@ exports.isSymlinkSync = isTypeSync.bind(null, 'lstatSync', 'isSymbolicLink');
 
 /***/ }),
 
-/***/ 1189:
+/***/ 189:
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -917,20 +917,20 @@ __webpack_require__.d(__webpack_exports__, {
 });
 
 // EXTERNAL MODULE: external "node:fs"
-var external_node_fs_ = __webpack_require__(7561);
+var external_node_fs_ = __webpack_require__(561);
 ;// CONCATENATED MODULE: ../../node_modules/.pnpm/registry.npmmirror.com+array-union@3.0.1/node_modules/array-union/index.js
 const arrayUnion = (...arguments_) => [...new Set(arguments_.flat())];
 
 /* harmony default export */ var array_union = (arrayUnion);
 
 // EXTERNAL MODULE: ../../node_modules/.pnpm/registry.npmmirror.com+merge2@1.4.1/node_modules/merge2/index.js
-var merge2 = __webpack_require__(8740);
+var merge2 = __webpack_require__(740);
 // EXTERNAL MODULE: external "@fe6/biu-deps/compiled/fast-glob"
-var fast_glob_ = __webpack_require__(2396);
+var fast_glob_ = __webpack_require__(396);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/registry.npmmirror.com+dir-glob@3.0.1/node_modules/dir-glob/index.js
-var dir_glob = __webpack_require__(9699);
+var dir_glob = __webpack_require__(699);
 // EXTERNAL MODULE: external "node:url"
-var external_node_url_ = __webpack_require__(1041);
+var external_node_url_ = __webpack_require__(41);
 ;// CONCATENATED MODULE: ../../node_modules/.pnpm/registry.npmmirror.com+globby@12.2.0/node_modules/globby/to-path.js
 
 
@@ -949,11 +949,11 @@ const toPath = urlOrPath => {
 /* harmony default export */ var to_path = (toPath);
 
 // EXTERNAL MODULE: external "node:process"
-var external_node_process_ = __webpack_require__(7742);
+var external_node_process_ = __webpack_require__(742);
 // EXTERNAL MODULE: external "node:path"
-var external_node_path_ = __webpack_require__(8330);
+var external_node_path_ = __webpack_require__(411);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/registry.npmmirror.com+ignore@5.2.0/node_modules/ignore/index.js
-var ignore = __webpack_require__(5747);
+var ignore = __webpack_require__(747);
 ;// CONCATENATED MODULE: ../../node_modules/.pnpm/registry.npmmirror.com+slash@4.0.0/node_modules/slash/index.js
 function slash(path) {
 	const isExtendedLengthPath = /^\\\\\?\\/.test(path);
@@ -1077,7 +1077,7 @@ const isGitIgnoredSync = options => {
 };
 
 // EXTERNAL MODULE: external "node:stream"
-var external_node_stream_ = __webpack_require__(4492);
+var external_node_stream_ = __webpack_require__(492);
 ;// CONCATENATED MODULE: ../../node_modules/.pnpm/registry.npmmirror.com+globby@12.2.0/node_modules/globby/stream-utils.js
 
 

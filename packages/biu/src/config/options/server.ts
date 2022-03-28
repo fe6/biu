@@ -1,6 +1,6 @@
 /** @format */
 
-import { Configuration as WebpackServerConfiguration } from '@fe6/biu-deps/compiled/webpack-dev-server/lib/Server';
+import { Configuration as WebpackServerConfiguration } from '@fe6/biu-deps-webpack/compiled/webpack-dev-server/types/lib/Server';
 
 export type TServerConfig = {
   /**

@@ -1,0 +1,71 @@
+{
+  "name": "@fe6/biu-deps-webpack",
+  "version": "0.0.0",
+  "description": "@fe6/biu-deps-webpack",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "compiled",
+    "dist"
+  ],
+  "scripts": {
+    "build": "pnpm tsc",
+    "build:deps": "pnpm esno ../../scripts/bundle-deps.ts",
+    "generate:webpackPackages": "zx ./scripts/generate-webpack-packages.mjs",
+    "start": "pnpm build -- --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fe6/biu.git",
+    "directory": "packages/deps-webpack"
+  },
+  "authors": [
+    "tainyi <649076408@qq.com> (https://github.com/iq9891)"
+  ],
+  "license": "MIT",
+  "bugs": "https://github.com/fe6/biu/issues",
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "@types/webpack-manifest-plugin": "3.0.5",
+    "chalk": "5.0.1",
+    "hash-sum": "2.0.0",
+    "loader-utils": "2.0.2",
+    "vue-loader": "17.0.0",
+    "webpack": "5.70.0",
+    "webpack-federated-stats-plugin": "2.0.9",
+    "webpack-manifest-plugin": "5.0.0",
+    "webpackbar": "5.0.2"
+  },
+  "compiledConfig": {
+    "deps": [
+      "webpackbar",
+      "./bundles/webpack/bundle",
+      "webpack-federated-stats-plugin",
+      "webpack-manifest-plugin",
+      "chalk",
+      "hash-sum",
+      "loader-utils",
+      "./bundles/vue-loader/bundle"
+    ],
+    "externals": {
+      "webpackbar": "$$LOCAL",
+      "webpack": "$$LOCAL",
+      "chalk": "$$LOCAL",
+      "hash-sum": "$$LOCAL",
+      "loader-utils": "$$LOCAL",
+      "vue-loader": "$$LOCAL"
+    },
+    "extraDtsDeps": [
+      "webpack",
+      "webpack-federated-stats-plugin",
+      "vue-loader"
+    ],
+    "excludeDtsDeps": [
+      "webpack-federated-stats-plugin",
+      "hash-sum",
+      "vue-loader"
+    ]
+  }
+}

@@ -29,10 +29,14 @@
     "access": "public"
   },
   "devDependencies": {
-    "@swc/core": "^1.2.160"
+    "@swc/core": "^1.2.160",
+    "webpack": "5.70.0",
+    "webpack-dev-server": "4.7.4",
+    "ws": "8.5.0"
   },
   "dependencies": {
     "@fe6/biu-deps": "workspace:*",
+    "@fe6/biu-deps-webpack": "workspace:*",
     "@fe6/biu-utils": "workspace:*"
   }
 }

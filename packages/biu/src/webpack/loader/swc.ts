@@ -1,6 +1,6 @@
 /** @format */
 
-import webpack from '@fe6/biu-deps/compiled/webpack';
+import webpack from '@fe6/biu-deps-webpack/compiled/webpack';
 import { TRquireBuildOptions } from '../../config/options/build';
 import {
   TransformConfig,
