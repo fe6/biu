@@ -1,7 +1,7 @@
 /** @format */
 
 import path from 'path';
-import { lodash } from '@fe6/biu-deps';
+import { cloneDeep } from '@fe6/biu-deps/compiled/lodash';
 import { TCmdOptions, TPkg, ENUM_ENV } from '../types';
 import { mergeConfig, TConfig, Config } from '../config';
 import BiuShare from '../config/options/biu-share';
@@ -89,7 +89,7 @@ class BiuCache {
       mode,
       cmdOptions,
     });
-    this.config = lodash.cloneDeep(configManager.currentConfig);
+    this.config = cloneDeep(configManager.currentConfig);
     this.isESM = ['es3', 'es5'].indexOf(this.config.build.target) === -1;
     //设置绝对路径
     this.setAbsPaths();

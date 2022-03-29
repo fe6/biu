@@ -1,26 +1,20 @@
 /** @format */
 
-import { Configuration } from '@fe6/biu-deps-webpack/compiled/webpack';
+// import { Configuration } from '@fe6/biu-deps-webpack/compiled/webpack';
 import store from '../shared/cache';
-import wpChain from '../shared/wp-chain';
+import { IDevServer } from '../server/types';
+// import { TConfig } from '../config';
+// import { ENUM_ENV } from '../types';
 
 class WPDevelopment {
   constructor() {}
-  async setup() {
-    const { devServer } = this;
-    const config: Configuration = {
-      mode: 'development',
-      devtool: 'inline-source-map',
-      devServer,
-    };
-    wpChain.merge(config);
-  }
+  async setup() {}
   /**
    * dev server
    */
-  get devServer(): Configuration['devServer'] {
+  get server(): IDevServer {
     const overlayLoggerLv =
-      store.config.debug.level === 'error'
+      store.config.debug && store.config.debug.level === 'error'
         ? { errors: true, warnings: false }
         : { errors: true, warnings: true };
     return {
@@ -29,35 +23,38 @@ class WPDevelopment {
       historyApiFallback: true,
       // compress: true,
       static: [
-        store.publicDir,
+        {
+          directory: store.outDir,
+          publicPath: [store.publicDir],
+        },
         // 暴露 d.ts 文件
         {
           directory: store.outDir,
-          publicPath: '/',
-          staticOptions: {
-            setHeaders: function (res: any, path) {
-              if (path.toString().endsWith('.d.ts'))
-                res?.set(
-                  'Content-Type',
-                  'application/javascript; charset=utf-8',
-                );
-            },
-          },
+          publicPath: ['/'],
+          // staticOptions: {
+          //   setHeaders: function (res: any, path) {
+          //     if (path.toString().endsWith('.d.ts'))
+          //       res?.set(
+          //         'Content-Type',
+          //         'application/javascript; charset=utf-8',
+          //       );
+          //   },
+          // },
         },
       ],
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods':
-          'GET, POST, PUT, DELETE, PATCH, OPTIONS',
-        'Access-Control-Allow-Headers':
-          'X-Requested-With, content-type, Authorization',
-      },
+      // headers: {
+      //   'Access-Control-Allow-Origin': '*',
+      //   'Access-Control-Allow-Methods':
+      //     'GET, POST, PUT, DELETE, PATCH, OPTIONS',
+      //   'Access-Control-Allow-Headers':
+      //     'X-Requested-With, content-type, Authorization',
+      // },
       client: {
         overlay: {
           ...overlayLoggerLv,
         },
       },
-      ...(store.config.server as Configuration['devServer']),
+      ...(store.config.server as IDevServer),
     };
   }
 }

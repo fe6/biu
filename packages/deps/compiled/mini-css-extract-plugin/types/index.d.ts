@@ -96,7 +96,7 @@ declare namespace MiniCssExtractPlugin {
     CssDependencyConstructor,
   };
 }
-type Compiler = import('../../webpack').Compiler;
+type Compiler = import('../webpack').Compiler;
 type CssModuleConstructor = new (dependency: CssModuleDependency) => CssModule;
 type CssDependencyConstructor = new (
   loaderDependency: CssDependencyOptions,
@@ -114,17 +114,17 @@ type PluginOptions = {
   experimentalUseImportModule?: boolean | undefined;
 };
 /** @typedef {import('../schema-utils/declarations/validate').Schema} Schema */
-/** @typedef {import('../../webpack').Compiler} Compiler */
-/** @typedef {import('../../webpack').Compilation} Compilation */
-/** @typedef {import('../../webpack').ChunkGraph} ChunkGraph */
-/** @typedef {import('../../webpack').Chunk} Chunk */
-/** @typedef {Parameters<import('../../webpack').Chunk["isInGroup"]>[0]} ChunkGroup */
-/** @typedef {import('../../webpack').Module} Module */
-/** @typedef {import('../../webpack').Dependency} Dependency */
-/** @typedef {import('../../webpack').sources.Source} Source */
-/** @typedef {import('../../webpack').Configuration} Configuration */
-/** @typedef {import('../../webpack').WebpackError} WebpackError */
-/** @typedef {import('../../webpack').AssetInfo} AssetInfo */
+/** @typedef {import('../webpack').Compiler} Compiler */
+/** @typedef {import('../webpack').Compilation} Compilation */
+/** @typedef {import('../webpack').ChunkGraph} ChunkGraph */
+/** @typedef {import('../webpack').Chunk} Chunk */
+/** @typedef {Parameters<import('../webpack').Chunk["isInGroup"]>[0]} ChunkGroup */
+/** @typedef {import('../webpack').Module} Module */
+/** @typedef {import('../webpack').Dependency} Dependency */
+/** @typedef {import('../webpack').sources.Source} Source */
+/** @typedef {import('../webpack').Configuration} Configuration */
+/** @typedef {import('../webpack').WebpackError} WebpackError */
+/** @typedef {import('../webpack').AssetInfo} AssetInfo */
 /** @typedef {import('./loader').Dependency} LoaderDependency */
 /**
  * @typedef {Object} LoaderOptions
@@ -166,16 +166,16 @@ declare const pluginName: "mini-css-extract-plugin";
 declare const pluginSymbol: unique symbol;
 declare var loader: string;
 type Schema = import('../schema-utils/declarations/validate').Schema;
-type Compilation = import('../../webpack').Compilation;
-type ChunkGraph = import('../../webpack').ChunkGraph;
-type Chunk = import('../../webpack').Chunk;
-type ChunkGroup = Parameters<import('../../webpack').Chunk["isInGroup"]>[0];
-type Module = import('../../webpack').Module;
-type Dependency = import('../../webpack').Dependency;
-type Source = import('../../webpack').sources.Source;
-type Configuration = import('../../webpack').Configuration;
-type WebpackError = import('../../webpack').WebpackError;
-type AssetInfo = import('../../webpack').AssetInfo;
+type Compilation = import('../webpack').Compilation;
+type ChunkGraph = import('../webpack').ChunkGraph;
+type Chunk = import('../webpack').Chunk;
+type ChunkGroup = Parameters<import('../webpack').Chunk["isInGroup"]>[0];
+type Module = import('../webpack').Module;
+type Dependency = import('../webpack').Dependency;
+type Source = import('../webpack').sources.Source;
+type Configuration = import('../webpack').Configuration;
+type WebpackError = import('../webpack').WebpackError;
+type AssetInfo = import('../webpack').AssetInfo;
 type LoaderDependency = import('./loader').Dependency;
 type LoaderOptions = {
   publicPath?:
@@ -202,7 +202,7 @@ type RuntimeOptions = {
   attributes: Record<string, string> | undefined;
 };
 type TODO = any;
-type CssModule = import('../../webpack').Module & {
+type CssModule = import('../webpack').Module & {
   content: Buffer;
   media?: string | undefined;
   sourceMap?: Buffer | undefined;
@@ -213,7 +213,7 @@ type CssModule = import('../../webpack').Module & {
         [key: string]: any;
       }
     | undefined;
-  assetsInfo?: Map<string, import('../../webpack').AssetInfo> | undefined;
+  assetsInfo?: Map<string, import('../webpack').AssetInfo> | undefined;
 };
 type CssModuleDependency = {
   context: string | null;
@@ -224,7 +224,7 @@ type CssModuleDependency = {
   media?: string | undefined;
   supports?: string | undefined;
   layer?: TODO;
-  assetsInfo?: Map<string, import('../../webpack').AssetInfo> | undefined;
+  assetsInfo?: Map<string, import('../webpack').AssetInfo> | undefined;
   assets?:
     | {
         [key: string]: any;
