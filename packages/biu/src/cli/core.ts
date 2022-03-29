@@ -12,9 +12,7 @@ const biuExec = async (
   cmdOptions: TCmdOptions,
 ): Promise<void> => {
   // 全局变量配置等初始化 cache & config
-  console.log(8, '8');
   biuCache.setup(mode, cmdOptions);
-  console.log(8, '18');
   //webpack 初始化
   await webpackConfig.setup();
   // 初始化所有 BIU Plugins
