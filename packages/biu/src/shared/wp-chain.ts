@@ -26,6 +26,10 @@ export const getConfig = (): WebpackConfiguration => {
       logger.info(JSON.stringify(conf, null, 2));
     }
   }
+
+  // TODO 分模式开发还是打包
+  conf.mode = 'development';
+
   return conf;
 };
 export default wpChain;

@@ -1,9 +1,9 @@
 export = CopyPlugin;
 /** @typedef {import('../schema-utils/declarations/validate').Schema} Schema */
-/** @typedef {import('../../webpack').Compiler} Compiler */
-/** @typedef {import('../../webpack').Compilation} Compilation */
-/** @typedef {import('../../webpack').WebpackError} WebpackError */
-/** @typedef {import('../../webpack').Asset} Asset */
+/** @typedef {import('../webpack').Compiler} Compiler */
+/** @typedef {import('../webpack').Compilation} Compilation */
+/** @typedef {import('../webpack').WebpackError} WebpackError */
+/** @typedef {import('../webpack').Asset} Asset */
 /** @typedef {import('../globby').Options} GlobbyOptions */
 /** @typedef {import('../globby').GlobEntry} GlobEntry */
 /** @typedef {ReturnType<Compilation["getLogger"]>} WebpackLogger */
@@ -192,15 +192,15 @@ declare namespace CopyPlugin {
     PluginOptions,
   };
 }
-type Compiler = import('../../webpack').Compiler;
+type Compiler = import('../webpack').Compiler;
 type PluginOptions = {
   patterns: Pattern[];
   options?: AdditionalOptions | undefined;
 };
 type Schema = import('../schema-utils/declarations/validate').Schema;
-type Compilation = import('../../webpack').Compilation;
-type WebpackError = import('../../webpack').WebpackError;
-type Asset = import('../../webpack').Asset;
+type Compilation = import('../webpack').Compilation;
+type WebpackError = import('../webpack').WebpackError;
+type Asset = import('../webpack').Asset;
 type GlobbyOptions = import('../globby').Options;
 type GlobEntry = import('../globby').GlobEntry;
 type WebpackLogger = ReturnType<Compilation["getLogger"]>;

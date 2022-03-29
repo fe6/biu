@@ -1,9 +1,9 @@
 export = TerserPlugin;
 /** @typedef {import('../schema-utils/declarations/validate').Schema} Schema */
-/** @typedef {import('../../webpack').Compiler} Compiler */
-/** @typedef {import('../../webpack').Compilation} Compilation */
-/** @typedef {import('../../webpack').WebpackError} WebpackError */
-/** @typedef {import('../../webpack').Asset} Asset */
+/** @typedef {import('../webpack').Compiler} Compiler */
+/** @typedef {import('../webpack').Compilation} Compilation */
+/** @typedef {import('../webpack').WebpackError} WebpackError */
+/** @typedef {import('../webpack').Asset} Asset */
 /** @typedef {import('./utils').TerserECMA} TerserECMA */
 /** @typedef {import('./utils').TerserOptions} TerserOptions */
 /** @typedef {import('../jest-worker').Worker} JestWorker */
@@ -165,7 +165,7 @@ declare class TerserPlugin<T = import('../terser').MinifyOptions> {
    * @private
    * @param {Compiler} compiler
    * @param {Compilation} compilation
-   * @param {Record<string, import('../../webpack').sources.Source>} assets
+   * @param {Record<string, import('../webpack').sources.Source>} assets
    * @param {{availableNumberOfCores: number}} optimizeOptions
    * @returns {Promise<void>}
    */
@@ -216,7 +216,7 @@ declare namespace TerserPlugin {
     InternalPluginOptions,
   };
 }
-type Compiler = import('../../webpack').Compiler;
+type Compiler = import('../webpack').Compiler;
 type BasePluginOptions = {
   test?: Rules | undefined;
   include?: Rules | undefined;
@@ -238,9 +238,9 @@ import { uglifyJsMinify } from './utils';
 import { swcMinify } from './utils';
 import { esbuildMinify } from './utils';
 type Schema = import('../schema-utils/declarations/validate').Schema;
-type Compilation = import('../../webpack').Compilation;
-type WebpackError = import('../../webpack').WebpackError;
-type Asset = import('../../webpack').Asset;
+type Compilation = import('../webpack').Compilation;
+type WebpackError = import('../webpack').WebpackError;
+type Asset = import('../webpack').Asset;
 type TerserECMA = import('./utils').TerserECMA;
 type TerserOptions = import('./utils').TerserOptions;
 type JestWorker = import('../jest-worker').Worker;

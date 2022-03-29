@@ -1,74 +1,92 @@
 /** @format */
 
-import { Server } from 'http';
+import { Server, IncomingMessage } from 'http';
+import { Duplex } from 'stream';
 import WebSocket, { WebSocketServer } from '@fe6/biu-deps/compiled/ws';
 import chalk from '@fe6/biu-deps/compiled/chalk';
+import { logger } from '@fe6/biu-utils';
 
-export function createWebSocketServer(server: Server) {
-  // const wss = new WebSocket.Server({
-  //   noServer: true,
-  // });
-  const wss = new WebSocketServer({
-    port: 8081,
-    perMessageDeflate: {
-      zlibDeflateOptions: {
-        // See zlib defaults.
-        chunkSize: 1024,
-        memLevel: 7,
-        level: 3,
-      },
-      zlibInflateOptions: {
-        chunkSize: 10 * 1024,
-      },
-      // Other options settable:
-      clientNoContextTakeover: true, // Defaults to negotiated value.
-      serverNoContextTakeover: true, // Defaults to negotiated value.
-      serverMaxWindowBits: 10, // Defaults to negotiated value.
-      // Below options specified as default values.
-      concurrencyLimit: 10, // Limits zlib concurrency for perf.
-      threshold: 1024, // Size (in bytes) below which messages
-      // should not be compressed if context takeover is disabled.
-    },
-  });
+import { BaseServer } from './base-ws';
 
-  server.on('upgrade', (req, socket, head) => {
-    if (req.headers['sec-websocket-protocol'] === 'webpack-hmr') {
-      wss.handleUpgrade(req, socket as any, head, (ws) => {
-        console.log(333333, '333333');
-        wss.emit('connection', ws, req);
-      });
-    }
-  });
+export class WebsocketServer extends BaseServer {
+  implementation: any;
 
-  wss.on('connection', (socket) => {
-    console.log(111111, '111111');
-    socket.send(JSON.stringify({ type: 'connected' }));
-  });
+  constructor(server: any) {
+    super(server);
+    const options = {
+      server,
+    };
 
-  wss.on('error', (e: Error & { code: string }) => {
-    console.log(e.code, 'e.code');
-    if (e.code !== 'EADDRINUSE') {
-      console.error(
-        chalk.red(`WebSocket server error:\n${e.stack || e.message}`),
-      );
-    }
-  });
+    this.implementation = new WebSocket.Server(options);
 
-  return {
-    send(message: string) {
-      wss.clients.forEach((client) => {
-        console.log(client, 'client');
-        if (client.readyState === WebSocket.OPEN) {
-          client.send(message);
+    this.server.on(
+      'upgrade',
+      (req: IncomingMessage, sock: Duplex, head: Buffer) => {
+        if (!this.implementation.shouldHandle(req)) {
+          return;
         }
-      });
-    },
 
-    wss,
+        this.implementation.handleUpgrade(
+          req,
+          sock,
+          head,
+          (connection: any) => {
+            this.implementation.emit('connection', connection, req);
+          },
+        );
+      },
+    );
 
-    close() {
-      console.log(9999, '9');
-      wss.close();
-    },
-  };
+    this.implementation.on(
+      'error',
+      /**
+       * @param {Error} err
+       */
+      (err: any) => {
+        logger.error(err.message);
+      },
+    );
+
+    const interval = setInterval(() => {
+      this.clients.forEach(
+        /**
+         * @param {ClientConnection} client
+         */
+        (client) => {
+          if (client.isAlive === false) {
+            client.terminate();
+
+            return;
+          }
+
+          client.isAlive = false;
+          client.ping(() => {});
+        },
+      );
+    }, WebsocketServer.heartbeatInterval);
+
+    this.implementation.on(
+      'connection',
+      /**
+       * @param {ClientConnection} client
+       */
+      (client: any) => {
+        this.clients.push(client);
+
+        client.isAlive = true;
+
+        client.on('pong', () => {
+          client.isAlive = true;
+        });
+
+        client.on('close', () => {
+          this.clients.splice(this.clients.indexOf(client), 1);
+        });
+      },
+    );
+
+    this.implementation.on('close', () => {
+      clearInterval(interval);
+    });
+  }
 }

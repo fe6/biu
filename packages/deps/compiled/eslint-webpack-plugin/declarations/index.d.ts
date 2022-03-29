@@ -1,5 +1,5 @@
 export default ESLintWebpackPlugin;
-export type Compiler = import('../../webpack').Compiler;
+export type Compiler = import('../webpack').Compiler;
 export type Options = import('./options').Options;
 declare class ESLintWebpackPlugin {
   /**

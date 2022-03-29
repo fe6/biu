@@ -51,7 +51,7 @@ declare class CssMinimizerPlugin<T = CssNanoOptionsExtended> {
    * @private
    * @param {Compiler} compiler
    * @param {Compilation} compilation
-   * @param {Record<string, import('../../webpack').sources.Source>} assets
+   * @param {Record<string, import('../webpack').sources.Source>} assets
    * @param {{availableNumberOfCores: number}} optimizeOptions
    * @returns {Promise<void>}
    */
@@ -108,7 +108,7 @@ declare namespace CssMinimizerPlugin {
 type CssNanoOptionsExtended = CssNanoOptions & {
   processorOptions?: ProcessOptionsExtender;
 };
-type Compiler = import('../../webpack').Compiler;
+type Compiler = import('../webpack').Compiler;
 type BasePluginOptions = {
   test?: Rules | undefined;
   include?: Rules | undefined;
@@ -131,11 +131,11 @@ import { cleanCssMinify } from './utils';
 import { esbuildMinify } from './utils';
 import { parcelCssMinify } from './utils';
 type Schema = import('../schema-utils/declarations/validate').Schema;
-type Compilation = import('../../webpack').Compilation;
-type WebpackError = import('../../webpack').WebpackError;
+type Compilation = import('../webpack').Compilation;
+type WebpackError = import('../webpack').WebpackError;
 type JestWorker = import('../jest-worker').Worker;
 type RawSourceMap = import('../source-map').RawSourceMap;
-type Asset = import('../../webpack').Asset;
+type Asset = import('../webpack').Asset;
 type ProcessOptions = import('../postcss').ProcessOptions;
 type Syntax = import('../postcss').Syntax;
 type Parser = import('../postcss').Parser;

@@ -120,6 +120,34 @@ Object.keys(exported).forEach(function (key) {
       }
       fs.writeFileSync(path.join(target, 'index.js'), code, 'utf-8');
 
+      // bonjour-service 复制 dts
+      if (opts.pkgName === 'bonjour-service') {
+        fs.copySync(
+          path.join(nodeModulesPath, opts.pkgName, 'dist', 'lib'),
+          path.join(target, 'lib'),
+        );
+        fs.copyFileSync(
+          path.join(nodeModulesPath, opts.pkgName, 'dist', 'index.d.ts'),
+          path.join(target, 'index.d.ts'),
+        );
+      }
+
+      // webpack-dev-middleware 复制 dts
+      if (opts.pkgName === 'webpack-dev-middleware') {
+        fs.copySync(
+          path.join(nodeModulesPath, opts.pkgName, 'types'),
+          path.join(target),
+        );
+      }
+
+      // anymatch 复制 dts
+      if (opts.pkgName === 'anymatch') {
+        fs.copyFileSync(
+          path.join(nodeModulesPath, opts.pkgName, 'index.d.ts'),
+          path.join(target, 'index.d.ts'),
+        );
+      }
+
       // patch
       if (opts.pkgName === 'mini-css-extract-plugin') {
         fs.copySync(
@@ -277,6 +305,18 @@ Object.keys(exported).forEach(function (key) {
         if (opts.pkgName === 'webpack') {
           const filePath = path.join(nodeModulesPath, opts.pkgName, 'hot');
           fs.copySync(filePath, path.join(target, 'hot'));
+
+          const webpackFilePath = path.join(target, 'types/index.d.ts');
+          fs.writeFileSync(
+            webpackFilePath,
+            fs
+              .readFileSync(webpackFilePath, 'utf-8')
+              .replace(
+                `path().resolve(__dirname,"./threadChild.js")`,
+                `require("worker_threads")`,
+              ),
+            'utf-8',
+          );
         }
 
         // patch
