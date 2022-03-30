@@ -849,20 +849,15 @@ class DevServer {
         this.sendMessage(this.webSocketServer.clients, 'invalid');
       }
     });
-    this.compiler.hooks.done.tap(
-      'webpack-dev-server',
-      (stats: Stats | MultiStats) => {
-        if (this.webSocketServer) {
-          this.sendStats(this.webSocketServer.clients, this.getStats(stats));
-        }
+    this.compiler.hooks.done.tap('webpack-dev-server', (stats) => {
+      if (this.webSocketServer) {
+        // @ts-ignore
+        this.sendStats(this.webSocketServer.clients, this.getStats(stats));
+      }
 
-        /**
-         * @private
-         * @type {Stats | MultiStats}
-         */
-        this.stats = stats;
-      },
-    );
+      // @ts-ignore
+      this.stats = stats;
+    });
   }
 
   setupApp(): void {
@@ -1176,8 +1171,8 @@ class DevServer {
         !(historyApiFallback as ConnectHistoryApiFallbackOptions).verbose
       ) {
         // @ts-ignore
-        historyApiFallback.logger = this.logger.log.bind(
-          this.logger,
+        historyApiFallback.logger = logger.warn.bind(
+          logger,
           '[connect-history-api-fallback]',
         );
       }
@@ -1341,7 +1336,7 @@ class DevServer {
         );
 
         if (HMRPluginExists) {
-          this.logger.warn(
+          logger.warn(
             `"hot: true" automatically applies HMR plugin, you don't have to add it manually to your webpack configuration.`,
           );
         } else {
@@ -1382,7 +1377,7 @@ class DevServer {
             process.exit();
           }
 
-          this.logger.info(
+          logger.info(
             'Gracefully shutting down. To force exit, press ^C again. Please wait...',
           );
 
@@ -1502,7 +1497,7 @@ class DevServer {
         //       undefined;
 
         // if (!headers) {
-        //   this.logger.warn(
+        //   logger.warn(
         //     'webSocketServer implementation must pass headers for the "connection" event'
         //   );
         // }
@@ -1604,7 +1599,7 @@ class DevServer {
         }
 
         return open(openTarget, item.options).catch(() => {
-          this.logger.warn(
+          logger.warn(
             `Unable to open "${openTarget}" page${
               item.options.app
                 ? ` in "${(item.options.app as OpenApp).name}" app${
@@ -1663,7 +1658,7 @@ class DevServer {
     const useColor = getColorsOption(this.getCompilerOptions());
 
     if (this.options.ipc && this.server) {
-      this.logger.info(`Project is running at: "${this.server.address()}"`);
+      logger.info(`Project is running at: "${this.server.address()}"`);
     } else {
       const protocol = 'http';
       const theAddress = (this.server as HttpServer).address();
@@ -1734,10 +1729,11 @@ class DevServer {
         }
       }
 
-      this.logger.info('Project is running at:');
+      logger.empty();
+      logger.successOnly('Project is running at:');
 
       if (server) {
-        this.logger.info(`Server: ${colors.info(useColor, server)}`);
+        logger.successOnly(`Server: ${colors.info(useColor, server)}`);
       }
 
       if (localhost || loopbackIPv4 || loopbackIPv6) {
@@ -1755,17 +1751,17 @@ class DevServer {
           loopbacks.push([colors.info(useColor, loopbackIPv6)]);
         }
 
-        this.logger.info(`Loopback: ${loopbacks.join(', ')}`);
+        logger.successOnly(`Loopback: ${loopbacks.join(', ')}`);
       }
 
       if (networkUrlIPv4) {
-        this.logger.info(
+        logger.successOnly(
           `On Your Network (IPv4): ${colors.info(useColor, networkUrlIPv4)}`,
         );
       }
 
       if (networkUrlIPv6) {
-        this.logger.info(
+        logger.successOnly(
           `On Your Network (IPv6): ${colors.info(useColor, networkUrlIPv6)}`,
         );
       }
@@ -1778,7 +1774,7 @@ class DevServer {
     }
 
     if ((this.options.static as INormalizedStatic[]).length > 0) {
-      this.logger.info(
+      logger.successOnly(
         `Content not from webpack is served from '${colors.info(
           useColor,
           (this.options.static as INormalizedStatic[])
@@ -1789,7 +1785,7 @@ class DevServer {
     }
 
     if (this.options.historyApiFallback) {
-      this.logger.info(
+      logger.info(
         `404s will fallback to '${colors.info(
           useColor,
           (this.options.historyApiFallback as ConnectHistoryApiFallbackOptions)
@@ -1800,7 +1796,7 @@ class DevServer {
 
     if (this.options.bonjour) {
       const bonjourProtocol = 'http';
-      this.logger.info(
+      logger.info(
         `Broadcasting "${bonjourProtocol}" with subtype of "webpack" via ZeroConf DNS (Bonjour)`,
       );
     }

@@ -1,6 +1,6 @@
 /** @format */
 
-import { Configuration as WebpackServerConfiguration } from '@fe6/biu-deps-webpack/compiled/webpack-dev-server/types/lib/Server';
+import { IServer } from '../../server/types';
 
 export type TServerConfig = {
   /**
@@ -19,16 +19,15 @@ export type TServerConfig = {
    * 自动打开
    * @default false
    */
-  open?: WebpackServerConfiguration['open'];
+  open?: IServer['open'];
   /**
    * 热重载
    * @default true
    */
-  hot?: WebpackServerConfiguration['hot'];
+  hot?: IServer['hot'];
 };
-export type TServerOptions = WebpackServerConfiguration & TServerConfig;
-export type TResolveServerConfig = WebpackServerConfiguration &
-  Required<TServerConfig>;
+export type TServerOptions = IServer & TServerConfig;
+export type TResolveServerConfig = IServer & Required<TServerConfig>;
 export const initServer = (op?: TServerOptions): TResolveServerConfig => ({
   ...{
     host: '0.0.0.0',
