@@ -13,36 +13,33 @@ module.exports = function (updatedModules, renewedModules) {
   var log = require('./log');
 
   if (unacceptedModules.length > 0) {
-    log(
-      'warning',
-      "[HMR] The following modules couldn't be hot updated: (They would need a full reload!)",
+    log.warnHmr(
+      "The following modules couldn't be hot updated: (They would need a full reload!)",
     );
     unacceptedModules.forEach(function (moduleId) {
-      log('warning', '[HMR]  - ' + moduleId);
+      log.warnHmr(moduleId);
     });
   }
 
   if (!renewedModules || renewedModules.length === 0) {
-    log('info', '[HMR] Nothing hot updated.');
+    log.eventHmr('Nothing hot updated.');
   } else {
-    log('info', '[HMR] Updated modules:');
+    log.eventHmr('Updated modules:');
     renewedModules.forEach(function (moduleId) {
       if (typeof moduleId === 'string' && moduleId.indexOf('!') !== -1) {
         var parts = moduleId.split('!');
-        log.groupCollapsed('info', '[HMR]  - ' + parts.pop());
-        log('info', '[HMR]  - ' + moduleId);
-        log.groupEnd('info');
+        log.eventGroupHmr(parts.pop());
+        log.eventHmr(moduleId);
       } else {
-        log('info', '[HMR]  - ' + moduleId);
+        log.eventHmr(moduleId);
       }
     });
     var numberIds = renewedModules.every(function (moduleId) {
       return typeof moduleId === 'number';
     });
     if (numberIds)
-      log(
-        'info',
-        '[HMR] Consider using the optimization.moduleIds: "named" for module names.',
+      log.infoHmr(
+        'Consider using the optimization.moduleIds: "named" for module names.',
       );
   }
 };

@@ -1,7 +1,7 @@
 /** @format */
 
+import clog from '@fe6/biu-utils/clog';
 import hotEmitter from '../../hot/emitter.js';
-import { log } from './log.js';
 /** @typedef {import("../index").Options} Options
 /** @typedef {import("../index").Status} Status
 
@@ -36,7 +36,7 @@ function reloadApp(_ref, status) {
 
   function applyReload(rootWindow, intervalId) {
     clearInterval(intervalId);
-    log.info('App updated. Reloading...');
+    clog.info('App updated. Reloading...');
     rootWindow.location.reload();
   }
 
@@ -46,7 +46,7 @@ function reloadApp(_ref, status) {
     search.indexOf('webpack-dev-server-live-reload=false') === -1;
 
   if (hot && allowToHot) {
-    log.info('App hot update...');
+    clog.info('App hot update...');
     hotEmitter.emit('webpackHotUpdate', status.currentHash);
 
     if (typeof self !== 'undefined' && self.window) {

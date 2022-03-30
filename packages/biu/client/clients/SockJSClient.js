@@ -1,5 +1,7 @@
 /** @format */
 
+import clog from '@fe6/biu-utils/clog';
+
 function _classCallCheck(instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError('Cannot call a class as a function');
@@ -24,7 +26,6 @@ function _createClass(Constructor, protoProps, staticProps) {
 }
 
 import SockJS from '../modules/sockjs-client/index.js';
-import { log } from '../utils/log.js';
 
 var SockJSClient = /*#__PURE__*/ (function () {
   /**
@@ -43,7 +44,7 @@ var SockJSClient = /*#__PURE__*/ (function () {
        * @param {Error} error
        */
       function (error) {
-        log.error(error);
+        clog.error(error);
       };
   }
   /**

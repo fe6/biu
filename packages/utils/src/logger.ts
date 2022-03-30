@@ -2,23 +2,39 @@
 
 import { chalk } from '@fe6/biu-deps';
 
-const nameChalk = chalk.hex('#ff85c0');
-export const pkgName = `${nameChalk('[BIU]')} `;
+import {
+  PKG_NAME,
+  BIU_COLOR,
+  WAIT_COLOR,
+  ERROR_COLOR,
+  WARN_COLOR,
+  READY_COLOR,
+  EVENT_COLOR,
+  DEBUG_COLOR,
+  INFO_COLOR,
+} from './constant';
 
-const waitChalk = chalk.hex('#fffb8f');
-const errorChalk = chalk.hex('#f5222d');
-const warnChalk = chalk.hex('#faad14');
+const nameChalk = chalk.hex(BIU_COLOR);
+export const pkgName = `${nameChalk(PKG_NAME)} `;
+
+const waitChalk = chalk.hex(WAIT_COLOR);
+const errorChalk = chalk.hex(ERROR_COLOR);
+const warnChalk = chalk.hex(WARN_COLOR);
+const readyChalk = chalk.hex(READY_COLOR);
+const eventChalk = chalk.hex(EVENT_COLOR);
+const debugChalk = chalk.hex(DEBUG_COLOR);
+const infoChalk = chalk.hex(INFO_COLOR);
 
 export const prefixes = {
   wait: `${pkgName}${waitChalk('[wait]')} -`,
   error: `${pkgName}${errorChalk('[error]')} -`,
   warn: `${pkgName}${warnChalk('[warn]')} -`,
   ready: (type: string = 'ready') =>
-    `${pkgName}${type ? chalk.green(`[${type}]`) : ''} -`,
-  event: `${pkgName}${chalk.magenta('[event]')} -`,
-  debug: `${pkgName}${chalk.gray('[debug]')} -`,
+    `${pkgName}${type ? readyChalk(`[${type}]`) : ''} -`,
+  event: `${pkgName}${eventChalk('[event]')} -`,
+  debug: `${pkgName}${debugChalk('[debug]')} -`,
   info: (type: string = 'info') =>
-    `${pkgName}${type ? chalk.blue(`[${type}]`) : ''} -`,
+    `${pkgName}${type ? infoChalk(`[${type}]`) : ''} -`,
 };
 
 export function empty() {

@@ -1,5 +1,7 @@
 /** @format */
 
+import clog from '@fe6/biu-utils/clog';
+
 function _classCallCheck(instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError('Cannot call a class as a function');
@@ -23,8 +25,6 @@ function _createClass(Constructor, protoProps, staticProps) {
   return Constructor;
 }
 
-import { log } from '../utils/log.js';
-
 var WebSocketClient = /*#__PURE__*/ (function () {
   /**
    * @param {string} url
@@ -35,7 +35,7 @@ var WebSocketClient = /*#__PURE__*/ (function () {
     this.client = new WebSocket(url);
 
     this.client.onerror = function (error) {
-      log.error(error);
+      clog.error(error);
     };
   }
   /**

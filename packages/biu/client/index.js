@@ -5,12 +5,11 @@
  */
 
 /// <reference types="webpack/module" />
-import webpackHotLog from '../hot/log.js';
+import clog from '@fe6/biu-utils/clog';
 import stripAnsi from './utils/stripAnsi.js';
 import parseURL from './utils/parseURL.js';
 import socket from './socket.js';
 import { formatProblem, show, hide } from './overlay.js';
-import { log, setLogLevel } from './utils/log.js';
 import sendMessage from './utils/sendMessage.js';
 import reloadApp from './utils/reloadApp.js';
 import createSocketURL from './utils/createSocketURL.js';
@@ -53,12 +52,12 @@ var parsedResourceQuery = parseURL(__resourceQuery);
 
 if (parsedResourceQuery.hot === 'true') {
   options.hot = true;
-  log.info('Hot Module Replacement enabled.');
+  clog.info('Hot Module Replacement enabled.');
 }
 
 if (parsedResourceQuery['live-reload'] === 'true') {
   options.liveReload = true;
-  log.info('Live Reloading enabled.');
+  clog.info('Live Reloading enabled.');
 }
 
 if (parsedResourceQuery.logging) {
@@ -67,21 +66,6 @@ if (parsedResourceQuery.logging) {
 
 if (typeof parsedResourceQuery.reconnect !== 'undefined') {
   options.reconnect = Number(parsedResourceQuery.reconnect);
-}
-/**
- * @param {string} level
- */
-
-function setAllLogLevel(level) {
-  // This is needed because the HMR logger operate separately from dev server logger
-  webpackHotLog.setLogLevel(
-    level === 'verbose' || level === 'log' ? 'info' : level,
-  );
-  setLogLevel(level);
-}
-
-if (options.logging) {
-  setAllLogLevel(options.logging);
 }
 
 self.addEventListener('beforeunload', function () {
@@ -94,7 +78,7 @@ var onSocketMessage = {
     }
 
     options.hot = true;
-    log.info('Hot Module Replacement enabled.');
+    clog.info('Hot Module Replacement enabled.');
   },
   liveReload: function liveReload() {
     if (parsedResourceQuery['live-reload'] === 'false') {
@@ -102,10 +86,10 @@ var onSocketMessage = {
     }
 
     options.liveReload = true;
-    log.info('Live Reloading enabled.');
+    clog.info('Live Reloading enabled.');
   },
   invalid: function invalid() {
-    log.info('App updated. Recompiling...'); // Fixes #1042. overlay doesn't clear if errors are fixed but warnings remain.
+    clog.info('App updated. Recompiling...'); // Fixes #1042. overlay doesn't clear if errors are fixed but warnings remain.
 
     if (options.overlay) {
       hide();
@@ -121,7 +105,6 @@ var onSocketMessage = {
     status.previousHash = status.currentHash;
     status.currentHash = _hash;
   },
-  logging: setAllLogLevel,
 
   /**
    * @param {boolean} value
@@ -157,7 +140,7 @@ var onSocketMessage = {
    */
   'progress-update': function progressUpdate(data) {
     if (options.progress) {
-      log.info(
+      clog.info(
         ''
           .concat(data.pluginName ? '['.concat(data.pluginName, '] ') : '')
           .concat(data.percent, '% - ')
@@ -168,7 +151,7 @@ var onSocketMessage = {
     sendMessage('Progress', data);
   },
   'still-ok': function stillOk() {
-    log.info('Nothing changed.');
+    clog.info('Nothing changed.');
 
     if (options.overlay) {
       hide();
@@ -191,7 +174,7 @@ var onSocketMessage = {
    * @param {string} file
    */
   'content-changed': function contentChanged(file) {
-    log.info(
+    clog.info(
       ''.concat(
         file ? '"'.concat(file, '"') : 'Content',
         ' from static directory was changed. Reloading...',
@@ -204,7 +187,7 @@ var onSocketMessage = {
    * @param {string} file
    */
   'static-changed': function staticChanged(file) {
-    log.info(
+    clog.info(
       ''.concat(
         file ? '"'.concat(file, '"') : 'Content',
         ' from static directory was changed. Reloading...',
@@ -287,7 +270,7 @@ var onSocketMessage = {
     log.error(_error);
   },
   close: function close() {
-    log.info('Disconnected!');
+    clog.info('Disconnected!');
 
     if (options.overlay) {
       hide();

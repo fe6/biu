@@ -18,11 +18,8 @@ if (module.hot) {
       .check()
       .then(function (updatedModules) {
         if (!updatedModules) {
-          log('warning', '[HMR] Cannot find update. Need to do a full reload!');
-          log(
-            'warning',
-            '[HMR] (Probably because of restarting the webpack-dev-server)',
-          );
+          log.warnHmr('Cannot find update. Need to do a full reload!');
+          log.warnHmr('Probably because of restarting the webpack-dev-server');
           return;
         }
 
@@ -32,23 +29,20 @@ if (module.hot) {
             ignoreDeclined: true,
             ignoreErrored: true,
             onUnaccepted: function (data) {
-              log(
-                'warning',
+              log.warn(
                 'Ignored an update to unaccepted module ' +
                   data.chain.join(' -> '),
               );
             },
             onDeclined: function (data) {
-              log(
-                'warning',
+              log.warn(
                 'Ignored an update to declined module ' +
                   data.chain.join(' -> '),
               );
             },
             onErrored: function (data) {
-              log('error', data.error);
-              log(
-                'warning',
+              log.error(data.error);
+              log.warn(
                 'Ignored an error while updating module ' +
                   data.moduleId +
                   ' (' +
@@ -65,20 +59,17 @@ if (module.hot) {
             require('./log-apply-result')(updatedModules, renewedModules);
 
             if (upToDate()) {
-              log('info', '[HMR] App is up to date.');
+              log.infoHmr('App is up to date.');
             }
           });
       })
       .catch(function (err) {
         var status = module.hot.status();
         if (['abort', 'fail'].indexOf(status) >= 0) {
-          log(
-            'warning',
-            '[HMR] Cannot check for update. Need to do a full reload!',
-          );
-          log('warning', '[HMR] ' + log.formatError(err));
+          log.warnHmr('Cannot check for update. Need to do a full reload!');
+          log.warnHmr(err);
         } else {
-          log('warning', '[HMR] Update check failed: ' + log.formatError(err));
+          log.warnHmr(err);
         }
       });
   };
@@ -88,19 +79,18 @@ if (module.hot) {
     if (!upToDate()) {
       var status = module.hot.status();
       if (status === 'idle') {
-        log('info', '[HMR] Checking for updates on the server...');
+        log.infoHmr('Checking for updates on the server...');
         check();
       } else if (['abort', 'fail'].indexOf(status) >= 0) {
-        log(
-          'warning',
-          '[HMR] Cannot apply update as a previous update ' +
+        log.warnHmr(
+          'Cannot apply update as a previous update ' +
             status +
             'ed. Need to do a full reload!',
         );
       }
     }
   });
-  log('info', '[HMR] Waiting for update signal from WDS...');
+  log.infoHmr('Waiting for update signal from WDS...');
 } else {
-  throw new Error('[HMR] Hot Module Replacement is disabled.');
+  log.errorHmr('Hot Module Replacement is disabled.');
 }
