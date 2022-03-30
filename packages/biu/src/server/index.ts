@@ -701,23 +701,17 @@ class DevServer {
 
       webSocketURLStr = searchParams.toString();
 
-      // TODO client
+      // WS 热更新
       additionalEntries.push(
         `${require.resolve('../../client/index.js')}?${webSocketURLStr}`,
       );
     }
 
+    // WS 热更新
     if (this.options.hot === 'only') {
-      additionalEntries.push(require.resolve('webpack/hot/only-dev-server'));
+      additionalEntries.push(require.resolve('../../hot/only-dev-server'));
     } else if (this.options.hot) {
-      additionalEntries.push(
-        // join(
-        //   __dirname,
-        //   './dev-server',
-        // ),
-        // TODO 换成本地的 webpack
-        require.resolve('webpack/hot/dev-server'),
-      );
+      additionalEntries.push(require.resolve('../../hot/dev-server'));
     }
 
     const webpack =
@@ -1320,7 +1314,7 @@ class DevServer {
       const webpack =
         compiler.webpack || require('@fe6-deps-webpack/compiled/webpack');
 
-      // TODO client
+      // WS 热更新
       new webpack.ProvidePlugin({
         __webpack_dev_server_client__: join(
           __dirname,

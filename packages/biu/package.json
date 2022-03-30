@@ -8,6 +8,7 @@
     "dist",
     "bin",
     "client",
+    "hot",
     "template"
   ],
   "bin": "./bin/biu.js",
@@ -37,6 +38,7 @@
     "@fe6/biu-deps": "workspace:*",
     "@fe6/biu-deps-webpack": "workspace:*",
     "@fe6/biu-utils": "workspace:*",
+    "events": "3.3.0",
     "sockjs-client": "1.6.0"
   }
 }

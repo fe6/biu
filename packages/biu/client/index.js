@@ -5,7 +5,7 @@
  */
 
 /// <reference types="webpack/module" />
-import webpackHotLog from 'webpack/hot/log.js';
+import webpackHotLog from '../hot/log.js';
 import stripAnsi from './utils/stripAnsi.js';
 import parseURL from './utils/parseURL.js';
 import socket from './socket.js';

@@ -1,6 +1,6 @@
 /** @format */
 
-import hotEmitter from 'webpack/hot/emitter.js';
+import hotEmitter from '../../hot/emitter.js';
 import { log } from './log.js';
 /** @typedef {import("../index").Options} Options
 /** @typedef {import("../index").Status} Status
