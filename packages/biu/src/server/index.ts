@@ -702,24 +702,21 @@ class DevServer {
       webSocketURLStr = searchParams.toString();
 
       // TODO client
-      // additionalEntries.push(
-      //   `${require.resolve("../client/index.js")}?${webSocketURLStr}`
-      // );
+      additionalEntries.push(
+        `${require.resolve('../../client/index.js')}?${webSocketURLStr}`,
+      );
     }
 
     if (this.options.hot === 'only') {
-      additionalEntries.push(
-        require.resolve(
-          '@fe6-deps-webpack/compiled/webpack/hot/only-dev-server',
-        ),
-      );
+      additionalEntries.push(require.resolve('webpack/hot/only-dev-server'));
     } else if (this.options.hot) {
       additionalEntries.push(
-        join(
-          __dirname,
-          '../../',
-          'node_modules/@fe6-deps-webpack/compiled/webpack/hot/dev-server',
-        ),
+        // join(
+        //   __dirname,
+        //   './dev-server',
+        // ),
+        // TODO 换成本地的 webpack
+        require.resolve('webpack/hot/dev-server'),
       );
     }
 
@@ -1316,7 +1313,7 @@ class DevServer {
     const compilers = (this.compiler as MultiCompiler).compilers || [
       this.compiler,
     ];
-
+    console.log(18, '8');
     compilers.forEach((compiler) => {
       this.addAdditionalEntries(compiler);
 
@@ -1324,11 +1321,12 @@ class DevServer {
         compiler.webpack || require('@fe6-deps-webpack/compiled/webpack');
 
       // TODO client
-      // new webpack.ProvidePlugin({
-      //   __webpack_dev_server_client__: require.resolve(
-      //     "../client/clients/WebSocketClient"
-      //   ),
-      // }).apply(compiler);
+      new webpack.ProvidePlugin({
+        __webpack_dev_server_client__: join(
+          __dirname,
+          '../../client/clients/WebSocketClient',
+        ),
+      }).apply(compiler);
 
       if (this.options.hot) {
         const HMRPluginExists = compiler.options.plugins.find(
