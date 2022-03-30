@@ -60,9 +60,17 @@ export function success(...message: any[]) {
   empty();
 }
 
+export function successOnly(...message: any[]) {
+  console.log(prefixes.ready('success'), ...message);
+}
+
 export function info(...message: any[]) {
   console.log(prefixes.info(), ...message);
   empty();
+}
+
+export function infoOnly(...message: any[]) {
+  console.log(prefixes.info(), ...message);
 }
 
 export function event(...message: any[]) {
