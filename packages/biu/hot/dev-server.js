@@ -18,11 +18,8 @@ if (module.hot) {
       .check(true)
       .then(function (updatedModules) {
         if (!updatedModules) {
-          log('warning', '[HMR] Cannot find update. Need to do a full reload!');
-          log(
-            'warning',
-            '[HMR] (Probably because of restarting the webpack-dev-server)',
-          );
+          log.warnHmr('Cannot find update. Need to do a full reload!');
+          log.warnHmr('Probably because of restarting the BIU');
           window.location.reload();
           return;
         }
@@ -34,20 +31,17 @@ if (module.hot) {
         require('./log-apply-result')(updatedModules, updatedModules);
 
         if (upToDate()) {
-          log('info', '[HMR] App is up to date.');
+          log.infoHmr('App is up to date.');
         }
       })
       .catch(function (err) {
         var status = module.hot.status();
         if (['abort', 'fail'].indexOf(status) >= 0) {
-          log(
-            'warning',
-            '[HMR] Cannot apply update. Need to do a full reload!',
-          );
-          log('warning', '[HMR] ' + log.formatError(err));
+          log.errorHmr('Cannot apply update. Need to do a full reload!');
+          log.errorHmr('' + err);
           window.location.reload();
         } else {
-          log('warning', '[HMR] Update failed: ' + log.formatError(err));
+          log.errorHmr('Update failed: ' + err);
         }
       });
   };
@@ -55,11 +49,11 @@ if (module.hot) {
   hotEmitter.on('webpackHotUpdate', function (currentHash) {
     lastHash = currentHash;
     if (!upToDate() && module.hot.status() === 'idle') {
-      log('info', '[HMR] Checking for updates on the server...');
+      log.infoHmr('Checking for updates on the server...');
       check();
     }
   });
-  log('info', '[HMR] Waiting for update signal from WDS...');
+  log.waitHmr('Waiting for update signal from WDS...');
 } else {
-  throw new Error('[HMR] Hot Module Replacement is disabled.');
+  log.errorHmr('Hot Module Replacement is disabled.');
 }

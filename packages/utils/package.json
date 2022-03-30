@@ -2,7 +2,6 @@
   "name": "@fe6/biu-utils",
   "version": "0.0.0",
   "description": "@fe6/biu-utils",
-  "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "files": [
     "compiled",
@@ -25,6 +24,10 @@
   "bugs": "https://github.com/fe6/biu/issues",
   "publishConfig": {
     "access": "public"
+  },
+  "exports": {
+    ".": "./dist/index.js",
+    "./clog": "./dist/clog.js"
   },
   "dependencies": {
     "@fe6/biu-deps": "workspace:^0.0.0"
