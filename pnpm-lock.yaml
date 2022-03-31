@@ -55,17 +55,13 @@ importers:
   demos/vue-3:
     specifiers:
       '@fe6/biu': workspace:*
-      '@fe6/biu-plugin-vue': workspace:*
-      '@vue/reactivity': ^3.2.31
       dayjs: ^1.11.0
       vue: ^3.2.31
     dependencies:
-      '@vue/reactivity': registry.npmmirror.com/@vue/reactivity/3.2.31
       dayjs: registry.npmmirror.com/dayjs/1.11.0
       vue: registry.npmmirror.com/vue/3.2.31
     devDependencies:
       '@fe6/biu': link:../../packages/biu
-      '@fe6/biu-plugin-vue': link:../../packages/plugin-vue
 
   packages/biu:
     specifiers:
