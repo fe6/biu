@@ -10,14 +10,14 @@
     />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <title><%= htmlWebpackPlugin.options.title %></title>
-    <!-- EMP inject css -->
+    <!-- BIU inject css -->
     <% for (let i in htmlWebpackPlugin.options.files.css) { %>
     <link
       rel="stylesheet"
       href="<%= htmlWebpackPlugin.options.files.css[i] %>"
     />
     <% } %>
-    <!-- EMP inject js -->
+    <!-- BIU inject js -->
     <% for (let i in htmlWebpackPlugin.options.files.js) { %>
     <script src="<%= htmlWebpackPlugin.options.files.js[i] %>"></script>
     <% } %>
