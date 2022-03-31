@@ -57,6 +57,13 @@ class BiuCache {
    */
   public cacheDir = '';
   public biuShare = new BiuShare();
+  // 是 vue 项目还是 react 项目
+  public projectLibName = '';
+  // 项目框架的版本号
+  // vue: '^3.2.4' | '~3.2.4' => [3,2,4]
+  // vue: '^3.2' | '~3.2' | '^3.2.x' | '~3.2.x' => [3,2,*]
+  // vue: '^3' | '~3' | '^3.x' | '~3.x' => [3,*,*]
+  public projectLibVersion: string[] = [];
   /**
    * 获取项目 根目录绝对路径
    * @param relativePath
@@ -79,10 +86,47 @@ class BiuCache {
   public getProjectResolve = (relativePath: string) =>
     path.resolve(this.root, relativePath);
 
+  setProjectVersion(libVersion: string) {
+    const theVersion = libVersion.replace(/^\^|~/, '').replace(/\.x/, '');
+    let theArrVersion = theVersion.split('.');
+
+    if (theArrVersion.length === 1) {
+      theArrVersion = [...theArrVersion, '*', '*'];
+    }
+
+    if (theArrVersion.length === 2) {
+      theArrVersion = [...theArrVersion, '*'];
+    }
+    this.projectLibVersion = theArrVersion.fill('*', theArrVersion.length);
+  }
+
+  setProjectInfo() {
+    const { dependencies, devDependencies } = this.pkg;
+    const theDepsKeys = Object.keys(dependencies);
+    const theDevDepsKeys = Object.keys(devDependencies);
+    if (theDepsKeys.indexOf('vue') > -1) {
+      this.projectLibName = 'vue';
+      this.setProjectVersion(dependencies[this.projectLibName]);
+    } else if (theDevDepsKeys.indexOf('vue') > -1) {
+      this.projectLibName = 'vue';
+      this.setProjectVersion(devDependencies[this.projectLibName]);
+    } else if (theDepsKeys.indexOf('react') > -1) {
+      this.projectLibName = 'react';
+      this.setProjectVersion(dependencies[this.projectLibName]);
+    } else if (theDevDepsKeys.indexOf('react') > -1) {
+      this.projectLibName = 'react';
+      this.setProjectVersion(devDependencies[this.projectLibName]);
+    } else {
+      this.projectLibName = '';
+    }
+  }
+
   async setup(mode: ENUM_ENV, cmdOptions: TCmdOptions) {
     // 项目 package.json
     const pkg = require(this.getProjectResolve('package.json'));
     this.pkg = { ...this.pkg, ...pkg };
+    // 设置项目的框架属性 vue or react
+    this.setProjectInfo();
     // 设置配置
     const configManager = new Config({
       cwd: this.root,
