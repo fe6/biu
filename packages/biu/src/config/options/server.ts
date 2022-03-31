@@ -1,6 +1,7 @@
 /** @format */
 
-import { IServer } from '../../server/types';
+import { IDevServer } from '../../server/types';
+import { DEFAULT_PORT } from '../../contant';
 
 export type TServerConfig = {
   /**
@@ -19,23 +20,25 @@ export type TServerConfig = {
    * 自动打开
    * @default false
    */
-  open?: IServer['open'];
+  open?: IDevServer['open'];
   /**
    * 热重载
    * @default true
    */
-  hot?: IServer['hot'];
+  hot?: IDevServer['hot'];
 };
-export type TServerOptions = IServer & TServerConfig;
-export type TResolveServerConfig = IServer & Required<TServerConfig>;
+export type TServerOptions = IDevServer & TServerConfig;
+export type TResolveServerConfig = IDevServer & Required<TServerConfig>;
+export const defServerConfig = {
+  host: '0.0.0.0',
+  port: DEFAULT_PORT,
+  // https: false,
+  open: false,
+  // proxy: false,
+  hot: true,
+};
+
 export const initServer = (op?: TServerOptions): TResolveServerConfig => ({
-  ...{
-    host: '0.0.0.0',
-    port: 8000,
-    // https: false,
-    open: false,
-    // proxy: false,
-    hot: true,
-    ...op,
-  },
+  ...defServerConfig,
+  ...op,
 });

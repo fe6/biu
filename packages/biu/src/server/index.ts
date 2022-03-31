@@ -35,6 +35,7 @@ import { isString } from '@fe6/biu-deps/compiled/lodash';
 import ipaddr from '@fe6/biu-deps/compiled/ipaddr.js';
 import { logger } from '@fe6/biu-utils';
 
+import { DEFAULT_PORT } from '../contant';
 import {
   IDevServer,
   IListeners,
@@ -557,7 +558,7 @@ class DevServer {
     portfinder.basePort =
       typeof process.env.WEBPACK_DEV_SERVER_BASE_PORT !== 'undefined'
         ? parseInt(process.env.WEBPACK_DEV_SERVER_BASE_PORT, 10)
-        : 8080;
+        : DEFAULT_PORT;
 
     // Try to find unused port and listen on it for 3 times,
     // if port is not specified in options.
