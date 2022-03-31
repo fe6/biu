@@ -38,7 +38,7 @@ class BiuCache {
   /**
    * 项目配置
    */
-  public config: TConfig = mergeConfig();
+  public config: TConfig = {} as TConfig;
 
   /**
    * 源码地址 绝对路径
