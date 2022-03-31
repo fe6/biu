@@ -1,0 +1,14 @@
+{
+  "name": "vue-simple",
+  "description": "Vue 简单项目",
+  "scripts": {
+    "start": "biu dev"
+  },
+  "dependencies": {
+    "dayjs": "^1.11.0",
+    "vue": "^3.2.31"
+  },
+  "devDependencies": {
+    "@fe6/biu": "workspace:*"
+  }
+}
