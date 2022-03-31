@@ -66,10 +66,8 @@ importers:
   demos/vue-simple:
     specifiers:
       '@fe6/biu': workspace:*
-      dayjs: ^1.11.0
       vue: ^3.2.31
     dependencies:
-      dayjs: registry.npmmirror.com/dayjs/1.11.0
       vue: registry.npmmirror.com/vue/3.2.31
     devDependencies:
       '@fe6/biu': link:../../packages/biu
