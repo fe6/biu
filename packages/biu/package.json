@@ -40,5 +40,12 @@
     "@fe6/biu-utils": "workspace:*",
     "events": "3.3.0",
     "sockjs-client": "1.6.0"
+  },
+  "pnpm": {
+    "peerDependencyRules": {
+      "ignoreMissing": [
+        "webpack"
+      ]
+    }
   }
 }
