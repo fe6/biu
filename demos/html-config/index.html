@@ -1,0 +1,46 @@
+<!-- @format -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0"
+    />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>HTML CONFIG</title>
+    <% for (let i in htmlWebpackPlugin.options.files.js) { %>
+    <script src="<%= htmlWebpackPlugin.options.files.js[i] %>"></script>
+    <% } %>
+    <link rel="icon" href="<%= htmlWebpackPlugin.options.urlFavicon %>" />
+  </head>
+
+  <body>
+    <div style="color: #f00; padding-bottom: 16px; border-bottom: 1px solid">
+      这是位于跟目录
+      <code
+        style="
+          background: rgba(84, 84, 88, 0.12);
+          padding: 4px;
+          border-radius: 4px;
+        "
+        >index.html</code
+      >
+      的 HTML 模板。在
+      <code
+        style="
+          background: rgba(84, 84, 88, 0.12);
+          padding: 4px;
+          border-radius: 4px;
+        "
+        >.biurc.ts</code
+      >
+      中引入了 腾讯极验 的 js 。
+      <script>
+        console.log(window.TencentCaptcha, '腾讯极验');
+      </script>
+    </div>
+    <div id="biu-root"></div>
+  </body>
+</html>

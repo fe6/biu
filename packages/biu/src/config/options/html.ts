@@ -47,21 +47,36 @@ export type TInitHtml = TOverride<
 export const initHtml = (o: WebpackHtmlPluginOption = {}): TInitHtml => {
   let template = o.template || 'src/index.html';
   let favicon = o.favicon || 'src/favicon.ico';
+  let urlFavicon = '';
+  const isUrlFavicon = /^https?:\/\//.test(favicon);
+
   if (store) {
     template = store.getProjectResolve(template);
-    console.log(template, 'TODO template');
+    console.log(template, 'TODO URL template');
     if (!fsExtra.existsSync(template)) {
       template = store.biuResolve('template/index.html');
     }
-    favicon = store.getProjectResolve(favicon);
-    if (!fsExtra.existsSync(favicon)) {
-      favicon = store.biuResolve(
-        `template/favicon${
-          store.projectLibName !== '' ? `-${store.projectLibName}` : ''
-        }.ico`,
-      );
+
+    if (isUrlFavicon) {
+      urlFavicon = favicon;
+    } else {
+      favicon = store.getProjectResolve(favicon);
+      if (!fsExtra.existsSync(favicon)) {
+        favicon = store.biuResolve(
+          `template/favicon${
+            store.projectLibName !== '' ? `-${store.projectLibName}` : ''
+          }.ico`,
+        );
+      }
     }
   }
   const title = 'BIU';
-  return { title, files: { css: [], js: [] }, ...o, template, favicon };
+  return {
+    title,
+    files: { css: [], js: [] },
+    ...o,
+    template,
+    favicon: isUrlFavicon ? '' : favicon,
+    urlFavicon,
+  };
 };

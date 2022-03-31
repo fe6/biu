@@ -3,7 +3,7 @@
 import path from 'path';
 import { cloneDeep } from '@fe6/biu-deps/compiled/lodash';
 import { TCmdOptions, TPkg, ENUM_ENV } from '../types';
-import { mergeConfig, TConfig, Config } from '../config';
+import { TConfig, Config } from '../config';
 import BiuShare from '../config/options/biu-share';
 
 class BiuCache {
@@ -69,7 +69,7 @@ class BiuCache {
    * @param relativePath
    * @returns
    */
-  public resolve = (relativePath: string) =>
+  public resolve = (relativePath: string): string =>
     path.resolve(this.root, relativePath);
   /**
    * 获取项目 emp内部根目录绝对路径
@@ -128,7 +128,7 @@ class BiuCache {
     // 设置项目的框架属性 vue or react
     this.setProjectInfo();
     // 设置配置
-    const configManager = new Config({
+    const configManager = await new Config({
       cwd: this.root,
       mode,
       cmdOptions,
