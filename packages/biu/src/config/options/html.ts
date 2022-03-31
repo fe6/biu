@@ -14,6 +14,8 @@ export interface IHtmlOptions extends WebpackHtmlPluginOption {
   template?: string;
   /**
    * 基于项目的根目录 favicon url
+   * 如果 shared/cache 中 projectLibName 的 favicon
+   * 如 vue 项目，默认是 favicon-vue.ico
    * @default src/favicon.ico
    */
   favicon?: string | false;
@@ -53,10 +55,13 @@ export const initHtml = (o: WebpackHtmlPluginOption = {}): TInitHtml => {
     }
     favicon = store.getProjectResolve(favicon);
     if (!fsExtra.existsSync(favicon)) {
-      favicon = store.biuResolve('template/favicon.ico');
+      favicon = store.biuResolve(
+        `template/favicon${
+          store.projectLibName !== '' ? `-${store.projectLibName}` : ''
+        }.ico`,
+      );
     }
   }
   const title = 'BIU';
-  console.log(template, 'template');
   return { title, files: { css: [], js: [] }, ...o, template, favicon };
 };
