@@ -9,7 +9,8 @@
     "bin",
     "client",
     "hot",
-    "template"
+    "template",
+    "biu-tsconfig.json"
   ],
   "bin": "./bin/biu.js",
   "scripts": {
