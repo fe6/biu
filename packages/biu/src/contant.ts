@@ -1,5 +1,6 @@
 /** @format */
 
+export const DEFAULT_PORT = 2022;
 export const DEFAULT_CONFIG_FILES = [
   '.biurc.ts',
   '.biurc.js',

@@ -1,8 +1,9 @@
 /** @format */
 
 import { Options as WebpackHtmlPluginOption } from '@fe6/biu-deps/compiled/html-webpack-plugin';
-import store from '../../shared/cache';
 import { fsExtra } from '@fe6/biu-deps';
+
+import store from '../../shared/cache';
 import { TOverride } from '../../types';
 
 export interface IHtmlOptions extends WebpackHtmlPluginOption {
