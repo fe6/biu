@@ -61,6 +61,15 @@ importers:
     devDependencies:
       '@fe6/biu': link:../../packages/biu
 
+  demos/html-config:
+    specifiers:
+      '@fe6/biu': workspace:*
+      vue: ^3.2.31
+    dependencies:
+      vue: registry.npmmirror.com/vue/3.2.31
+    devDependencies:
+      '@fe6/biu': link:../../packages/biu
+
   demos/vue-simple:
     specifiers:
       '@fe6/biu': workspace:*

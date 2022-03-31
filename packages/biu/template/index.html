@@ -10,6 +10,8 @@
     />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <title><%= htmlWebpackPlugin.options.title %></title>
+    <!-- BIU inject urlFavicon -->
+    <link rel="icon" href="<%= htmlWebpackPlugin.options.urlFavicon %>" />
     <!-- BIU inject css -->
     <% for (let i in htmlWebpackPlugin.options.files.css) { %>
     <link

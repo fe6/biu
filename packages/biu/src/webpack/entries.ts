@@ -95,8 +95,13 @@ class WPEntries {
     const htmlConfig = store.config.html;
     // 单页面时 需要把 filename 设置成 index.html
     filename = filename ? filename : `${chunks[0]}.html`;
-    htmlConfig.files.css = [];
-    htmlConfig.files.js = [];
+    // FIX 判断是为了在 .biurc.js 配置中设置无效
+    if (!Array.isArray(htmlConfig.files.css)) {
+      htmlConfig.files.css = [];
+    }
+    if (!Array.isArray(htmlConfig.files.js)) {
+      htmlConfig.files.js = [];
+    }
     htmlConfig.files.css = store.config.html.files.css.concat(
       store.biuShare.externalAssets.css,
     );

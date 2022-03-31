@@ -1,0 +1,13 @@
+{
+  "name": "html-config",
+  "description": "通过 CONFIG 文件定义 HTML",
+  "scripts": {
+    "start": "biu dev"
+  },
+  "dependencies": {
+    "vue": "^3.2.31"
+  },
+  "devDependencies": {
+    "@fe6/biu": "workspace:*"
+  }
+}
