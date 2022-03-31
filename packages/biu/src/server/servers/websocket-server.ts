@@ -2,7 +2,7 @@
 
 'use strict';
 
-import WebSocket from '@fe6/biu-deps/compiled/ws';
+import { WebSocketServer } from '@fe6/biu-deps/compiled/ws';
 import { logger } from '@fe6/biu-utils';
 import BaseServer from './base-server';
 import { TClientConnection } from '../types';
@@ -13,19 +13,10 @@ export default class WebsocketServer extends BaseServer {
   constructor(server: any) {
     super(server);
 
-    const options = {
-      ...this.server.options,
-      clientTracking: false,
-    };
-    const isNoServerMode =
-      typeof options.port === 'undefined' &&
-      typeof options.server === 'undefined';
-
-    if (isNoServerMode) {
-      options.noServer = true;
-    }
-
-    this.implementation = new WebSocket.Server(options);
+    // ! FIX ERROR listen EADDRINUSE: address already in use :::2022
+    this.implementation = new WebSocketServer({
+      noServer: true,
+    });
 
     this.server.server.on('upgrade', (req: any, sock: any, head: any) => {
       if (!this.implementation.shouldHandle(req)) {
