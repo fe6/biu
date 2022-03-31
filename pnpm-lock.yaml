@@ -52,6 +52,15 @@ importers:
       vitepress: registry.npmmirror.com/vitepress/0.22.3
       zx: registry.npmmirror.com/zx/4.3.0
 
+  demos/html:
+    specifiers:
+      '@fe6/biu': workspace:*
+      vue: ^3.2.31
+    dependencies:
+      vue: registry.npmmirror.com/vue/3.2.31
+    devDependencies:
+      '@fe6/biu': link:../../packages/biu
+
   demos/vue-simple:
     specifiers:
       '@fe6/biu': workspace:*
