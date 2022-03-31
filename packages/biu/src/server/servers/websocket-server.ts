@@ -3,6 +3,7 @@
 'use strict';
 
 import WebSocket from '@fe6/biu-deps/compiled/ws';
+import { logger } from '@fe6/biu-utils';
 import BaseServer from './base-server';
 import { TClientConnection } from '../types';
 
@@ -42,7 +43,7 @@ export default class WebsocketServer extends BaseServer {
        * @param {Error} err
        */
       (err: any) => {
-        this.server.logger.error(err.message);
+        logger.error(err.message);
       },
     );
 
