@@ -5,12 +5,10 @@
     "start": "biu dev"
   },
   "dependencies": {
-    "@vue/reactivity": "^3.2.31",
     "dayjs": "^1.11.0",
     "vue": "^3.2.31"
   },
   "devDependencies": {
-    "@fe6/biu": "workspace:*",
-    "@fe6/biu-plugin-vue": "workspace:*"
+    "@fe6/biu": "workspace:*"
   }
 }
