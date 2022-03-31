@@ -2,7 +2,7 @@
 
 <template>
   <div>
-    <h1>Vue Simple App</h1>
+    <h1>Html app</h1>
     <div
       :style="{
         display: 'inline-block',
