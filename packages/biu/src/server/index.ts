@@ -1,6 +1,6 @@
 /** @format */
 
-import net from 'net';
+import net, { Socket } from 'net';
 // import { IncomingMessage } from 'http';
 import http, { Server as HttpServer } from 'http';
 import url from 'url';
@@ -1287,7 +1287,7 @@ class DevServer {
       /**
        * @param {Socket} socket
        */
-      (socket) => {
+      (socket: Socket) => {
         // Add socket to list
         this.sockets.push(socket);
 
@@ -1307,7 +1307,7 @@ class DevServer {
     const compilers = (this.compiler as MultiCompiler).compilers || [
       this.compiler,
     ];
-    console.log(18, '8');
+
     compilers.forEach((compiler) => {
       this.addAdditionalEntries(compiler);
 
@@ -1463,11 +1463,7 @@ class DevServer {
     }
   }
 
-  /**
-   * @private
-   * @returns {void}
-   */
-  createWebSocketServer() {
+  createWebSocketServer(): void {
     this.webSocketServer = new WskServer(this);
     if (this.webSocketServer) {
       (
@@ -1560,10 +1556,6 @@ class DevServer {
   }
 
   runBonjour() {
-    /**
-     * @private
-     * @type {Bonjour | undefined}
-     */
     this.bonjour = new Bonjour();
     this.bonjour.publish({
       // @ts-expect-error
@@ -1661,7 +1653,6 @@ class DevServer {
 
       const prettyPrintURL = (newHostname: string): string =>
         url.format({ protocol, hostname: newHostname, port, pathname: '/' });
-      console.log(prettyPrintURL('localhost'), 'prettyPrintURL');
 
       let server;
       let localhost;
@@ -1760,7 +1751,6 @@ class DevServer {
 
       if ((this.options.open as IOpen[]).length > 0) {
         const openTarget = prettyPrintURL(this.options.host || 'localhost');
-
         this.openBrowser(openTarget);
       }
     }

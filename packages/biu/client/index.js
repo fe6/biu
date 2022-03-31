@@ -237,7 +237,7 @@ var onSocketMessage = {
    * @param {Error[]} errors
    */
   errors: function errors(_errors) {
-    log.error('Errors while compiling. Reload prevented.');
+    clog.error('Errors while compiling. Reload prevented.');
 
     var printableErrors = _errors.map(function (error) {
       var _formatProblem2 = formatProblem('error', error),
@@ -250,7 +250,7 @@ var onSocketMessage = {
     sendMessage('Errors', printableErrors);
 
     for (var i = 0; i < printableErrors.length; i++) {
-      log.error(printableErrors[i]);
+      clog.error(printableErrors[i]);
     }
 
     var needShowOverlayForErrors =
@@ -267,7 +267,7 @@ var onSocketMessage = {
    * @param {Error} error
    */
   error: function error(_error) {
-    log.error(_error);
+    clog.error(_error);
   },
   close: function close() {
     clog.info('Disconnected!');

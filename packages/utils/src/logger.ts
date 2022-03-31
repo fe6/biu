@@ -15,7 +15,7 @@ import {
 } from './constant';
 
 const nameChalk = chalk.hex(BIU_COLOR);
-export const pkgName = `${nameChalk(PKG_NAME)} `;
+export const pkgName = `${nameChalk(`[${PKG_NAME}]`)} `;
 
 const waitChalk = chalk.hex(WAIT_COLOR);
 const errorChalk = chalk.hex(ERROR_COLOR);
