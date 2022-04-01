@@ -12,6 +12,8 @@ export interface IHtmlOptions extends WebpackHtmlPluginOption {
    * @default src/index.html
    */
   template?: string;
+  // 模板的地址
+  urlTemplate?: string;
   /**
    * 基于项目的根目录 favicon url
    * 如果 shared/cache 中 projectLibName 的 favicon
@@ -19,6 +21,8 @@ export interface IHtmlOptions extends WebpackHtmlPluginOption {
    * @default src/favicon.ico
    */
   favicon?: string | false;
+  // favicon 地址
+  urlFavicon?: string;
   /**
    * externals 文件插入到html
    */
@@ -48,13 +52,18 @@ export const initHtml = (o: WebpackHtmlPluginOption = {}): TInitHtml => {
   let template = o.template || 'src/index.html';
   let favicon = o.favicon || 'src/favicon.ico';
   let urlFavicon = '';
+  let urlTemplate = '';
   const isUrlFavicon = /^https?:\/\//.test(favicon);
+  const isUrlTemplate = /^https?:\/\//.test(template);
 
   if (store) {
-    template = store.getProjectResolve(template);
-    console.log(template, 'TODO URL template');
-    if (!fsExtra.existsSync(template)) {
-      template = store.biuResolve('template/index.html');
+    if (isUrlTemplate) {
+      urlTemplate = template;
+    } else {
+      template = store.getProjectResolve(template);
+      if (!fsExtra.existsSync(template)) {
+        template = store.biuResolve('template/index.html');
+      }
     }
 
     if (isUrlFavicon) {
@@ -78,5 +87,6 @@ export const initHtml = (o: WebpackHtmlPluginOption = {}): TInitHtml => {
     template,
     favicon: isUrlFavicon ? '' : favicon,
     urlFavicon,
+    urlTemplate,
   };
 };
