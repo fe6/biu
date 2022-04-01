@@ -4,6 +4,7 @@ import path from 'path';
 import glob from '@fe6/biu-deps/compiled/fast-glob';
 import HtmlWebpackPlugin from '@fe6/biu-deps/compiled/html-webpack-plugin';
 import fetch from '@fe6/biu-deps/compiled/node-fetch';
+import { isFunction } from '@fe6/biu-deps/compiled/lodash';
 import { logger } from '@fe6/biu-utils';
 import wpChain from '../shared/wp-chain';
 import store from '../shared/cache';
@@ -96,20 +97,23 @@ class WPEntries {
     const htmlConfig = store.config.html;
     // 单页面时 需要把 filename 设置成 index.html
     filename = filename ? filename : `${chunks[0]}.html`;
+    if (!htmlConfig.files) {
+      htmlConfig.files = {};
+    }
     // FIX 判断是为了在 .biurc.js 配置中设置无效
-    if (!Array.isArray(htmlConfig.files.css)) {
+    if (htmlConfig.files && !Array.isArray(htmlConfig.files.css)) {
       htmlConfig.files.css = [];
     }
-    if (!Array.isArray(htmlConfig.files.js)) {
+    if (htmlConfig.files && !Array.isArray(htmlConfig.files.js)) {
       htmlConfig.files.js = [];
     }
-    htmlConfig.files.css = store.config.html.files.css.concat(
-      store.biuShare.externalAssets.css,
-    );
+    htmlConfig.files.css = (
+      (store.config.html?.files || { css: [] }).css || []
+    ).concat(store.biuShare.externalAssets.css);
     if (!store.isESM)
-      htmlConfig.files.js = store.config.html.files.js.concat(
-        store.biuShare.externalAssets.js,
-      );
+      htmlConfig.files.js = (
+        (store.config.html?.files || { js: [] }).js || []
+      ).concat(store.biuShare.externalAssets.js);
     //
     if (htmlOptions.files) {
       if (htmlOptions.files.css) {
@@ -118,7 +122,9 @@ class WPEntries {
         );
       }
       if (htmlOptions.files.js && !store.isESM) {
-        htmlConfig.files.js = htmlConfig.files.js.concat(htmlOptions.files.js);
+        htmlConfig.files.js = (htmlConfig.files.js || []).concat(
+          htmlOptions.files.js,
+        );
       }
     }
 
@@ -129,8 +135,10 @@ class WPEntries {
         );
         const response = await fetch(htmlConfig.urlTemplate);
         const htmlBody = await response.text();
-        // htmlOptions.templateContent = htmlBody;
-        htmlOptions.templateContent = ({ htmlWebpackPlugin }) => htmlBody;
+        htmlOptions.templateContent = (webpackConfig) =>
+          htmlConfig.templateFormat && isFunction(htmlConfig.templateFormat)
+            ? htmlConfig.templateFormat(htmlBody, webpackConfig)
+            : htmlBody;
         delete htmlOptions.template;
       } catch (error) {
         logger.error('The request failed. Please try again later~');

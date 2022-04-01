@@ -4,7 +4,6 @@ import { Options as WebpackHtmlPluginOption } from '@fe6/biu-deps/compiled/html-
 import { fsExtra } from '@fe6/biu-deps';
 
 import store from '../../shared/cache';
-import { TOverride } from '../../types';
 
 export interface IHtmlOptions extends WebpackHtmlPluginOption {
   /**
@@ -36,19 +35,12 @@ export interface IHtmlOptions extends WebpackHtmlPluginOption {
      */
     js?: string[];
   };
+  // 可以修改远程 template 的内容
+  templateFormat?: (code: string, webpackConfig: any) => string;
 }
-export type TInitHtml = TOverride<
-  WebpackHtmlPluginOption,
-  {
-    files: {
-      css: string[];
-      js: string[];
-    };
-  }
->;
 
 // TODO 模板
-export const initHtml = (o: WebpackHtmlPluginOption = {}): TInitHtml => {
+export const initHtml = (o: WebpackHtmlPluginOption = {}): IHtmlOptions => {
   let template = o.template || 'src/index.html';
   let favicon = o.favicon || 'src/favicon.ico';
   let urlFavicon = '';

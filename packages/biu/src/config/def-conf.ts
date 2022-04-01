@@ -64,7 +64,6 @@ export const mergeConfig = (opts: any = {}): TConfig => {
       typingsPath: path.resolve('src', 'biuShareTypes'),
       dtsPath,
       moduleTransformExclude,
-      // initTemplates,
     },
     ...opts,
   };

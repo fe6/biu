@@ -15,7 +15,7 @@ import { TExternals } from '../types/externals';
 import { TMFExport } from '../types/module-federation';
 import { TBuildOptions } from './options/build';
 import { TServerOptions } from './options/server';
-import { IHtmlOptions, TInitHtml } from './options/html';
+import { IHtmlOptions } from './options/html';
 import { TWebpackChain } from './options/chain';
 
 export interface IConfigEnv {
@@ -162,11 +162,6 @@ export type TBiuConfig = {
    * 如 node_modules 模块 是否加入编译
    */
   moduleTransform?: IModuleTransform;
-  /**
-   * initTemplates
-   * 暂无场景 弃置
-   */
-  // initTemplates?: {[key: string]: string | boolean}
 };
 
 export type TConfig = TOverride<
@@ -180,7 +175,7 @@ export type TConfig = TOverride<
     webpackChain?: TWebpackChain;
     reactRuntime?: 'automatic' | 'classic';
     base?: string;
-    html: TInitHtml;
+    html: IHtmlOptions;
     entries?: TEntries;
     debug: TConfigDebug;
     env?: IConfigEnv['env'];
@@ -188,7 +183,6 @@ export type TConfig = TOverride<
     dtsPath: { [key: string]: string };
     moduleTransform: IModuleTransform;
     moduleTransformExclude: WebpackRuleSetRule['exclude'];
-    // initTemplates: {[key: string]: string | boolean}
   }
 >;
 
