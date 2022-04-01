@@ -1,0 +1,17 @@
+{
+  "name": "comp-water-pro",
+  "description": "Water Pro 项目",
+  "scripts": {
+    "start": "biu dev"
+  },
+  "dependencies": {
+    "@fe6/water-pro": "^4.7.1",
+    "dayjs": "^1.11.0",
+    "vue": "^3.2.31"
+  },
+  "devDependencies": {
+    "@fe6/biu": "workspace:*",
+    "@fe6/nvcr": "^0.1.1",
+    "unplugin-vue-components": "^0.18.5"
+  }
+}
