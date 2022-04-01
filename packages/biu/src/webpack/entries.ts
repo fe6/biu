@@ -3,6 +3,7 @@
 import path from 'path';
 import glob from '@fe6/biu-deps/compiled/fast-glob';
 import HtmlWebpackPlugin from '@fe6/biu-deps/compiled/html-webpack-plugin';
+import fetch from '@fe6/biu-deps/compiled/node-fetch';
 import { logger } from '@fe6/biu-utils';
 import wpChain from '../shared/wp-chain';
 import store from '../shared/cache';
@@ -43,14 +44,14 @@ class WPEntries {
         delete htmlOptions.favicon;
       }
       //
-      this.setHtmlWebpackPlugin([chunk], htmlOptions);
+      await this.setHtmlWebpackPlugin([chunk], htmlOptions);
     }
     wpChain.merge(this.wpConfig);
   }
   async singleEntry() {
     await this.setIndexEntry();
     for (const chunk in this.wpConfig.entry) {
-      this.setHtmlWebpackPlugin([chunk], {}, 'index.html');
+      await this.setHtmlWebpackPlugin([chunk], {}, 'index.html');
     }
     wpChain.merge(this.wpConfig);
   }
@@ -87,7 +88,7 @@ class WPEntries {
       );
     }
   }
-  private setHtmlWebpackPlugin(
+  private async setHtmlWebpackPlugin(
     chunks: string[] = ['index'],
     htmlOptions: IHtmlOptions = {},
     filename?: string,
@@ -120,11 +121,25 @@ class WPEntries {
         htmlConfig.files.js = htmlConfig.files.js.concat(htmlOptions.files.js);
       }
     }
+
+    if (htmlConfig.urlTemplate && !htmlOptions.templateContent) {
+      try {
+        logger.wait(
+          `Desperately requesting ${htmlConfig.urlTemplate} , just a moment, please~`,
+        );
+        const response = await fetch(htmlConfig.urlTemplate);
+        const htmlBody = await response.text();
+        // htmlOptions.templateContent = htmlBody;
+        htmlOptions.templateContent = ({ htmlWebpackPlugin }) => htmlBody;
+        delete htmlOptions.template;
+      } catch (error) {
+        logger.error('The request failed. Please try again later~');
+        logger.errorExit(error);
+      }
+    }
+
     const options: HtmlWebpackPlugin.Options = {
-      // title: 'EMP',
-      // template,
       chunks,
-      // favicon,
       // inject: false, //避免插入两个同样 js ::TODO 延展增加 node_modules
       filename,
       // isESM: store.isESM,

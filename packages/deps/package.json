@@ -28,7 +28,9 @@
     "access": "public"
   },
   "devDependencies": {
+    "@types/bonjour": "3.5.10",
     "@types/compression": "1.7.2",
+    "@types/connect-history-api-fallback": "1.3.5",
     "@types/cross-spawn": "6.0.2",
     "@types/css-minimizer-webpack-plugin": "3.2.1",
     "@types/default-gateway": "3.0.1",
@@ -38,9 +40,11 @@
     "@types/less": "3.0.3",
     "@types/lodash": "4.14.180",
     "@types/mini-css-extract-plugin": "2.5.1",
+    "@types/node-fetch": "2.6.1",
     "@types/sass": "1.43.1",
     "@types/serve-index": "1.9.1",
     "@types/serve-static": "1.13.10",
+    "@types/sockjs": "0.3.33",
     "@types/sockjs-client": "1.5.1",
     "@types/spdy": "3.4.5",
     "@types/tapable": "^2.2.2",
@@ -85,6 +89,7 @@
     "lodash": "4.17.21",
     "make-dir": "3.1.0",
     "mini-css-extract-plugin": "2.6.0",
+    "node-fetch": "3.2.3",
     "open": "8.4.0",
     "p-retry": "5.1.0",
     "pirates": "4.0.5",
@@ -189,7 +194,8 @@
       "less-loader",
       "style-loader",
       "html-loader",
-      "sockjs-client"
+      "sockjs-client",
+      "node-fetch"
     ],
     "externals": {
       "commander": "$$LOCAL",
@@ -241,7 +247,8 @@
       "spdy": "$$LOCAL",
       "strip-ansi": "$$LOCAL",
       "ws": "$$LOCAL",
-      "sockjs-client": "$$LOCAL"
+      "sockjs-client": "$$LOCAL",
+      "node-fetch": "$$LOCAL"
     },
     "noMinify": [
       "terser-webpack-plugin",
@@ -263,6 +270,7 @@
       "html-loader",
       "make-dir",
       "p-retry",
+      "loader-utils",
       "ipaddr",
       "selfsigned",
       "bufferutil",
@@ -272,19 +280,22 @@
       "ansi-html-community",
       "pretty-error",
       "bonjour-service",
-      "anymatch"
+      "anymatch",
+      "node-fetch"
     ],
     "extraDtsExternals": [
       "esbuild",
       "uglify-js",
       "p-retry",
+      "loader-utils",
       "ipaddr",
       "make-dir",
       "regenerator-runtime",
       "html-entities",
       "ansi-html-community",
       "html-webpack-plugin",
-      "pretty-error"
+      "pretty-error",
+      "node-fetch"
     ]
   }
 }
