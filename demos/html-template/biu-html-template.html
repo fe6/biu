@@ -1,3 +1,5 @@
+<!-- @format -->
+
 <!DOCTYPE html>
 <html lang="zh-CN">
   <head>
@@ -7,13 +9,17 @@
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0"
     />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>${htmlWebpackPlugin.options.title}</title>
-    ${htmlWebpackPlugin.options.files.urlFavicon?`<link rel="icon" href="${htmlWebpackPlugin.options.files.urlFavicon}" />`:''}
+    <title>{{title}}</title>
   </head>
 
   <body>
     <div style="color: #f00; padding-bottom: 16px; border-bottom: 1px solid">
-      这是一个远程模板。<a target="_blank" style="color: #1996f0;" href="https://github.com/fe6/biu/blob/master/demos/html-template/index.temp">地址 ></a>
+      这是一个远程模板。<a
+        target="_blank"
+        style="color: #1996f0"
+        href="https://github.com/fe6/biu/blob/master/demos/html-template/biu-html-template.html"
+        >地址 &gt;</a
+      >
     </div>
     <div id="biu-root"></div>
   </body>
