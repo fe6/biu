@@ -9,7 +9,7 @@ import { TExternalsItem } from '../../types/externals';
 //
 const exp = /^([0-9a-zA-Z_\s]+)@(.*)/; // 匹配库内容如 React@http://
 //
-class EMPShare {
+class BiuShare {
   moduleFederation: TMFOptions = {};
   externals: Configuration['externals'] | any = {};
   externalAssets: TExternalAssets = { js: [], css: [] };
@@ -17,15 +17,15 @@ class EMPShare {
   constructor() {}
   async setup() {
     if (store.config.biuShare) {
-      if (!store.isESM) await this.setEmpShare();
+      if (!store.isESM) await this.setBiuShare();
       /**
        * 需要重写 非 esm 下的 模块管理
-       */ else await this.setESMEmpshare();
+       */ else await this.setESMBiushare();
     } else {
       await Promise.all([this.setExternals(), this.setModuleFederation()]);
     }
   }
-  private async setESMEmpshare() {
+  private async setESMBiushare() {
     let mf: TBiuShare = {};
     if (typeof store.config.biuShare === 'function') {
       mf = await store.config.biuShare(store.config);
@@ -38,7 +38,7 @@ class EMPShare {
     delete mf.shareLib;
     await this.setModuleFederation(mf);
   }
-  private async setEmpShare() {
+  private async setBiuShare() {
     let mf: TBiuShare = {};
     if (typeof store.config.biuShare === 'function') {
       mf = await store.config.biuShare(store.config);
@@ -174,4 +174,4 @@ class EMPShare {
     }
   }
 }
-export default EMPShare;
+export default BiuShare;

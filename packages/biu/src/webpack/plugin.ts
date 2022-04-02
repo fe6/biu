@@ -79,7 +79,7 @@ class WPPlugin {
     }
     // progress
     if (store.config.debug.progress !== false) {
-      const options: any = { name: logger.pkgName };
+      const options: any = { name: `[${logger.pkgName}]` };
       if (store.config.debug.profile) {
         options.reporters = ['fancy', 'profile'];
         options.profile = true;
@@ -165,13 +165,6 @@ class WPPlugin {
       }
     }
 
-    // if (store.config.build.emptyOutDir && !isDev) {
-    //   const {CleanWebpackPlugin} = require('clean-webpack-plugin')
-    //   config.plugin.clean = {
-    //     plugin: CleanWebpackPlugin,
-    //     args: [{cleanOnceBeforeBuildPatterns: [`!${store.typesOutputDir}/**`]}],
-    //   }
-    // }
     wpChain.merge(config);
   }
 }
