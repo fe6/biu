@@ -1,0 +1,13 @@
+{
+  "name": "vue-base",
+  "description": "Vue 基座项目",
+  "scripts": {
+    "start": "biu dev"
+  },
+  "dependencies": {
+    "vue": "^3.2.31"
+  },
+  "devDependencies": {
+    "@fe6/biu": "workspace:*"
+  }
+}
