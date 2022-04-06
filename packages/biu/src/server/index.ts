@@ -1,7 +1,6 @@
 /** @format */
 
 import net, { Socket } from 'net';
-// import { IncomingMessage } from 'http';
 import http, { Server as HttpServer, IncomingMessage } from 'http';
 import url from 'url';
 import os from 'os';
@@ -35,6 +34,7 @@ import { isString } from '@fe6/biu-deps/compiled/lodash';
 import ipaddr from '@fe6/biu-deps/compiled/ipaddr.js';
 import { logger } from '@fe6/biu-utils';
 
+import store from '../shared/cache';
 import { DEFAULT_PORT } from '../contant';
 import {
   IDevServer,
@@ -74,10 +74,10 @@ class DevServer {
   middleware: any;
   server: HttpServer | undefined = undefined;
 
-  constructor(opts: IDevServer, compiler: Compiler) {
+  constructor(compiler: Compiler) {
     this.compiler = compiler;
     this.logger = this.compiler.getInfrastructureLogger('webpack-dev-server');
-    this.options = opts;
+    this.options = store.config.server || {};
   }
 
   static get DEFAULT_STATS(): StatsOptions {
