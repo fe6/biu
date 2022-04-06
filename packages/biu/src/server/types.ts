@@ -174,7 +174,12 @@ export type TClientConnection = WebSocket & {
   send: WebSocket['send'];
   terminate: WebSocket['terminate'];
   ping: WebSocket['ping'];
-} & { isAlive?: boolean };
+} & {
+  isAlive?: boolean;
+  headers: {
+    [key: string]: string;
+  };
+};
 
 export interface IWebSocketServerImplementation {
   implementation: TWebSocketServer;

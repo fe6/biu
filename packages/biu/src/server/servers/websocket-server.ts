@@ -28,15 +28,9 @@ export default class WebsocketServer extends BaseServer {
       });
     });
 
-    this.implementation.on(
-      'error',
-      /**
-       * @param {Error} err
-       */
-      (err: any) => {
-        logger.error(err.message);
-      },
-    );
+    this.implementation.on('error', (err: Error) => {
+      logger.error(err.message);
+    });
 
     const interval = setInterval(() => {
       this.clients.forEach((client) => {

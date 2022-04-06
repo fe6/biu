@@ -2,7 +2,7 @@
 
 import net, { Socket } from 'net';
 // import { IncomingMessage } from 'http';
-import http, { Server as HttpServer } from 'http';
+import http, { Server as HttpServer, IncomingMessage } from 'http';
 import url from 'url';
 import os from 'os';
 import { join } from 'path';
@@ -499,7 +499,7 @@ class DevServer {
     for (const addresses of Object.values(os.networkInterfaces())) {
       if (addresses) {
         for (const { cidr } of addresses) {
-          const net = ipaddr.parseCIDR(/** @type {string} */ cidr);
+          const net = ipaddr.parseCIDR(cidr);
 
           if (
             net[0] &&
@@ -572,6 +572,127 @@ class DevServer {
     });
   }
 
+  setHeaders(req: Request, res: any, next: NextFunction) {
+    // TODO 添加 headers 配置 在 IDevServer
+    // let { headers } = this.options;
+
+    // if (headers) {
+    //   if (typeof headers === "function") {
+    //     headers = headers(
+    //       req,
+    //       res,
+    //       (this.middleware).context
+    //     );
+    //   }
+
+    //   const allHeaders: {key: string, value: string}[] = [];
+
+    //   if (!Array.isArray(headers)) {
+    //     // eslint-disable-next-line guard-for-in
+    //     for (const name in headers) {
+    //       // @ts-ignore
+    //       allHeaders.push({ key: name, value: headers[name] });
+    //     }
+
+    //     headers = allHeaders;
+    //   }
+
+    //   headers.forEach(
+    //     (header: {key: string, value: any}) => {
+    //       res.setHeader(header.key, header.value);
+    //     }
+    //   );
+    // }
+
+    next();
+  }
+
+  checkHeader(
+    headers: { [key: string]: string | undefined },
+    headerToCheck: string,
+  ): boolean {
+    // allow user to opt out of this security check, at their own risk
+    // by explicitly enabling allowedHosts
+    if (this.options.allowedHosts === 'all') {
+      return true;
+    }
+
+    // get the Host header and extract hostname
+    // we don't care about port not matching
+    const hostHeader = headers[headerToCheck];
+
+    if (!hostHeader) {
+      return false;
+    }
+
+    if (/^(file|.+-extension):/i.test(hostHeader)) {
+      return true;
+    }
+
+    // use the node url-parser to retrieve the hostname from the host-header.
+    const hostname = url.parse(
+      // if hostHeader doesn't have scheme, add // for parsing.
+      /^(.+:)?\/\//.test(hostHeader) ? hostHeader : `//${hostHeader}`,
+      false,
+      true,
+    ).hostname;
+
+    // always allow requests with explicit IPv4 or IPv6-address.
+    // A note on IPv6 addresses:
+    // hostHeader will always contain the brackets denoting
+    // an IPv6-address in URLs,
+    // these are removed from the hostname in url.parse(),
+    // so we have the pure IPv6-address in hostname.
+    // always allow localhost host, for convenience (hostname === 'localhost')
+    // allow hostname of listening address  (hostname === this.options.host)
+    const isValidHostname =
+      (hostname !== null && ipaddr.IPv4.isValid(hostname)) ||
+      (hostname !== null && ipaddr.IPv6.isValid(hostname)) ||
+      hostname === 'localhost' ||
+      hostname === this.options.host;
+
+    if (isValidHostname) {
+      return true;
+    }
+
+    const { allowedHosts } = this.options;
+
+    // always allow localhost host, for convenience
+    // allow if hostname is in allowedHosts
+    if (Array.isArray(allowedHosts) && allowedHosts.length > 0) {
+      for (let hostIdx = 0; hostIdx < allowedHosts.length; hostIdx++) {
+        const allowedHost = allowedHosts[hostIdx];
+
+        if (allowedHost === hostname) {
+          return true;
+        }
+
+        // support "." as a subdomain wildcard
+        // e.g. ".example.com" will allow "example.com", "www.example.com", "subdomain.example.com", etc
+        if (allowedHost[0] === '.') {
+          // "example.com"  (hostname === allowedHost.substring(1))
+          // "*.example.com"  (hostname.endsWith(allowedHost))
+          if (
+            hostname === allowedHost.substring(1) ||
+            String(hostname).endsWith(allowedHost)
+          ) {
+            return true;
+          }
+        }
+      }
+    }
+
+    // Also allow if `client.webSocketURL.hostname` provided
+    const webSocketURL = (this.options.client as IClientConfiguration)
+      .webSocketURL as IClientWebSocketURL;
+    if (this.options.client && typeof webSocketURL !== 'undefined') {
+      return webSocketURL === hostname;
+    }
+
+    // disallow
+    return false;
+  }
+
   sendMessage(
     clients: TClientConnection[],
     type: string,
@@ -630,7 +751,6 @@ class DevServer {
         searchParams.set('password', webSocketURL.password);
       }
 
-      /** @type {string} */
       let hostname;
 
       // SockJS is not supported server mode, so `hostname` and `port` can't specified, let's ignore them
@@ -856,26 +976,14 @@ class DevServer {
     this.app = express();
   }
 
-  /**
-   * @private
-   * @returns {void}
-   */
   setupHostHeaderCheck(): void {
     if (this.app) {
       this.app.all('*', (req: any, res: any, next: NextFunction): void => {
-        // TODO 验证 header
-        // if (
-        //   this.checkHeader(
-        //     /** @type {{ [key: string]: string | undefined }} */
-        //     (req.headers),
-        //     "host"
-        //   )
-        // ) {
-        //   return next();
-        // }
+        if (this.checkHeader(req.headers, 'host')) {
+          return next();
+        }
 
-        // res.send("Invalid Host header");
-        return next();
+        res.send('Invalid Host header');
       });
     }
   }
@@ -996,7 +1104,6 @@ class DevServer {
 
   setupWatchStaticFiles(): void {
     if (this.options.static && (this.options.static as IStatic[]).length > 0) {
-      /** @type {NormalizedStatic[]} */
       (this.options.static as IStatic[]).forEach((staticOption) => {
         if (staticOption.watch && staticOption?.directory) {
           this.watchFiles(staticOption.directory, staticOption.watch);
@@ -1046,10 +1153,7 @@ class DevServer {
         if (proxyConfig.target) {
           const context = proxyConfig.context || proxyConfig.path;
 
-          return createProxyMiddleware(
-            /** @type {string} */ context,
-            proxyConfig,
-          );
+          return createProxyMiddleware(context, proxyConfig);
         }
 
         if (proxyConfig.router) {
@@ -1073,7 +1177,6 @@ class DevServer {
        *   }
        * ]
        */
-      /** @type {ProxyConfigArray} */
       this.options.proxy.forEach((proxyConfigOrCallback) => {
         let proxyMiddleware: RequestHandler | undefined;
 
@@ -1235,11 +1338,11 @@ class DevServer {
                   return next();
                 }
 
-                serveIndex(
-                  staticOption.directory,
-                  /** @type {ServeIndexOptions} */
-                  staticOption.serveIndex,
-                )(req, res, next);
+                serveIndex(staticOption.directory, staticOption.serveIndex)(
+                  req,
+                  res,
+                  next,
+                );
               },
             });
           }
@@ -1283,21 +1386,15 @@ class DevServer {
   createServer(): void {
     this.server = http.createServer(this.app);
 
-    this.server.on(
-      'connection',
-      /**
-       * @param {Socket} socket
-       */
-      (socket: Socket) => {
-        // Add socket to list
-        this.sockets.push(socket);
+    this.server.on('connection', (socket: Socket) => {
+      // Add socket to list
+      this.sockets.push(socket);
 
-        socket.once('close', () => {
-          // Remove socket from list
-          this.sockets.splice(this.sockets.indexOf(socket), 1);
-        });
-      },
-    );
+      socket.once('close', () => {
+        // Remove socket from list
+        this.sockets.splice(this.sockets.indexOf(socket), 1);
+      });
+    });
 
     this.server.on('error', (error: Error) => {
       logger.errorExit(error);
@@ -1469,90 +1566,84 @@ class DevServer {
     if (this.webSocketServer) {
       (
         this.webSocketServer as IWebSocketServerImplementation
-      ).implementation.on('connection', (client: TClientConnection) => {
-        // , request: IncomingMessage
-        // TODO 验证 header
-        // /** @type {{ [key: string]: string | undefined } | undefined} */
-        // const headers =
-        //   // eslint-disable-next-line no-nested-ternary
-        //   typeof request !== "undefined"
-        //     ? /** @type {{ [key: string]: string | undefined }} */
-        //       (request.headers)
-        //     : typeof (
-        //         /** @type {import("sockjs").Connection} */ (client).headers
-        //       ) !== "undefined"
-        //     ? /** @type {import("sockjs").Connection} */ (client).headers
-        //     : // eslint-disable-next-line no-undefined
-        //       undefined;
+      ).implementation.on(
+        'connection',
+        (client: TClientConnection, request: IncomingMessage) => {
+          const headers: any =
+            typeof request !== 'undefined'
+              ? request.headers
+              : typeof client.headers !== 'undefined'
+              ? client.headers
+              : undefined;
 
-        // if (!headers) {
-        //   logger.warn(
-        //     'webSocketServer implementation must pass headers for the "connection" event'
-        //   );
-        // }
+          if (!headers) {
+            logger.warn(
+              'webSocketServer implementation must pass headers for the "connection" event',
+            );
+          }
 
-        // TODO 验证 header
-        // if (
-        //   \!headers ||
-        //   \!this.checkHeader(headers, "host") ||
-        //   \!this.checkHeader(headers, "origin")
-        // ) {
-        //   this.sendMessage([client], "error", "Invalid Host/Origin header");
+          // TODO 添加 headers 配置 在 IDevServer
+          // \!headers ||
+          // \!this.checkHeader(headers, "host") ||
+          // \!this.checkHeader(headers, "origin")
+          if (!headers) {
+            this.sendMessage([client], 'error', 'Invalid Host/Origin header');
 
-        //   // With https enabled, the sendMessage above is encrypted asynchronously so not yet sent
-        //   // Terminate would prevent it sending, so use close to allow it to be sent
-        //   client.close();
+            // With https enabled, the sendMessage above is encrypted asynchronously so not yet sent
+            // Terminate would prevent it sending, so use close to allow it to be sent
+            client.close();
 
-        //   return;
-        // }
+            return;
+          }
 
-        if (this.options.hot === true || this.options.hot === 'only') {
-          this.sendMessage([client], 'hot');
-        }
+          if (this.options.hot === true || this.options.hot === 'only') {
+            this.sendMessage([client], 'hot');
+          }
 
-        if (this.options.liveReload) {
-          this.sendMessage([client], 'liveReload');
-        }
+          if (this.options.liveReload) {
+            this.sendMessage([client], 'liveReload');
+          }
 
-        if (
-          this.options.client &&
-          (this.options.client as IClientConfiguration)?.progress
-        ) {
-          this.sendMessage(
-            [client],
-            'progress',
-            (this.options.client as IClientConfiguration).progress,
-          );
-        }
+          if (
+            this.options.client &&
+            (this.options.client as IClientConfiguration)?.progress
+          ) {
+            this.sendMessage(
+              [client],
+              'progress',
+              (this.options.client as IClientConfiguration).progress,
+            );
+          }
 
-        if (
-          this.options.client &&
-          (this.options.client as IClientConfiguration).reconnect
-        ) {
-          this.sendMessage(
-            [client],
-            'reconnect',
-            (this.options.client as IClientConfiguration).reconnect,
-          );
-        }
+          if (
+            this.options.client &&
+            (this.options.client as IClientConfiguration).reconnect
+          ) {
+            this.sendMessage(
+              [client],
+              'reconnect',
+              (this.options.client as IClientConfiguration).reconnect,
+            );
+          }
 
-        if (
-          this.options.client &&
-          (this.options.client as IClientConfiguration).overlay
-        ) {
-          this.sendMessage(
-            [client],
-            'overlay',
-            (this.options.client as IClientConfiguration).overlay,
-          );
-        }
+          if (
+            this.options.client &&
+            (this.options.client as IClientConfiguration).overlay
+          ) {
+            this.sendMessage(
+              [client],
+              'overlay',
+              (this.options.client as IClientConfiguration).overlay,
+            );
+          }
 
-        if (!this.stats) {
-          return;
-        }
+          if (!this.stats) {
+            return;
+          }
 
-        this.sendStats([client], this.getStats(this.stats), true);
-      });
+          this.sendStats([client], this.getStats(this.stats), true);
+        },
+      );
     }
   }
 
