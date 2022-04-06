@@ -21,6 +21,9 @@ export default {
   eventGroupHmr: (...message: any[]) => {
     console.groupCollapsed(...renderName('HMR', 'event'), ...message);
   },
+  groupEnd: () => {
+    console.groupEnd();
+  },
   warn: (...message: any[]) => {
     console.log(...renderName('warn'), ...message);
   },
@@ -50,5 +53,8 @@ export default {
   },
   ready: (...message: any[]) => {
     console.log(...renderName('ready'), ...message);
+  },
+  readyHmr: (...message: any[]) => {
+    console.log(...renderName('HMR', 'readyOld'), ...message);
   },
 };

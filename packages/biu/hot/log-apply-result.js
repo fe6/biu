@@ -30,6 +30,7 @@ module.exports = function (updatedModules, renewedModules) {
         var parts = moduleId.split('!');
         log.eventGroupHmr(parts.pop());
         log.eventHmr(moduleId);
+        log.groupEnd();
       } else {
         log.eventHmr(moduleId);
       }

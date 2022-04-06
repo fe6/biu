@@ -31,7 +31,7 @@ if (module.hot) {
         require('./log-apply-result')(updatedModules, updatedModules);
 
         if (upToDate()) {
-          log.infoHmr('App is up to date.');
+          log.readyHmr('App is up to date.');
         }
       })
       .catch(function (err) {
