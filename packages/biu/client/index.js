@@ -37,7 +37,6 @@ import createSocketURL from './utils/createSocketURL.js';
 var status = {
   isUnloading: false,
   // TODO Workaround for webpack v4, `__webpack_hash__` is not replaced without HotModuleReplacement
-  // eslint-disable-next-line camelcase
   currentHash: typeof __webpack_hash__ !== 'undefined' ? __webpack_hash__ : '',
 };
 /** @type {Options} */
