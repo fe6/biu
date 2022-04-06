@@ -12,6 +12,7 @@ class WPDevelopment {
   /**
    * dev server
    */
+  // TODO 没有用到-删除 ↓
   get server(): IDevServer {
     const overlayLoggerLv =
       store.config.debug && store.config.debug.level === 'error'

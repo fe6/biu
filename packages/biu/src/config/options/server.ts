@@ -26,6 +26,10 @@ export type TServerConfig = {
    * @default true
    */
   hot?: IDevServer['hot'];
+  /**
+   * 设置请求 headers
+   */
+  headers?: IDevServer['headers'];
 };
 export type TServerOptions = IDevServer & TServerConfig;
 export type TResolveServerConfig = IDevServer & Required<TServerConfig>;
@@ -36,6 +40,12 @@ export const defServerConfig = {
   open: false,
   // proxy: false,
   hot: true,
+  headers: {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
+    'Access-Control-Allow-Headers':
+      'X-Requested-With, content-type, Authorization',
+  },
 };
 
 export const initServer = (op?: TServerOptions): TResolveServerConfig => ({

@@ -17,7 +17,7 @@ import {
   RequestHandler as ExpressRequestHandler,
 } from '@fe6/biu-deps/compiled/express';
 
-import { Configuration } from '@fe6/biu-deps-webpack/compiled/webpack';
+import { Options as WebpackDevMiddlewareOptions } from '@fe6/biu-deps/compiled/webpack-dev-middleware';
 
 export type TServerPort = number | string | 'auto';
 export type TServerHost = 'local-ip' | 'local-ipv4' | 'local-ipv6' | string;
@@ -144,6 +144,10 @@ export interface IDevMiddleware {
   writeToDisk?: boolean;
 }
 
+export type TDevHeaders =
+  | Array<{ key: string; value: string }>
+  | Record<string, string | string[]>;
+
 export interface IDevServer {
   port?: TServerPort;
   host?: TServerHost;
@@ -154,6 +158,7 @@ export interface IDevServer {
   allowedHosts?: 'auto' | 'all' | string | string[];
   bonjour?: TBonjour;
   client?: boolean | IClientConfiguration;
+  headers?: TDevHeaders;
   // TODO 函数的支持
   proxy?: TProxyConfigArrayItem[];
   setupExitSignals?: boolean;

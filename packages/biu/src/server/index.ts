@@ -573,36 +573,24 @@ class DevServer {
   }
 
   setHeaders(req: Request, res: any, next: NextFunction) {
-    // TODO 添加 headers 配置 在 IDevServer
-    // let { headers } = this.options;
+    let { headers } = this.options;
 
-    // if (headers) {
-    //   if (typeof headers === "function") {
-    //     headers = headers(
-    //       req,
-    //       res,
-    //       (this.middleware).context
-    //     );
-    //   }
+    if (headers) {
+      const allHeaders: { key: string; value: string }[] = [];
 
-    //   const allHeaders: {key: string, value: string}[] = [];
+      if (!Array.isArray(headers)) {
+        for (const name in headers) {
+          // @ts-ignore
+          allHeaders.push({ key: name, value: headers[name] });
+        }
 
-    //   if (!Array.isArray(headers)) {
-    //     // eslint-disable-next-line guard-for-in
-    //     for (const name in headers) {
-    //       // @ts-ignore
-    //       allHeaders.push({ key: name, value: headers[name] });
-    //     }
+        headers = allHeaders;
+      }
 
-    //     headers = allHeaders;
-    //   }
-
-    //   headers.forEach(
-    //     (header: {key: string, value: any}) => {
-    //       res.setHeader(header.key, header.value);
-    //     }
-    //   );
-    // }
+      headers.forEach((header: { key: string; value: any }) => {
+        res.setHeader(header.key, header.value);
+      });
+    }
 
     next();
   }
@@ -1126,14 +1114,13 @@ class DevServer {
     //   this.options.onBeforeSetupMiddleware(this);
     // }
 
-    // TODO 为所有响应添加 headers
-    // if (typeof this.options.headers !== "undefined") {
-    //   middlewares.push({
-    //     name: "set-headers",
-    //     path: "*",
-    //     middleware: this.setHeaders.bind(this),
-    //   });
-    // }
+    if (typeof this.options.headers !== 'undefined') {
+      middlewares.push({
+        name: 'set-headers',
+        path: '*',
+        middleware: this.setHeaders.bind(this),
+      } as any);
+    }
 
     middlewares.push({
       name: 'webpack-dev-middleware',
@@ -1582,11 +1569,11 @@ class DevServer {
             );
           }
 
-          // TODO 添加 headers 配置 在 IDevServer
-          // \!headers ||
-          // \!this.checkHeader(headers, "host") ||
-          // \!this.checkHeader(headers, "origin")
-          if (!headers) {
+          if (
+            !headers ||
+            !this.checkHeader(headers, 'host') ||
+            !this.checkHeader(headers, 'origin')
+          ) {
             this.sendMessage([client], 'error', 'Invalid Host/Origin header');
 
             // With https enabled, the sendMessage above is encrypted asynchronously so not yet sent
