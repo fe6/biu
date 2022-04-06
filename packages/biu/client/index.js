@@ -200,7 +200,7 @@ var onSocketMessage = {
    * @param {any} params
    */
   warnings: function warnings(_warnings, params) {
-    log.warn('Warnings while compiling.');
+    clog.warn('Warnings while compiling.');
 
     var printableWarnings = _warnings.map(function (error) {
       var _formatProblem = formatProblem('warning', error),
@@ -213,7 +213,7 @@ var onSocketMessage = {
     sendMessage('Warnings', printableWarnings);
 
     for (var i = 0; i < printableWarnings.length; i++) {
-      log.warn(printableWarnings[i]);
+      clog.warn(printableWarnings[i]);
     }
 
     var needShowOverlayForWarnings =
