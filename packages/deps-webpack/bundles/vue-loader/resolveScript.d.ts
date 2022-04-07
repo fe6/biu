@@ -1,4 +1,4 @@
-import webpack = require('webpack');
+import webpack = require('@fe6/biu-deps-webpack/compiled/webpack');
 import type { SFCDescriptor, SFCScriptBlock } from 'vue/compiler-sfc';
 import type { VueLoaderOptions } from 'src';
 /**

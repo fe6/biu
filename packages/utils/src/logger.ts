@@ -51,6 +51,10 @@ export function error(...message: any[]) {
   empty();
 }
 
+export function errorOnly(...message: any[]) {
+  console.error(prefixes.error, ...message);
+}
+
 export function errorExit(...message: any[]) {
   console.error(prefixes.error, ...message);
   empty();

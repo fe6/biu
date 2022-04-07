@@ -303,20 +303,28 @@ Object.keys(exported).forEach(function (key) {
         }
 
         if (opts.pkgName === 'webpack') {
-          const filePath = path.join(nodeModulesPath, opts.pkgName, 'hot');
-          fs.copySync(filePath, path.join(target, 'hot'));
-
-          const webpackFilePath = path.join(target, 'types/index.d.ts');
+          const filePath = path.join(
+            nodeModulesPath,
+            opts.pkgName,
+            'lib',
+            'rules',
+          );
+          fs.copySync(filePath, path.join(target, 'rules'));
+          const webpackFilePath = path.join(target, 'rules/RuleSetCompiler.js');
           fs.writeFileSync(
             webpackFilePath,
             fs
               .readFileSync(webpackFilePath, 'utf-8')
               .replace(
-                `path().resolve(__dirname,"./threadChild.js")`,
-                `require("worker_threads")`,
+                `require("tapable")`,
+                `require("@fe6/biu-deps-webpack/compiled/tapable")`,
               ),
             'utf-8',
           );
+        }
+        if (opts.pkgName === 'tapable') {
+          const filePath = path.join(target, 'tapable.d.ts');
+          fs.copySync(filePath, path.join(target, 'index.d.ts'));
         }
 
         // patch

@@ -4,17 +4,17 @@ const qs = require("querystring");
 const id = 'vue-loader-plugin';
 const NS = 'vue-loader';
 const NormalModule = require('webpack/lib/NormalModule');
-const BasicEffectRulePlugin = require('webpack/lib/rules/BasicEffectRulePlugin');
-const BasicMatcherRulePlugin = require('webpack/lib/rules/BasicMatcherRulePlugin');
-const UseEffectRulePlugin = require('webpack/lib/rules/UseEffectRulePlugin');
-const RuleSetCompiler = require('webpack/lib/rules/RuleSetCompiler');
+const BasicEffectRulePlugin = require('@fe6/biu-deps-webpack/compiled/webpack/rules/BasicEffectRulePlugin');
+const BasicMatcherRulePlugin = require('@fe6/biu-deps-webpack/compiled/webpack/rules/BasicMatcherRulePlugin');
+const UseEffectRulePlugin = require('@fe6/biu-deps-webpack/compiled/webpack/rules/UseEffectRulePlugin');
+const RuleSetCompiler = require('@fe6/biu-deps-webpack/compiled/webpack/rules/RuleSetCompiler');
 let objectMatcherRulePlugins = [];
 try {
-    const ObjectMatcherRulePlugin = require('webpack/lib/rules/ObjectMatcherRulePlugin');
+    const ObjectMatcherRulePlugin = require('@fe6/biu-deps-webpack/compiled/webpack/rules/ObjectMatcherRulePlugin');
     objectMatcherRulePlugins.push(new ObjectMatcherRulePlugin('assert', 'assertions'), new ObjectMatcherRulePlugin('descriptionData'));
 }
 catch (e) {
-    const DescriptionDataMatcherRulePlugin = require('webpack/lib/rules/DescriptionDataMatcherRulePlugin');
+    const DescriptionDataMatcherRulePlugin = require('@fe6/biu-deps-webpack/compiled/webpack/rules/DescriptionDataMatcherRulePlugin');
     objectMatcherRulePlugins.push(new DescriptionDataMatcherRulePlugin());
 }
 const ruleSetCompiler = new RuleSetCompiler([

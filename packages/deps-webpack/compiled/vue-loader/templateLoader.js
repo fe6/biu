@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const qs = require("querystring");
-const loaderUtils = require("loader-utils");
+const loaderUtils = require("@fe6/biu-deps-webpack/compiled/loader-utils");
 const formatError_1 = require("./formatError");
 const descriptorCache_1 = require("./descriptorCache");
 const resolveScript_1 = require("./resolveScript");

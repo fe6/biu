@@ -1,4 +1,4 @@
-import webpack = require('webpack');
+import webpack = require('@fe6/biu-deps-webpack/compiled/webpack');
 import type { TemplateCompiler, CompilerOptions, SFCTemplateCompileOptions, SFCScriptCompileOptions } from 'vue/compiler-sfc';
 import VueLoaderPlugin from './plugin';
 export { VueLoaderPlugin };

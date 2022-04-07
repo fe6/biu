@@ -28,10 +28,12 @@
     "access": "public"
   },
   "devDependencies": {
+    "@types/loader-utils": "2.0.3",
+    "@types/tapable": "2.2.2",
     "@types/webpack-manifest-plugin": "3.0.5",
-    "chalk": "5.0.1",
     "hash-sum": "2.0.0",
     "loader-utils": "2.0.2",
+    "tapable": "2.2.1",
     "vue-loader": "17.0.0",
     "webpack": "5.70.0",
     "webpack-federated-stats-plugin": "2.0.9",
@@ -41,18 +43,19 @@
   "compiledConfig": {
     "deps": [
       "webpackbar",
+      "tapable",
       "./bundles/webpack/bundle",
       "webpack-federated-stats-plugin",
       "webpack-manifest-plugin",
-      "chalk",
       "hash-sum",
       "loader-utils",
       "./bundles/vue-loader/bundle"
     ],
     "externals": {
       "webpackbar": "$$LOCAL",
+      "tapable": "$$LOCAL",
       "webpack": "$$LOCAL",
-      "chalk": "$$LOCAL",
+      "webpack/lib/NormalModule": "../webpack/NormalModule",
       "hash-sum": "$$LOCAL",
       "loader-utils": "$$LOCAL",
       "vue-loader": "$$LOCAL"
