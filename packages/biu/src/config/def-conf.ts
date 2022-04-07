@@ -60,7 +60,8 @@ export const mergeConfig = (opts: any = {}): TConfig => {
       useImportMeta: false,
       splitCss: true,
       appEntry: '',
-      jsCheck: false,
+      // TODO  启用 ForkTsChecker or Eslint
+      // jsCheck: true,
       typingsPath: path.resolve('src', 'biuShareTypes'),
       dtsPath,
       moduleTransformExclude,

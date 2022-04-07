@@ -1,7 +1,7 @@
 /** @format */
 
 import path from 'path';
-import { cloneDeep } from '@fe6/biu-deps/compiled/lodash';
+import { cloneDeep } from '@fe6/biu-deps-webpack/compiled/lodash';
 import { TCmdOptions, TPkg, ENUM_ENV } from '../types';
 import { TConfig, Config } from '../config';
 import BiuShare from '../config/options/biu-share';

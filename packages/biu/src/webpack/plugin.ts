@@ -116,54 +116,6 @@ class WPPlugin {
         ],
       };
     }
-    if (store.config.jsCheck) {
-      // ts check
-      if (isTS) {
-        config.plugin.tsCheck = {
-          plugin: require.resolve(
-            '@fe6/biu-deps/compiled/fork-ts-checker-webpack-plugin',
-          ),
-          args: [
-            {
-              async: isDev, // true dev环境下部分错误验证通过
-              eslint: {
-                enabled: true,
-                files: `${store.appSrc}/**/*.{ts,tsx,js,jsx}`,
-              },
-              typescript: {
-                configFile: tsconfigJsonPath,
-                profile: false,
-                typescriptPath: 'typescript',
-                // configOverwrite: {
-                //   compilerOptions: {skipLibCheck: true},
-                // },
-              },
-              // logger: {issues: 'console'},
-            },
-          ],
-        };
-      } else {
-        config.plugin.eslint = {
-          plugin: require.resolve(
-            '@fe6/biu-deps/compiled/eslint-webpack-plugin',
-          ),
-          args: [
-            {
-              extensions: ['js', 'mjs', 'jsx', 'ts', 'tsx'],
-              context: store.root,
-              // overrideConfigFile: resolveApp('.eslintrc.js'),
-              files: ['src/**/*.{ts,tsx,js,jsx}'],
-              // eslintPath: require.resolve('eslint'),
-              cache: true,
-              cacheLocation: path.resolve(store.config.cacheDir, 'eslint'),
-              fix: true,
-              threads: true,
-              lintDirtyModulesOnly: false,
-            },
-          ],
-        };
-      }
-    }
 
     wpChain.merge(config);
   }

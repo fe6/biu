@@ -2,7 +2,7 @@
 
 'use strict';
 
-import { WebSocketServer } from '@fe6/biu-deps/compiled/ws';
+import { WebSocketServer } from '@fe6/biu-deps-webpack/compiled/ws';
 import { logger } from '@fe6/biu-utils';
 import BaseServer from './base-server';
 import { TClientConnection } from '../types';

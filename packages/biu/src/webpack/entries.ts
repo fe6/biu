@@ -2,9 +2,9 @@
 
 import path from 'path';
 import glob from '@fe6/biu-deps/compiled/fast-glob';
-import HtmlWebpackPlugin from '@fe6/biu-deps/compiled/html-webpack-plugin';
+import HtmlWebpackPlugin from '@fe6/biu-deps-webpack/compiled/html-webpack-plugin';
 import fetch from '@fe6/biu-deps/compiled/node-fetch';
-import { isFunction } from '@fe6/biu-deps/compiled/lodash';
+import { isFunction } from '@fe6/biu-deps-webpack/compiled/lodash';
 import { logger } from '@fe6/biu-utils';
 import wpChain from '../shared/wp-chain';
 import store from '../shared/cache';

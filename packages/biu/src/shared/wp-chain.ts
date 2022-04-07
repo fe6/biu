@@ -1,13 +1,14 @@
 /** @format */
 
-import { webpackChain, fsExtra } from '@fe6/biu-deps';
+import fsExtra from '@fe6/biu-deps/compiled/fs-extra';
 import { logger } from '@fe6/biu-utils';
+import WPChain from '@fe6/biu-deps-webpack/compiled/webpack-5-chain';
 import { Configuration as WebpackConfiguration } from '@fe6/biu-deps-webpack/compiled/webpack';
 import store from '../shared/cache';
 
-export { webpackChain as WPChain };
+export { WPChain };
 
-const wpChain = new webpackChain();
+const wpChain = new WPChain();
 
 export const getConfig = (): WebpackConfiguration => {
   const conf = wpChain.toConfig();

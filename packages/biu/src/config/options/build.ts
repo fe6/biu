@@ -1,6 +1,6 @@
 /** @format */
 
-import { TerserOptions } from '@fe6/biu-deps/compiled/terser-webpack-plugin';
+import { TerserOptions } from '@fe6/biu-deps-webpack/compiled/terser-webpack-plugin';
 import { Configuration as WebpackConfiguration } from '@fe6/biu-deps-webpack/compiled/webpack';
 import { TOverride, TJscTarget } from '../../types';
 

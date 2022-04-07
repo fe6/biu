@@ -57,6 +57,29 @@ Object.keys(exported).forEach(function (key) {
       if (opts.file === './bundles/webpack/bundle') {
         delete opts.webpackExternals['webpack'];
       }
+      if (opts.file === './bundles/html-webpack-plugin/index') {
+        fs.ensureDirSync(target);
+        fs.copySync(
+          path.join(nodeModulesPath, 'html-webpack-plugin', 'lib'),
+          path.join(target, 'lib'),
+        );
+        fs.copyFileSync(
+          path.join(nodeModulesPath, 'html-webpack-plugin', 'typings.d.ts'),
+          path.join(target, 'index.d.ts'),
+        );
+
+        const htmlWebpackPluginLoaderFilePath = path.join(
+          target,
+          'lib/loader.js',
+        );
+        fs.writeFileSync(
+          htmlWebpackPluginLoaderFilePath,
+          fs
+            .readFileSync(htmlWebpackPluginLoaderFilePath, 'utf-8')
+            .replace(`'lodash'`, `'@fe6/biu-deps-webpack/compiled/lodash'`),
+          'utf-8',
+        );
+      }
       let { code, assets } = await ncc(entry, {
         externals: opts.webpackExternals,
         minify: !!opts.minify,
@@ -158,6 +181,10 @@ Object.keys(exported).forEach(function (key) {
           path.join(nodeModulesPath, opts.pkgName, 'dist', 'utils.js'),
           path.join(target, 'utils.js'),
         );
+        fs.copySync(
+          path.join(nodeModulesPath, opts.pkgName, 'types'),
+          path.join(target, 'types'),
+        );
         fs.copyFileSync(
           path.join(
             nodeModulesPath,
@@ -168,8 +195,12 @@ Object.keys(exported).forEach(function (key) {
           path.join(target, 'loader-options.json'),
         );
       }
-      if (opts.pkgName === 'fork-ts-checker-webpack-plugin') {
-        fs.removeSync(path.join(target, 'typescript.js'));
+
+      if (opts.pkgName === 'css-minimizer-webpack-plugin') {
+        fs.copySync(
+          path.join(nodeModulesPath, opts.pkgName, 'types'),
+          path.join(target, 'types'),
+        );
       }
     }
   }
