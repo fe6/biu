@@ -24,7 +24,7 @@ import {
   StatsCompilation,
 } from '@fe6/biu-deps-webpack/compiled/webpack';
 import { FSWatcher } from '@fe6/biu-deps/compiled/chokidar';
-import { RequestHandler } from '@fe6/biu-deps/compiled/http-proxy-middleware';
+import { RequestHandler } from '@fe6/biu-deps-webpack/compiled/http-proxy-middleware';
 import defaultGateway from '@fe6/biu-deps/compiled/default-gateway';
 import connectHistoryApiFallback, {
   Options as ConnectHistoryApiFallbackOptions,
@@ -1130,7 +1130,7 @@ class DevServer {
     if (this.options.proxy) {
       const {
         createProxyMiddleware,
-      } = require('@fe6/biu-deps/compiled/http-proxy-middleware');
+      } = require('@fe6/biu-deps-webpack/compiled/http-proxy-middleware');
 
       const getProxyMiddleware = (
         proxyConfig: TProxyConfigArrayItem,
