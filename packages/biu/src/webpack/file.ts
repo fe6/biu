@@ -1,7 +1,6 @@
 /** @format */
 
 import wpChain from '../shared/wp-chain';
-import store from '../shared/cache';
 
 class WPFile {
   constructor() {}

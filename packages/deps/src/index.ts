@@ -1,10 +1,5 @@
 /** @format */
 
-// ! types
-export type { Compiler, Stats } from '../compiled/webpack';
-import type webpack from '../compiled/webpack';
-// ! types
-
 // ? deps
 import yParser from '../compiled/yargs-parser';
 import chalk from '../compiled/chalk';
@@ -25,7 +20,6 @@ export {
   esbuild,
   fsExtra,
   lodash,
-  webpack,
   reactRefreshWebpack,
   WebpackHtmlPluginOption,
   webpackChain,

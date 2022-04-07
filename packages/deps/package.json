@@ -204,7 +204,6 @@
       "cross-spawn": "$$LOCAL",
       "yargs-parser": "$$LOCAL",
       "esbuild": "$$LOCAL",
-      "webpack/lib/NormalModule": "../webpack/NormalModule",
       "webpack-5-chain": "$$LOCAL",
       "html-webpack-plugin": "$$LOCAL",
       "lodash": "$$LOCAL",

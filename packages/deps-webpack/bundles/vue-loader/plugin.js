@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const webpack = require("webpack");
+const webpack = require("@fe6/biu-deps-webpack/compiled/webpack");
 let Plugin;
 if (webpack.version && webpack.version[0] > '4') {
     // webpack5 and upper

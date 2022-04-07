@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.pitch = void 0;
 const qs = require("querystring");
-const loaderUtils = require("loader-utils");
+const loaderUtils = require("@fe6/biu-deps-webpack/compiled/loader-utils");
 const selfPath = require.resolve('./index');
 // const templateLoaderPath = require.resolve('./templateLoader')
 const stylePostLoaderPath = require.resolve('./stylePostLoader');

@@ -17,8 +17,6 @@ import {
   RequestHandler as ExpressRequestHandler,
 } from '@fe6/biu-deps/compiled/express';
 
-import { Options as WebpackDevMiddlewareOptions } from '@fe6/biu-deps/compiled/webpack-dev-middleware';
-
 export type TServerPort = number | string | 'auto';
 export type TServerHost = 'local-ip' | 'local-ipv4' | 'local-ipv6' | string;
 

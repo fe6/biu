@@ -1,5 +1,5 @@
 /// <reference types="node" />
-import webpack = require('webpack');
+import webpack = require('@fe6/biu-deps-webpack/compiled/webpack');
 import type { SFCDescriptor } from 'vue/compiler-sfc';
 import type { ParsedUrlQuery } from 'querystring';
 import type { VueLoaderOptions } from 'src';

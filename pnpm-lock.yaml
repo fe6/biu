@@ -410,20 +410,24 @@ importers:
 
   packages/deps-webpack:
     specifiers:
+      '@types/loader-utils': 2.0.3
+      '@types/tapable': 2.2.2
       '@types/webpack-manifest-plugin': 3.0.5
-      chalk: 5.0.1
       hash-sum: 2.0.0
       loader-utils: 2.0.2
+      tapable: 2.2.1
       vue-loader: 17.0.0
       webpack: 5.70.0
       webpack-federated-stats-plugin: 2.0.9
       webpack-manifest-plugin: 5.0.0
       webpackbar: 5.0.2
     devDependencies:
+      '@types/loader-utils': registry.npmmirror.com/@types/loader-utils/2.0.3
+      '@types/tapable': registry.npmmirror.com/@types/tapable/2.2.2
       '@types/webpack-manifest-plugin': registry.npmmirror.com/@types/webpack-manifest-plugin/3.0.5
-      chalk: registry.npmmirror.com/chalk/5.0.1
       hash-sum: registry.npmmirror.com/hash-sum/2.0.0
       loader-utils: registry.npmmirror.com/loader-utils/2.0.2
+      tapable: registry.npmmirror.com/tapable/2.2.1
       vue-loader: registry.npmmirror.com/vue-loader/17.0.0_webpack@5.70.0
       webpack: registry.npmmirror.com/webpack/5.70.0
       webpack-federated-stats-plugin: registry.npmmirror.com/webpack-federated-stats-plugin/2.0.9_webpack@5.70.0
@@ -3578,6 +3582,15 @@ packages:
     resolution: {integrity: sha512-1YXyYH83h6We1djyoUEqTlVyQtCfJAFXELSKW2ZRtjHD4hQ82CC4lvrv5D0l0FLcKBaiPbXyi3MpMsI9ZRgKsw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/less/-/less-3.0.3.tgz}
     name: '@types/less'
     version: 3.0.3
+    dev: true
+
+  registry.npmmirror.com/@types/loader-utils/2.0.3:
+    resolution: {integrity: sha512-sDXXzZnTLXgdso54/iOpAFSDgqhVXabCvwGAt77Agadh/Xk0QYgOk520r3tpOouI098gyqGIFywx8Op1voc3vQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/loader-utils/-/loader-utils-2.0.3.tgz}
+    name: '@types/loader-utils'
+    version: 2.0.3
+    dependencies:
+      '@types/node': registry.npmmirror.com/@types/node/17.0.21
+      '@types/webpack': registry.npmmirror.com/@types/webpack/4.41.32
     dev: true
 
   registry.npmmirror.com/@types/lodash/4.14.180:
@@ -7148,7 +7161,7 @@ packages:
       lodash: registry.npmmirror.com/lodash/4.17.21
       pretty-error: registry.npmmirror.com/pretty-error/4.0.0
       tapable: registry.npmmirror.com/tapable/2.2.1
-      webpack: registry.npmmirror.com/webpack/5.70.0_esbuild@0.14.27
+      webpack: registry.npmmirror.com/webpack/5.70.0
     dev: true
 
   registry.npmmirror.com/htmlparser2/6.1.0:
