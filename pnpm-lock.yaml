@@ -417,16 +417,6 @@ importers:
       worker-loader: registry.npmmirror.com/worker-loader/3.0.8_webpack@5.70.0
       ws: registry.npmmirror.com/ws/8.5.0
 
-  packages/plugin-vue:
-    specifiers:
-      '@fe6/biu': workspace:*
-      '@fe6/biu-deps': workspace:*
-      '@fe6/biu-deps-babel': workspace:*
-    dependencies:
-      '@fe6/biu': link:../biu
-      '@fe6/biu-deps': link:../deps
-      '@fe6/biu-deps-babel': link:../deps-babel
-
   packages/utils:
     specifiers:
       '@fe6/biu-deps': workspace:*
