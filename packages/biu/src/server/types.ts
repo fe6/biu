@@ -8,7 +8,7 @@ import { Options as OpenOptions } from '@fe6/biu-deps/compiled/open';
 import {
   Filter as HttpProxyMiddlewareFilter,
   Options as HttpProxyMiddlewareOptions,
-} from '@fe6/biu-deps/compiled/http-proxy-middleware';
+} from '@fe6/biu-deps-webpack/compiled/http-proxy-middleware';
 import { Matcher as AnymatchMatcher } from '@fe6/biu-deps/compiled/anymatch';
 import { Options as ConnectHistoryApiFallbackOptions } from '@fe6/biu-deps-webpack/compiled/connect-history-api-fallback';
 import { WebSocketServer, WebSocket } from '@fe6/biu-deps-webpack/compiled/ws';
