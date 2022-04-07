@@ -1,7 +1,7 @@
 /** @format */
 
-import MiniCssExtractPlugin from '@fe6/biu-deps/compiled/mini-css-extract-plugin';
-import CssMinimizerPlugin from '@fe6/biu-deps/compiled/css-minimizer-webpack-plugin';
+import MiniCssExtractPlugin from '@fe6/biu-deps-webpack/compiled/mini-css-extract-plugin';
+import CssMinimizerPlugin from '@fe6/biu-deps-webpack/compiled/css-minimizer-webpack-plugin';
 import store from '../shared/cache';
 import wpChain from '../shared/wp-chain';
 //
@@ -124,7 +124,9 @@ class WPCss {
     const options = store.config.base ? { publicPath: store.config.base } : {}; //修复css 绝对路径的问题[改进项]
     return this.isStyleLoader
       ? {
-          loader: require.resolve('@fe6/biu-deps/compiled/style-loader'),
+          loader: require.resolve(
+            '@fe6/biu-deps-webpack/compiled/style-loader',
+          ),
           options: {},
         }
       : {
@@ -135,7 +137,7 @@ class WPCss {
   get css() {
     const { localIdentName, isModules } = this;
     return {
-      loader: require.resolve('@fe6/biu-deps/compiled/css-loader'),
+      loader: require.resolve('@fe6/biu-deps-webpack/compiled/css-loader'),
       options: {
         modules: isModules ? { localIdentName } : isModules,
       },
@@ -144,9 +146,9 @@ class WPCss {
   get sass() {
     const { isDev } = this;
     return {
-      loader: require.resolve('@fe6/biu-deps/compiled/sass-loader'),
+      loader: require.resolve('@fe6/biu-deps-webpack/compiled/sass-loader'),
       options: {
-        implementation: require('@fe6/biu-deps/compiled/sass'),
+        implementation: require('@fe6/biu-deps-webpack/compiled/sass'),
         sourceMap: isDev,
       },
     };
@@ -154,9 +156,11 @@ class WPCss {
   get less() {
     const { isModules } = this;
     return isModules
-      ? { loader: require.resolve('@fe6/biu-deps/compiled/less-loader') }
+      ? {
+          loader: require.resolve('@fe6/biu-deps-webpack/compiled/less-loader'),
+        }
       : {
-          loader: require.resolve('@fe6/biu-deps/compiled/less-loader'),
+          loader: require.resolve('@fe6/biu-deps-webpack/compiled/less-loader'),
           options: {
             lessOptions: { javascriptEnabled: true },
           },
@@ -164,7 +168,7 @@ class WPCss {
   }
   get postcss() {
     return {
-      loader: require.resolve('@fe6/biu-deps/compiled/postcss-loader'),
+      loader: require.resolve('@fe6/biu-deps-webpack/compiled/postcss-loader'),
       options: {
         postcssOptions: {
           hideNothingWarning: true,

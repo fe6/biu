@@ -13,7 +13,7 @@ import open, { App as OpenApp } from '@fe6/biu-deps/compiled/open';
 import fs from '@fe6/biu-deps/compiled/fs-extra';
 import webpackDevMiddleware, {
   Callback as WebpackDevMiddlewareCallback,
-} from '@fe6/biu-deps/compiled/webpack-dev-middleware';
+} from '@fe6/biu-deps-webpack/compiled/webpack-dev-middleware';
 import { Bonjour } from '@fe6/biu-deps/compiled/bonjour-service';
 import {
   MultiCompiler,
@@ -28,8 +28,8 @@ import { RequestHandler } from '@fe6/biu-deps/compiled/http-proxy-middleware';
 import defaultGateway from '@fe6/biu-deps/compiled/default-gateway';
 import connectHistoryApiFallback, {
   Options as ConnectHistoryApiFallbackOptions,
-} from '@fe6/biu-deps/compiled/connect-history-api-fallback';
-import { isString } from '@fe6/biu-deps/compiled/lodash';
+} from '@fe6/biu-deps-webpack/compiled/connect-history-api-fallback';
+import { isString } from '@fe6/biu-deps-webpack/compiled/lodash';
 // @ts-ignore
 import ipaddr from '@fe6/biu-deps/compiled/ipaddr.js';
 import { logger } from '@fe6/biu-utils';
@@ -1105,7 +1105,7 @@ class DevServer {
 
     // compress is placed last and uses unshift so that it will be the first middleware used
     if (this.options.compress) {
-      const compression = require('@fe6/biu-deps/compiled/compression');
+      const compression = require('@fe6/biu-deps-webpack/compiled/compression');
       middlewares.push({ name: 'compression', middleware: compression() });
     }
 

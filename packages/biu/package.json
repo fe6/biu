@@ -32,8 +32,7 @@
     "access": "public"
   },
   "devDependencies": {
-    "@swc/core": "^1.2.160",
-    "webpack": "5.70.0"
+    "@swc/core": "^1.2.160"
   },
   "dependencies": {
     "@fe6/biu-deps": "workspace:*",

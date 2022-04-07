@@ -123,11 +123,8 @@ export type TBiuConfig = {
    * @default false
    */
   useImportMeta?: boolean;
-  /**
-   * 启用 ForkTsChecker or Eslint
-   * @default false
-   */
-  jsCheck?: boolean;
+  // TODO  启用 ForkTsChecker or Eslint
+  // jsCheck?: boolean;
   /**
    * 启动 mini-css-extract-plugin
    * 分离 js里的css

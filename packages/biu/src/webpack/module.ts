@@ -64,7 +64,7 @@ class WPModule {
       .oneOf('workerInline')
       .resourceQuery(/worker/)
       .use('workerLoader')
-      .loader(require.resolve('@fe6/biu-deps/compiled/worker-loader'))
+      .loader(require.resolve('@fe6/biu-deps-webpack/compiled/worker-loader'))
       .options({
         inline: 'no-fallback',
         filename: '[name].[contenthash].worker.js',

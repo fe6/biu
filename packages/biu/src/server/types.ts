@@ -10,8 +10,8 @@ import {
   Options as HttpProxyMiddlewareOptions,
 } from '@fe6/biu-deps/compiled/http-proxy-middleware';
 import { Matcher as AnymatchMatcher } from '@fe6/biu-deps/compiled/anymatch';
-import { Options as ConnectHistoryApiFallbackOptions } from '@fe6/biu-deps/compiled/connect-history-api-fallback';
-import { WebSocketServer, WebSocket } from '@fe6/biu-deps/compiled/ws';
+import { Options as ConnectHistoryApiFallbackOptions } from '@fe6/biu-deps-webpack/compiled/connect-history-api-fallback';
+import { WebSocketServer, WebSocket } from '@fe6/biu-deps-webpack/compiled/ws';
 import {
   ErrorRequestHandler as ExpressErrorRequestHandler,
   RequestHandler as ExpressRequestHandler,
