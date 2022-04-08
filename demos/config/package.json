@@ -1,6 +1,6 @@
 {
-  "name": "vue-simple",
-  "description": "Vue 简单项目",
+  "name": "config",
+  "description": "通过命令参数设置配置文件",
   "scripts": {
     "start": "biu dev --config config/.biurc.js"
   },
