@@ -18,6 +18,8 @@ export type TCmdOptions = { [key: string]: string | number | boolean } & {
    */
   env?: ENUM_ENV;
   analyze?: boolean;
+  // 配置文件
+  config?: string;
   typingsPath?: string;
 };
 
