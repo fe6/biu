@@ -99,6 +99,18 @@ class BiuShare {
       }
       delete mf.shareLib;
     }
+
+    // FIX remote 的时候无法更新数据
+    // FIX [runtime-core.esm-bundler.js:4353] Feature flags __VUE_OPTIONS_API__, __VUE_PROD_DEVTOOLS__ are not explicitly defined. You are running the esm-bundler build of Vue, which expects these compile-time feature flags to be globally injected via the bundler config in order to get better tree-shaking in the production bundle.
+    if (mf && externals.length < 1) {
+      externals.push({
+        module: 'vue',
+        global: 'Vue',
+        entry: 'https://cdn.jsdelivr.net/npm/vue@3.2.31/dist/vue.global.min.js',
+        type: 'js',
+      });
+    }
+
     await Promise.all([
       this.setExternals(externals),
       this.setModuleFederation(mf),

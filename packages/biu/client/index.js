@@ -4,7 +4,6 @@
  * @format
  */
 
-/// <reference types="webpack/module" />
 import clog from '@fe6/biu-utils/clog';
 import stripAnsi from './utils/stripAnsi.js';
 import parseURL from './utils/parseURL.js';
@@ -179,7 +178,8 @@ var onSocketMessage = {
         ' from static directory was changed. Reloading...',
       ),
     );
-    self.location.reload();
+    console.log('reload 12222');
+    // self.location.reload();
   },
 
   /**
@@ -192,7 +192,8 @@ var onSocketMessage = {
         ' from static directory was changed. Reloading...',
       ),
     );
-    self.location.reload();
+    console.log('reload 12');
+    // self.location.reload();
   },
 
   /**
