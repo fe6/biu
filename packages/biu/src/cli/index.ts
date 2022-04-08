@@ -27,6 +27,7 @@ export const run = () => {
     .command('dev')
     .description('Dev 模式')
     .option('-e, --env <env>', '部署环境 dev、test、prod')
+    .option('-c, --config <config>', '设置配置文件')
     // .argument('[seconds]', 'how long to delay', '1')
     .action(async (options) => {
       logger.ready(options);

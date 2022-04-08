@@ -17,6 +17,9 @@ class BiuCache {
     version: '0.0.0',
     name: '',
   };
+
+  // 命令的参数集合
+  public cmdOpts: TCmdOptions = {};
   /**
    * biu 内部根路径
    * @default path.resolve(__dirname, '../../')
@@ -122,6 +125,8 @@ class BiuCache {
   }
 
   async setup(mode: ENUM_ENV, cmdOptions: TCmdOptions) {
+    // 存储命令参数
+    this.cmdOpts = cmdOptions;
     // 项目 package.json
     const pkg = require(this.getProjectResolve('package.json'));
     this.pkg = { ...this.pkg, ...pkg };

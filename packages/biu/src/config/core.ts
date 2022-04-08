@@ -28,7 +28,10 @@ export class Config {
     this.setConfig(opts.mode, opts.cmdOptions);
   }
 
-  static getMainConfigFile(opts: { cwd: string }): string {
+  static getMainConfigFile(opts: IOpts): string {
+    if (opts.cmdOptions.config) {
+      return join(opts.cwd, opts.cmdOptions.config);
+    }
     let mainConfigFile = '';
     for (const configFile of DEFAULT_CONFIG_FILES) {
       const absConfigFile = join(opts.cwd, configFile);
