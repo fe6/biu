@@ -10,19 +10,23 @@
     />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <title><%= htmlWebpackPlugin.options.title %></title>
+    <% if (htmlWebpackPlugin.options.urlFavicon) { %>
     <!-- BIU inject urlFavicon -->
     <link rel="icon" href="<%= htmlWebpackPlugin.options.urlFavicon %>" />
+    <% } %> <% if (htmlWebpackPlugin.options.files.css &&
+    htmlWebpackPlugin.options.files.css.length > 0) { %>
     <!-- BIU inject css -->
     <% for (let i in htmlWebpackPlugin.options.files.css) { %>
     <link
       rel="stylesheet"
       href="<%= htmlWebpackPlugin.options.files.css[i] %>"
     />
-    <% } %>
+    <% } %> <% } %> <% if (htmlWebpackPlugin.options.files.js &&
+    htmlWebpackPlugin.options.files.js.length > 0) { %>
     <!-- BIU inject js -->
     <% for (let i in htmlWebpackPlugin.options.files.js) { %>
     <script src="<%= htmlWebpackPlugin.options.files.js[i] %>"></script>
-    <% } %>
+    <% } %> <% } %>
   </head>
 
   <body>
