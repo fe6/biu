@@ -37,7 +37,8 @@ function reloadApp(_ref, status) {
   function applyReload(rootWindow, intervalId) {
     clearInterval(intervalId);
     clog.info('App updated. Reloading...');
-    rootWindow.location.reload();
+    console.log('reload 32');
+    // rootWindow.location.reload();
   }
 
   var search = self.location.search.toLowerCase();

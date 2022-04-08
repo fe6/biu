@@ -53,6 +53,7 @@
     "default-gateway": "6.0.3",
     "del": "6.0.0",
     "dotenv-webpack": "7.1.0",
+    "es-module-lexer": "0.10.5",
     "esbuild": "0.14.27",
     "events": "3.3.0",
     "express": "4.17.3",
@@ -126,7 +127,8 @@
       "bufferutil",
       "utf-8-validate",
       "sockjs-client",
-      "node-fetch"
+      "node-fetch",
+      "es-module-lexer"
     ],
     "externals": {
       "commander": "$$LOCAL",
@@ -134,6 +136,7 @@
       "fs-extra": "$$LOCAL",
       "cross-spawn": "$$LOCAL",
       "yargs-parser": "$$LOCAL",
+      "es-module-lexer": "$$LOCAL",
       "esbuild": "$$LOCAL",
       "pirates": "$$LOCAL",
       "fast-glob": "$$LOCAL",

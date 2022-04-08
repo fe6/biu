@@ -20,7 +20,8 @@ if (module.hot) {
         if (!updatedModules) {
           log.warnHmr('Cannot find update. Need to do a full reload!');
           log.warnHmr('Probably because of restarting the BIU');
-          window.location.reload();
+          console.log('reload 1');
+          // window.location.reload();
           return;
         }
 
@@ -39,7 +40,9 @@ if (module.hot) {
         if (['abort', 'fail'].indexOf(status) >= 0) {
           log.errorHmr('Cannot apply update. Need to do a full reload!');
           log.errorHmr('' + err);
-          window.location.reload();
+          console.log('reload 2');
+
+          // window.location.reload();
         } else {
           log.errorHmr('Update failed: ' + err);
         }
