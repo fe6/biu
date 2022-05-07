@@ -171,6 +171,22 @@ Object.keys(exported).forEach(function (key) {
         );
       }
 
+      // dotenv 复制 dts
+      if (opts.pkgName === 'dotenv') {
+        fs.copyFileSync(
+          path.join(nodeModulesPath, opts.pkgName, 'lib', 'main.d.ts'),
+          path.join(target, 'index.d.ts'),
+        );
+      }
+
+      // dotenv-expand 复制 dts
+      if (opts.pkgName === 'dotenv-expand') {
+        fs.copyFileSync(
+          path.join(nodeModulesPath, opts.pkgName, 'lib', 'main.d.ts'),
+          path.join(target, 'index.d.ts'),
+        );
+      }
+
       // patch
       if (opts.pkgName === 'mini-css-extract-plugin') {
         fs.copySync(

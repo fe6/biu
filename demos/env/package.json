@@ -1,0 +1,13 @@
+{
+  "name": "env",
+  "description": "环境变量",
+  "scripts": {
+    "start": "biu dev -e dev"
+  },
+  "dependencies": {
+    "vue": "^3.2.31"
+  },
+  "devDependencies": {
+    "@fe6/biu": "workspace:*"
+  }
+}

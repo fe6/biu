@@ -51,7 +51,7 @@ class WPCommon {
     }
     return {
       name: `${store.pkg.name || 'emp'}-${store.config.mode}-${
-        store.config.env || 'local'
+        store.cmdOpts.env || 'local'
       }-${store.pkg.version}`,
       type: 'filesystem',
       cacheDirectory: store.cacheDir,
@@ -84,7 +84,7 @@ class WPCommon {
           // module: true,
           // dynamicImport: true,
         };
-    const publicPath = store.config.base || '';
+    // const publicPath = store.config.base || '';
     // const clean = true
     const clean = {
       keep(asset: string) {
