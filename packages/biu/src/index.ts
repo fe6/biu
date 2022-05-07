@@ -7,5 +7,6 @@ export {
   IConfigEnv,
   TConfig,
 } from './config/types';
+export { TMode } from './types';
 export { TConfigPluginOptions } from './config/types';
 export { default as biuStore } from './shared/cache';

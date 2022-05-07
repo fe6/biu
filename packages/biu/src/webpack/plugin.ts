@@ -1,72 +1,74 @@
 /** @format */
 
-// import path from 'path';
 import webpack from '@fe6/biu-deps-webpack/compiled/webpack';
-// import Dotenv from '@fe6/biu-deps/compiled/dotenv-webpack';
+import dotenv from '@fe6/biu-deps-webpack/compiled/dotenv';
+import { expand as dotenvExpand } from '@fe6/biu-deps-webpack/compiled/dotenv-expand';
 import fs from '@fe6/biu-deps/compiled/fs-extra';
 import { logger } from '@fe6/biu-utils';
 import wpChain from '../shared/wp-chain';
 import store from '../shared/cache';
-import { TMode } from '../types';
 // 多线程 dts
 import DTSPlugin from '../dts';
 
 class WPPlugin {
   isDev = true;
   constructor() {}
-  // private get dotenv() {
-  //   const env = store.config.env || store.config.mode;
-  //   const options = {
-  //     path: store.resolve(`.env${env ? '.' + env : ''}`),
-  //     // path: './some.other.env', // load this now instead of the ones in '.env'
-  //     safe: true, // load '.env.example' to verify the '.env' variables are all set. Can also be a string to a different file.
-  //     allowEmptyValues: true, // allow empty variables (e.g. `FOO=`) (treat it as empty string, rather than missing)
-  //     systemvars: true, // load all the predefined 'process.env' variables which will trump anything local per dotenv specs.
-  //     silent: true, // hide any errors
-  //     defaults: false, // load '.env.defaults' as the default values if empty.
-  //   };
-  //   return {
-  //     plugin: Dotenv,
-  //     args: [options],
-  //   };
-  // }
-  private get define() {
-    type optionsType = { [key: string]: string | number | boolean | TMode };
-    // 合并 mode env 参数
-    let dlist: optionsType = {
-      mode: store.config.mode,
-      env: store.config.env || '',
-    };
-    // 合并 store.config.define
-    if (store.config.define) {
-      dlist = { ...dlist, ...store.config.define };
-    }
-    //
-    const options: optionsType = {};
-    Object.keys(dlist).map((key) => {
-      if (store.isESM && store.config.useImportMeta) {
-        options[`import.meta.env.${key}`] = JSON.stringify(dlist[key]);
-      } else {
-        options[`process.env.${key}`] = JSON.stringify(dlist[key]);
+  getDefines() {
+    const env = store.cmdOpts.env || store.config.mode || '';
+
+    const envFiles = [
+      /** mode local file */ `.env.${env}.local`,
+      /** mode file */ `.env.${env}`,
+      /** local file */ `.env.local`,
+      /** default file */ `.env`,
+    ];
+
+    let theNowEnv: any = {};
+
+    for (const file of envFiles) {
+      const theEnvFile = store.resolve(file);
+      const hasEnv = fs.existsSync(theEnvFile);
+      if (hasEnv) {
+        const parsed = dotenv.parse(fs.readFileSync(theEnvFile, 'utf-8'));
+        dotenvExpand({
+          parsed,
+          ignoreProcessEnv: true,
+        } as any);
+
+        for (const [key, value] of Object.entries(parsed)) {
+          if (
+            store.config.envPrefix.some((prefix: string) =>
+              key.startsWith(prefix),
+            ) &&
+            theNowEnv[key] === undefined
+          ) {
+            theNowEnv[key] = value;
+          }
+        }
       }
-    });
-    // return defines
-    return {
-      plugin: webpack.DefinePlugin,
-      args: [options],
-    };
+    }
+    if (store.config.define) {
+      theNowEnv = { ...theNowEnv, ...store.config.define };
+    }
+    return theNowEnv;
   }
   //
   async setup() {
     const isDev = store.config.mode === 'development';
     this.isDev = isDev;
-    const { define } = this; //, dotenv
     const config: any = {
       plugin: {
-        define,
-        // dotenv,
+        define: {
+          plugin: webpack.DefinePlugin,
+          args: [
+            {
+              'process.env': JSON.stringify(this.getDefines()),
+            },
+          ],
+        },
       },
     };
+
     if (Object.keys(store.biuShare.moduleFederation).length > 0) {
       config.plugin.mf = {
         plugin: webpack.container.ModuleFederationPlugin,

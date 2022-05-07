@@ -5,7 +5,6 @@ import {
   ENUM_ENV,
   TOverride,
   TEntries,
-  TMode,
   TConfigDebug,
   TConfigResolve,
 } from '../types';
@@ -20,7 +19,7 @@ import { TWebpackChain } from './options/chain';
 
 export interface IConfigEnv {
   mode: ENUM_ENV;
-  env?: TMode;
+  env?: string;
   [key: string]: any;
 }
 
@@ -168,6 +167,7 @@ export type TConfig = TOverride<
     webpackChain?: TWebpackChain;
     reactRuntime?: 'automatic' | 'classic';
     base?: string;
+    envPrefix: string[];
     html: IHtmlOptions;
     entries?: TEntries;
     debug: TConfigDebug;
