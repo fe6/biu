@@ -8,7 +8,6 @@ export default defineComponent({
     const theAdd = () => {
       theValue.value++;
     };
-
     return {
       theValue,
       theAdd,

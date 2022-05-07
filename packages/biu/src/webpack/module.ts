@@ -3,8 +3,7 @@
 import path from 'path';
 import { reactRefreshWebpack } from '@fe6/biu-deps';
 import { vueLoader } from '@fe6/biu-deps-webpack';
-// TODO esbuild
-// import esbuild from 'esbuild';
+import esbuild from 'esbuild';
 import wpChain from '../shared/wp-chain';
 import store from '../shared/cache';
 
@@ -21,6 +20,18 @@ class WPModule {
     this.setVue();
   }
   private setConfig() {
+    const theParser: any = {};
+    if (store.projectLibName === 'vue') {
+      theParser.esbuild = {
+        loader: store.biuResolve(
+          path.resolve(store.biuSource, 'webpack/loader/esbuild'),
+        ),
+        options: {
+          target: 'esnext',
+          implementation: esbuild,
+        },
+      };
+    }
     const config = {
       module: {
         // mini-css-extract-plugin 编译不过！
@@ -39,11 +50,10 @@ class WPModule {
           },
           //
           scripts: {
-            test: /\.(js|jsx|ts|tsx)$/,
-            exclude: /(packages\/biu|packages\/deps)/, //不能加 exclude 否则会专程 arrow
+            test: /\.(js|ts)$/,
+            exclude: /(packages)/, //不能加 exclude 否则会专程 arrow
             // exclude: store.config.moduleTransformExclude,
             use: {
-              // TODO esbuild
               // vue: {
               //   loader: require.resolve('@fe6/biu-deps-webpack/compiled/vue-loader'),
               // },
@@ -53,19 +63,14 @@ class WPModule {
                 ),
                 options: store.config.build,
               },
-              // TODO esbuild
-              // esbuild: {
-              //   loader: store.biuResolve(
-              //     path.resolve(store.biuSource, 'webpack/loader/esbuild'),
-              //   ),
-              //   // options: store.config.build,
-              //   options: {
-              //     handler: [
-              //     ],
-              //     target: 'esnext',
-              //     implementation: esbuild
-              //   }
-              // },
+            },
+          },
+          sx: {
+            test: /\.(jsx|tsx)$/,
+            exclude: /(packages)/, //不能加 exclude 否则会专程 arrow
+            // exclude: store.config.moduleTransformExclude,
+            use: {
+              ...theParser,
             },
           },
           // webworker: this.webworker,
