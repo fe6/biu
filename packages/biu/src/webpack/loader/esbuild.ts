@@ -20,7 +20,6 @@ async function esbuildTranspiler(
 
   const filePath = this.resourcePath;
   const ext = extname(filePath).slice(1) as EsbuildLoader;
-  console.log(extname(filePath), filePath, ext, 'ext=====');
 
   const transformOptions = {
     ...otherOptions,
@@ -28,10 +27,19 @@ async function esbuildTranspiler(
     loader: ext ?? 'js',
     sourcemap: this.sourceMap,
     sourcefile: filePath,
+    jsxFactory: 'h',
+    jsxFragment: 'Fragment',
   };
 
   try {
     let { code, map } = await transform(source, transformOptions);
+
+    if (ext === 'tsx' || ext === 'jsx') {
+      code = `import { h } from 'vue';\n${code}`.replace(
+        /\/\* \@__PURE__ \*\//,
+        '',
+      );
+    }
 
     if (handler.length) {
       await init;

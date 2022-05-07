@@ -8,3 +8,6 @@ export const moneyFormat = (money: number) => {
 
 import VueBaseCompButton from '../components/CompButton.vue';
 export { VueBaseCompButton };
+
+import VueBaseTsxBtn from '../components/the-btn';
+export { VueBaseTsxBtn };

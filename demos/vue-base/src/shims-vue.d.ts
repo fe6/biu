@@ -15,3 +15,8 @@ declare module '*.svg' {
   const content: VueConstructor<Vue>;
   export default content;
 }
+
+declare module '*.less' {
+  const classes: { readonly [key: string]: string };
+  export default classes;
+}
