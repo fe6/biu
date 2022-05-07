@@ -7,14 +7,16 @@ import { TMFOptions } from '../../types/module-federation';
 import { TBiuShare } from '../../types/biu-share';
 import { TExternalsItem } from '../../types/externals';
 //
-const exp = /^([0-9a-zA-Z_\s]+)@(.*)/; // 匹配库内容如 React@http://
+const eBiuNameUrl = /^([0-9a-zA-Z_\s]+)@(.*)/; // 匹配库内容如 React@http://
 //
 class BiuShare {
   moduleFederation: TMFOptions = {};
   externals: Configuration['externals'] | any = {};
   externalAssets: TExternalAssets = { js: [], css: [] };
   biuShare: TBiuShare = {};
+
   constructor() {}
+
   async setup() {
     if (store.config.biuShare) {
       if (!store.isESM) await this.setBiuShare();
@@ -25,6 +27,16 @@ class BiuShare {
       await Promise.all([this.setExternals(), this.setModuleFederation()]);
     }
   }
+
+  private getExternalVue() {
+    return {
+      module: 'vue',
+      global: 'Vue',
+      entry: 'https://cdn.jsdelivr.net/npm/vue@3.2.31/dist/vue.global.min.js',
+      type: 'js',
+    };
+  }
+
   private async setESMBiushare() {
     let mf: TBiuShare = {};
     if (typeof store.config.biuShare === 'function') {
@@ -53,7 +65,7 @@ class BiuShare {
         //增加下划线 支持lodash 等特殊符号的问题 如 _@http
 
         if (typeof v === 'string') {
-          const cb: any = v.match(exp) || [];
+          const cb: any = v.match(eBiuNameUrl) || [];
           if (cb.length > 0) {
             externalsItem.global = cb[1];
             externalsItem.entry = cb[2];
@@ -75,7 +87,7 @@ class BiuShare {
               externalsItem.entry = vo;
               externalsItem.type = 'css';
             } else {
-              const cb: any = vo.match(exp) || [];
+              const cb: any = vo.match(eBiuNameUrl) || [];
               if (cb.length > 0) {
                 externalsItem.global = cb[1];
                 externalsItem.entry = cb[2];
@@ -100,15 +112,9 @@ class BiuShare {
       delete mf.shareLib;
     }
 
-    // FIX remote 的时候无法更新数据
-    // FIX [runtime-core.esm-bundler.js:4353] Feature flags __VUE_OPTIONS_API__, __VUE_PROD_DEVTOOLS__ are not explicitly defined. You are running the esm-bundler build of Vue, which expects these compile-time feature flags to be globally injected via the bundler config in order to get better tree-shaking in the production bundle.
-    if (mf && externals.length < 1) {
-      externals.push({
-        module: 'vue',
-        global: 'Vue',
-        entry: 'https://cdn.jsdelivr.net/npm/vue@3.2.31/dist/vue.global.min.js',
-        type: 'js',
-      });
+    // FIX No.1
+    if (store.projectLibName === 'vue' && mf && externals.length < 1) {
+      externals.push(this.getExternalVue());
     }
 
     await Promise.all([
@@ -131,6 +137,10 @@ class BiuShare {
         list = externalsOpt;
       }
       list = list.concat(externals);
+      // FIX No.1
+      if (store.projectLibName === 'vue' && list.length < 1) {
+        list.push(this.getExternalVue());
+      }
       list.map((v) => {
         v.type = v.type || 'js';
         if (v.type === 'js' && v.module) {
@@ -170,8 +180,8 @@ class BiuShare {
           for (const [k, v] of Object.entries(remotes)) {
             if (typeof v === 'string') {
               // TODO logger
-              console.log('v.match(exp)', v.match(exp), v);
-              const cb: any = v.match(exp) || [];
+              console.log('v.match(eBiuNameUrl)', v.match(eBiuNameUrl), v);
+              const cb: any = v.match(eBiuNameUrl) || [];
               if (cb.length > 0) {
                 remotes[k] = cb[2];
               }
