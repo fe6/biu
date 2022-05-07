@@ -71,10 +71,6 @@ export type TBiuConfig = {
    */
   mode?: ENUM_ENV;
   /**
-   * 通过命令行指令 `--env` 赋值
-   */
-  env?: IConfigEnv['env'];
-  /**
    * 全局环境替换
    */
   define?: Record<string, any>;
@@ -175,7 +171,6 @@ export type TConfig = TOverride<
     html: IHtmlOptions;
     entries?: TEntries;
     debug: TConfigDebug;
-    env?: IConfigEnv['env'];
     mode: ENUM_ENV;
     dtsPath: { [key: string]: string };
     moduleTransform: IModuleTransform;
