@@ -147,6 +147,17 @@ importers:
     devDependencies:
       '@fe6/biu': link:../../packages/biu
 
+  demos/multi-entries:
+    specifiers:
+      '@fe6/biu': workspace:*
+      '@types/node': ^17.0.21
+      vue: ^3.2.33
+    dependencies:
+      vue: registry.npmmirror.com/vue/3.2.33
+    devDependencies:
+      '@fe6/biu': link:../../packages/biu
+      '@types/node': registry.npmmirror.com/@types/node/17.0.21
+
   demos/vue-base:
     specifiers:
       '@fe6/biu': workspace:*
