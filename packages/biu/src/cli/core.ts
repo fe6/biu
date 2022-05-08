@@ -1,6 +1,6 @@
 /** @format */
 
-import { ENUM_ENV, TCmdOptions } from '../types';
+import { TMode, TCmdOptions } from '../types';
 import biuCache from '../shared/cache';
 import webpackConfig from '../webpack';
 import configPlugins from '../config/options/plugins';
@@ -8,7 +8,7 @@ import configChain from '../config/options/chain';
 
 const biuExec = async (
   name: string,
-  mode: ENUM_ENV,
+  mode: TMode,
   cmdOptions: TCmdOptions,
 ): Promise<void> => {
   // 全局变量配置等初始化 cache & config

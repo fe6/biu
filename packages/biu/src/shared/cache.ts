@@ -2,7 +2,7 @@
 
 import path from 'path';
 import { cloneDeep } from '@fe6/biu-deps-webpack/compiled/lodash';
-import { TCmdOptions, TPkg, ENUM_ENV } from '../types';
+import { TCmdOptions, TPkg, TMode } from '../types';
 import { TConfig, Config } from '../config';
 import BiuShare from '../config/options/biu-share';
 
@@ -124,7 +124,7 @@ class BiuCache {
     }
   }
 
-  async setup(mode: ENUM_ENV, cmdOptions: TCmdOptions) {
+  async setup(mode: TMode, cmdOptions: TCmdOptions) {
     // 存储命令参数
     this.cmdOpts = cmdOptions;
     // 项目 package.json

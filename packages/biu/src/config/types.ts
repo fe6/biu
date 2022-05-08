@@ -2,11 +2,11 @@
 
 import { RuleSetRule as WebpackRuleSetRule } from '@fe6/biu-deps-webpack/compiled/webpack';
 import {
-  ENUM_ENV,
   TOverride,
   TEntries,
   TConfigDebug,
   TConfigResolve,
+  TMode,
 } from '../types';
 import { TBiuShareExport } from '../types/biu-share';
 import { WPChain } from '../shared/wp-chain';
@@ -18,7 +18,7 @@ import { IHtmlOptions } from './options/html';
 import { TWebpackChain } from './options/chain';
 
 export interface IConfigEnv {
-  mode: ENUM_ENV;
+  mode: TMode;
   env?: string;
   [key: string]: any;
 }
@@ -68,7 +68,7 @@ export type TBiuConfig = {
    * 构建模式为 production
    * 正式环境为 none
    */
-  mode?: ENUM_ENV;
+  mode?: TMode;
   /**
    * 全局环境替换
    */
@@ -174,7 +174,7 @@ export type TConfig = TOverride<
     html: IHtmlOptions;
     entries?: TEntries;
     debug: TConfigDebug;
-    mode: ENUM_ENV;
+    mode: TMode;
     dtsPath: { [key: string]: string };
     moduleTransform: IModuleTransform;
     moduleTransformExclude: WebpackRuleSetRule['exclude'];
