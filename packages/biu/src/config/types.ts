@@ -170,7 +170,7 @@ export type TConfig = TOverride<
     // 环境变量前缀，只有带前缀的才会返回来供项目使用
     envPrefix: string[];
     // 环境变量的文件夹
-    envDir: string;
+    envDir: string[] | ((env: string) => string)[];
     html: IHtmlOptions;
     entries?: TEntries;
     debug: TConfigDebug;
