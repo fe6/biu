@@ -1,0 +1,34 @@
+<!-- @format -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0"
+    />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title><%= htmlWebpackPlugin.options.title %></title>
+    <link
+      href="https://axhub.im/ax9files/resources/images/favicon_play.ico"
+      rel="shortcut icon"
+    />
+    <!-- EMP inject css -->
+    <% for (let i in htmlWebpackPlugin.options.files.css) { %>
+    <link
+      rel="stylesheet"
+      href="<%= htmlWebpackPlugin.options.files.css[i] %>"
+    />
+    <% } %>
+    <!-- EMP inject js -->
+    <% for (let i in htmlWebpackPlugin.options.files.js) { %>
+    <script src="<%= htmlWebpackPlugin.options.files.js[i] %>"></script>
+    <% } %>
+  </head>
+
+  <body>
+    <h1>页面存在于 src/two/index.html 的模板页</h1>
+    <div id="two-root"></div>
+  </body>
+</html>

@@ -1,11 +1,11 @@
 {
-  "name": "env",
-  "description": "环境变量",
+  "name": "multi-entries",
+  "description": "多入口",
   "scripts": {
-    "start": "biu dev -e dev"
+    "start": "biu dev"
   },
   "dependencies": {
-    "vue": "^3.2.31"
+    "vue": "^3.2.33"
   },
   "devDependencies": {
     "@fe6/biu": "workspace:*",

@@ -1,5 +1,7 @@
 /** @format */
 
+import fetch from 'node-fetch';
+
 import webpack from '@fe6/biu-deps-webpack/compiled/webpack';
 import dotenv from '@fe6/biu-deps-webpack/compiled/dotenv';
 import { expand as dotenvExpand } from '@fe6/biu-deps-webpack/compiled/dotenv-expand';
@@ -14,55 +16,108 @@ class WPPlugin {
   isDev = true;
   constructor() {}
   getDefines() {
-    const env = store.cmdOpts.env || store.config.mode || '';
+    return new Promise(async (resolve) => {
+      const env = store.cmdOpts.env || store.config.mode || '';
 
-    const envFiles = [
-      /** mode local file */ `.env.${env}.local`,
-      /** mode file */ `.env.${env}`,
-      /** local file */ `.env.local`,
-      /** default file */ `.env`,
-    ];
+      const envFiles = [
+        /** mode local file */ `.env.${env}.local`,
+        /** mode file */ `.env.${env}`,
+        /** local file */ `.env.local`,
+        /** default file */ `.env`,
+      ];
 
-    let theNowEnv: any = {};
+      const theEnvDirLen = store.config.envDir.length;
+      let idx = 0;
 
-    for (const file of envFiles) {
-      const theEnvFile = store.resolve(file);
-      const hasEnv = fs.existsSync(theEnvFile);
-      if (hasEnv) {
-        const parsed = dotenv.parse(fs.readFileSync(theEnvFile, 'utf-8'));
-        dotenvExpand({
-          parsed,
-          ignoreProcessEnv: true,
-        } as any);
+      const theGetEnvValues = async () => {
+        const envOneDir = store.config.envDir[idx];
+        if (typeof envOneDir === 'function') {
+          const theUrl = envOneDir(env);
+          const theUrlList = theUrl.split('.');
 
-        for (const [key, value] of Object.entries(parsed)) {
-          if (
-            store.config.envPrefix.some((prefix: string) =>
-              key.startsWith(prefix),
-            ) &&
-            theNowEnv[key] === undefined
-          ) {
-            theNowEnv[key] = value;
+          if (theUrlList[theUrlList.length - 1] === 'json') {
+            let body = '';
+            try {
+              const response = await fetch(theUrl);
+              body = await response.text();
+
+              if (body.length > 0) {
+                const parsed = JSON.parse(body);
+                dotenvExpand({
+                  parsed,
+                  ignoreProcessEnv: true,
+                } as any);
+
+                for (const [key, value] of Object.entries(parsed)) {
+                  if (
+                    store.config.envPrefix.some((prefix: string) =>
+                      key.startsWith(prefix),
+                    ) &&
+                    theNowEnv[key] === undefined
+                  ) {
+                    theNowEnv[key] = value;
+                  }
+                }
+              }
+            } catch (error) {
+              logger.errorExit(error);
+            }
           }
         }
-      }
-    }
-    if (store.config.define) {
-      theNowEnv = { ...theNowEnv, ...store.config.define };
-    }
-    return theNowEnv;
+        if (typeof envOneDir === 'string') {
+          for (const file of envFiles) {
+            const theEnvFile = store.resolve(`${envOneDir}/${file}`);
+            const hasEnv = fs.existsSync(theEnvFile);
+            if (hasEnv) {
+              const parsed = dotenv.parse(fs.readFileSync(theEnvFile, 'utf-8'));
+              dotenvExpand({
+                parsed,
+                ignoreProcessEnv: true,
+              } as any);
+
+              for (const [key, value] of Object.entries(parsed)) {
+                if (
+                  store.config.envPrefix.some((prefix: string) =>
+                    key.startsWith(prefix),
+                  ) &&
+                  theNowEnv[key] === undefined
+                ) {
+                  theNowEnv[key] = value;
+                }
+              }
+            }
+          }
+        }
+
+        if (store.config.define) {
+          theNowEnv = { ...theNowEnv, ...store.config.define };
+        }
+
+        if (idx < theEnvDirLen - 1) {
+          idx++;
+          await theGetEnvValues();
+        } else {
+          resolve(theNowEnv);
+        }
+      };
+
+      let theNowEnv: any = {};
+      await theGetEnvValues();
+    });
   }
   //
   async setup() {
     const isDev = store.config.mode === 'development';
     this.isDev = isDev;
+    const theEnvDefine = await this.getDefines();
+
     const config: any = {
       plugin: {
         define: {
           plugin: webpack.DefinePlugin,
           args: [
             {
-              'process.env': JSON.stringify(this.getDefines()),
+              'process.env': JSON.stringify(theEnvDefine),
             },
           ],
         },

@@ -4,7 +4,7 @@ import path from 'path';
 import glob from '@fe6/biu-deps/compiled/fast-glob';
 import HtmlWebpackPlugin from '@fe6/biu-deps-webpack/compiled/html-webpack-plugin';
 import fetch from '@fe6/biu-deps/compiled/node-fetch';
-import { isFunction } from '@fe6/biu-deps-webpack/compiled/lodash';
+import { isEmpty, isFunction } from '@fe6/biu-deps-webpack/compiled/lodash';
 import { logger } from '@fe6/biu-utils';
 import wpChain from '../shared/wp-chain';
 import store from '../shared/cache';
@@ -17,17 +17,20 @@ import { IHtmlOptions } from '../config/options/html';
  */
 class WPEntries {
   wpConfig: any = { entry: {}, plugin: {} };
+
   constructor() {}
+
   async setup() {
     // 不允许 template 放到 public
     this.checkTemplateInPublic();
-    //
-    if (store.config.entries) {
+
+    if (store.config.entries && !isEmpty(store.config.entries)) {
       await this.multiEntry(store.config.entries);
     } else {
       await this.singleEntry();
     }
   }
+
   async multiEntry(entries: TEntries = {}) {
     for (const [filename, htmlOptions] of Object.entries(entries)) {
       const entry = store.resolve(`${store.config.appSrc}/${filename}`);
@@ -37,18 +40,18 @@ class WPEntries {
       if (htmlOptions.template) {
         htmlOptions.template = store.resolve(htmlOptions.template);
       }
-      // 屏蔽子页面的favicon 防止重复操作导致报错
-      // TODO 检测是否影响 favicon 图标设置
-      if (htmlOptions.favicon) {
-        // htmlOptions.favicon = store.resolve(htmlOptions.favicon)
-        logger.warn('favicon只支持在 [html] 设置');
-        delete htmlOptions.favicon;
-      }
-      //
+      // // 屏蔽子页面的favicon 防止重复操作导致报错
+      // // TODO 检测是否影响 favicon 图标设置
+      // if (htmlOptions.favicon) {
+      //   // htmlOptions.favicon = store.resolve(htmlOptions.favicon)
+      //   logger.warn('favicon只支持在 [html] 设置');
+      //   delete htmlOptions.favicon;
+      // }
       await this.setHtmlWebpackPlugin([chunk], htmlOptions);
     }
     wpChain.merge(this.wpConfig);
   }
+
   async singleEntry() {
     await this.setIndexEntry();
     for (const chunk in this.wpConfig.entry) {
@@ -56,6 +59,7 @@ class WPEntries {
     }
     wpChain.merge(this.wpConfig);
   }
+
   async setIndexEntry() {
     let entry = '';
     if (!store.config.appEntry) {
@@ -75,6 +79,7 @@ class WPEntries {
       .replace(`${store.config.appSrc}/`, '');
     this.wpConfig.entry[chunk] = [store.resolve(entry)];
   }
+
   private checkTemplateInPublic() {
     const { favicon, template } = store.config.html;
     const faviconAbs = path.dirname(favicon || '');
@@ -89,6 +94,7 @@ class WPEntries {
       );
     }
   }
+
   private async setHtmlWebpackPlugin(
     chunks: string[] = ['index'],
     htmlOptions: IHtmlOptions = {},
@@ -127,6 +133,9 @@ class WPEntries {
         );
       }
     }
+
+    // FIX 多页面会有重复
+    htmlConfig.files.js = [...new Set(htmlConfig.files.js)];
 
     if (htmlConfig.urlTemplate && !htmlOptions.templateContent) {
       try {

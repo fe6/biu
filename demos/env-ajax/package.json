@@ -1,11 +1,11 @@
 {
-  "name": "env",
-  "description": "环境变量",
+  "name": "env-ajax",
+  "description": "请求远程环境路径",
   "scripts": {
     "start": "biu dev -e dev"
   },
   "dependencies": {
-    "vue": "^3.2.31"
+    "vue": "^3.2.33"
   },
   "devDependencies": {
     "@fe6/biu": "workspace:*",
