@@ -167,7 +167,10 @@ export type TConfig = TOverride<
     webpackChain?: TWebpackChain;
     reactRuntime?: 'automatic' | 'classic';
     base?: string;
+    // 环境变量前缀，只有带前缀的才会返回来供项目使用
     envPrefix: string[];
+    // 环境变量的文件夹
+    envDir: string;
     html: IHtmlOptions;
     entries?: TEntries;
     debug: TConfigDebug;

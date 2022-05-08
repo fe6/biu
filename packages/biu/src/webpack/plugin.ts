@@ -26,7 +26,7 @@ class WPPlugin {
     let theNowEnv: any = {};
 
     for (const file of envFiles) {
-      const theEnvFile = store.resolve(file);
+      const theEnvFile = store.resolve(`${store.config.envDir}/${file}`);
       const hasEnv = fs.existsSync(theEnvFile);
       if (hasEnv) {
         const parsed = dotenv.parse(fs.readFileSync(theEnvFile, 'utf-8'));

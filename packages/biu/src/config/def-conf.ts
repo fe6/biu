@@ -53,6 +53,7 @@ export const mergeConfig = (opts: any = {}): TConfig => {
       cacheDir: 'node_modules/.biu-cache',
       build,
       envPrefix: ['BIU_'],
+      envDir: './',
       define: [],
       plugins: [],
       server,
