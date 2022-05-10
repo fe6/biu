@@ -1,6 +1,6 @@
 /** @format */
 
-import fetch from 'node-fetch';
+import fetch from '@fe6/biu-deps/compiled/node-fetch';
 
 import webpack from '@fe6/biu-deps-webpack/compiled/webpack';
 import dotenv from '@fe6/biu-deps-webpack/compiled/dotenv';
