@@ -41,6 +41,14 @@ export const run = () => {
   // TODO 环境测试 biu serve
 
   // TODO 拉取远程类型文件 ( d.ts ) biu dts
+  program
+    .command('dts')
+    .description('拉取 remote 项目的 d.ts')
+    .option('-p, --typingsPath <typingsPath>', '下载目录')
+    .option('-e, --env <env>', '部署环境 dev、test、prod')
+    .action((options) => {
+      biuExec('dts', 'none', options);
+    });
 
   // 执行命令
   program.parse(process.argv);

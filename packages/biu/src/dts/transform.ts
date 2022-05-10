@@ -11,19 +11,17 @@ const globalImportRE =
 const staticImportRE =
   /(?:import|export)\s?(?:type)?\s?\{?.+\}?\s?from\s?['"](.+)['"]/;
 const dynamicImportRE = /import\(['"]([^;\n]+?)['"]\)/;
-// const simpleStaticImportRE = /((?:import|export).+from\s?)['"](.+)['"]/
-// const simpleDynamicImportRE = /(import\()['"](.+)['"]\)/
-export const transformLibName = (name: string, code: string) => {
-  //
-  code = code.replace(
-    `declare module '${store.config.appSrc}'`,
-    `declare module '${name}'`,
-  );
-  // 兼容 不支持 replace all 的情况
-  const reg = new RegExp(`${store.config.appSrc}/`, 'g');
+
+export const transformLibName = (
+  appSrc: string,
+  name: string,
+  code: string,
+) => {
+  code = code.replace(`declare module '${appSrc}'`, `declare module '${name}'`);
+  const reg = new RegExp(`${appSrc}/`, 'g');
   return code.replace(reg, `${name}/`);
-  // return code.replaceAll(`${store.config.appSrc}/`, `${name}/`)
 };
+
 export const transformPathImport = (
   o: ts.OutputFile,
   alias: TConfigResolveAlias,

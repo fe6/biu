@@ -17,7 +17,7 @@ parentPort.on('message', async (payload: any) => {
     dtslist.map((d: any) => {
       dts.emit(d, options.alias, options.typesOutDir);
     });
-    dts.createFile();
+    dts.createFile(options.appSrc);
     parentPort.postMessage('finish');
   }
 });
