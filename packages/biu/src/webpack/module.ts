@@ -3,7 +3,7 @@
 import path from 'path';
 import { reactRefreshWebpack } from '@fe6/biu-deps';
 import { vueLoader } from '@fe6/biu-deps-webpack';
-import esbuild from 'esbuild';
+import esbuild from '@fe6/biu-deps/compiled/esbuild';
 import wpChain from '../shared/wp-chain';
 import store from '../shared/cache';
 
