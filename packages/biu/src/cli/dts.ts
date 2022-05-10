@@ -1,14 +1,17 @@
 /** @format */
 
-import fetch from 'node-fetch';
 import path from 'path';
+import fetch from '@fe6/biu-deps/compiled/node-fetch';
 import fs from '@fe6/biu-deps/compiled/fs-extra';
+import ora from '@fe6/biu-deps/compiled/ora';
+import chalk from '@fe6/biu-deps/compiled/chalk';
 import { logger } from '@fe6/biu-utils';
+
 import store from '../shared/cache';
 import { TYPES_OUT_DIR, TYPES_BIU_NAME } from '../contant';
-// import {createSpinner} from 'nanospinner'
 
-// const spinner = createSpinner().start()
+const spinner = ora();
+
 class Dts {
   /**
    * 创建目录
@@ -37,34 +40,34 @@ class Dts {
   ) {
     try {
       let originData = '';
-      // logger.info(`[download ${fileName}]:${uri}`)
-      // spinner.start({text: `[download ${fileName}]:${uri}\n`})
+
+      spinner.text = `${fileName}\n`;
+
       const res = await fetch(uri);
       originData = await res.text();
 
       if (originData.indexOf('declare') === -1) {
-        // spinner.error({text: `[download ${fileName}]:${uri} not found`})
-        return;
+        spinner.stop();
+        logger.error(`${fileName} 未找到`);
       }
 
-      let newData = '';
+      let newCode = '';
       // 替换 remote 别名
-      console.log(baseName, alias, 'baseName');
       const regSingleQuote = new RegExp(`'${baseName}`, 'g');
       const regDoubleQuote = new RegExp(`"${baseName}`, 'g');
-      newData = originData.replace(regSingleQuote, `'${alias}`);
-      newData = newData.replace(regDoubleQuote, `"${alias}`);
+      newCode = originData.replace(regSingleQuote, `'${alias}`);
+      newCode = newCode.replace(regDoubleQuote, `"${alias}`);
       await fs.ensureDir(filePath);
       const fullPath = path.resolve(filePath, fileName);
       this.mkdir(fullPath);
-      fs.writeFileSync(fullPath, newData, 'utf8');
-      // spinner.success({text: `[download ${fileName}]:${uri} finish`})
-      // process.exit()
+      fs.writeFileSync(fullPath, newCode, 'utf8');
+      spinner.succeed(
+        `${logger.prefixes.ready('success')} ${fileName} 已完成\n`,
+      );
     } catch (error) {
-      // logger.error(error)
-      // spinner.error({text: `[download ${fileName}]:${uri} not found`})
-      // logger.error(`${uri} --> network error`)
-      // process.exit()
+      spinner.stop();
+      logger.error(`${fileName} 未找到。`);
+      logger.warn(`请检查 ${chalk.blue(uri)} 是否能访问！`);
     }
   }
   /**
@@ -72,14 +75,14 @@ class Dts {
    */
   async downloadDts() {
     const remotes = store.biuShare.moduleFederation.remotes;
-    const dtsPath = store.config.ts.dtsPath;
-    console.log(remotes, 'remotes');
     if (remotes) {
       for (const [key, value] of Object.entries(remotes)) {
         if (key && value) {
           const splitIndex = value.indexOf('@');
-          if (splitIndex === -1)
-            throw Error(`[emp dts] invaild remotes url: ${value}`);
+          if (splitIndex === -1) {
+            spinner.stop();
+            logger.error(`无效 remotes 地址: ${value}`);
+          }
           const baseName = value.substr(0, splitIndex);
           let baseUrl = value.substr(splitIndex + 1);
           baseUrl = baseUrl.substr(0, baseUrl.lastIndexOf('/'));
@@ -89,6 +92,7 @@ class Dts {
             typesOutDir || TYPES_OUT_DIR
           ).replace(`${outDir}/`, '')}/${typesBiuName || TYPES_BIU_NAME}`;
           //可以独立设置 dtsPath，默认路径是 typesOutDir
+          const dtsPath = store.config.ts.dtsPath;
           const dtsUrl = dtsPath?.[key] ? dtsPath[key] : defaultDtsUrl;
           await this.downloadFileAsync(
             dtsUrl,
@@ -100,12 +104,15 @@ class Dts {
         }
       }
     } else {
+      spinner.stop();
       logger.error('未找到 remotes 参数配置');
     }
   }
 
   async setup() {
+    spinner.start(`${logger.prefixes.ready()} 开始生成~`);
     await this.downloadDts();
   }
 }
+
 export default new Dts();

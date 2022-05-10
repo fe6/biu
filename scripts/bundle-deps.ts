@@ -218,6 +218,28 @@ Object.keys(exported).forEach(function (key) {
           path.join(target, 'types'),
         );
       }
+
+      if (opts.pkgName === 'ora') {
+        const oraCore = path.join(target, 'index.js');
+        fs.writeFileSync(
+          oraCore,
+          fs
+            .readFileSync(oraCore, 'utf-8')
+            .replace(
+              `require("@fe6/biu-deps/compiled/chalk")`,
+              `require("@fe6/biu-deps/compiled/chalk").default`,
+            )
+            .replace(
+              `require("@fe6/biu-deps/compiled/strip-ansi")`,
+              `require("@fe6/biu-deps/compiled/strip-ansi").default`,
+            ),
+          'utf-8',
+        );
+        fs.copyFileSync(
+          path.join(nodeModulesPath, opts.pkgName, 'index.d.ts'),
+          path.join(target, 'index.d.ts'),
+        );
+      }
     }
   }
 
