@@ -3,7 +3,7 @@
   "include": ["components.d.ts", "src"],
   "exclude": ["node_modules"],
   "compilerOptions": {
-    "types": ["@efox/emp/client"],
+    "types": ["@fe6/biu/app"],
     "baseUrl": "."
   }
 }
