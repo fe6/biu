@@ -1,9 +1,9 @@
 /** @format */
 
 import path from 'path';
+import esbuild from 'esbuild';
 import { reactRefreshWebpack } from '@fe6/biu-deps';
 import { vueLoader } from '@fe6/biu-deps-webpack';
-import esbuild from '@fe6/biu-deps/compiled/esbuild';
 import wpChain from '../shared/wp-chain';
 import store from '../shared/cache';
 
