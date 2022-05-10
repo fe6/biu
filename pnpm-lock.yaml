@@ -192,7 +192,6 @@ importers:
       '@fe6/biu-utils': workspace:*
       '@swc/core': ^1.2.164
       esbuild: 0.14.34
-      events: 3.3.0
       sockjs-client: 1.6.0
     dependencies:
       '@fe6/biu-deps': link:../deps
@@ -200,7 +199,6 @@ importers:
       '@fe6/biu-utils': link:../utils
       '@swc/core': registry.npmmirror.com/@swc/core/1.2.164
       esbuild: registry.npmmirror.com/esbuild/0.14.34
-      events: registry.npmmirror.com/events/3.3.0
       sockjs-client: registry.npmmirror.com/sockjs-client/1.6.0
 
   packages/deps:
@@ -6675,6 +6673,7 @@ packages:
     name: events
     version: 3.3.0
     engines: {node: '>=0.8.x'}
+    dev: true
 
   registry.npmmirror.com/eventsource/1.1.0:
     resolution: {integrity: sha512-VSJjT5oCNrFvCS6igjzPAt5hBzQ2qPBFIbJ03zLI9SE0mxwZpMw6BfJrbFHm1a141AavMEB8JHmBhWAd66PfCg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/eventsource/-/eventsource-1.1.0.tgz}
