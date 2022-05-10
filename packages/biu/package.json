@@ -10,6 +10,7 @@
     "client",
     "hot",
     "template",
+    "app.d.ts",
     "biu-tsconfig.json"
   ],
   "bin": "./bin/biu.js",

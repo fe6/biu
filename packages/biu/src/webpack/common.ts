@@ -5,6 +5,7 @@ import fs from '@fe6/biu-deps/compiled/fs-extra';
 import { Configuration } from '@fe6/biu-deps-webpack/compiled/webpack';
 import store from '../shared/cache';
 import wpChain from '../shared/wp-chain';
+import { TYPES_OUT_DIR } from '../contant';
 
 class WPCommon {
   isDev = true;
@@ -88,20 +89,12 @@ class WPCommon {
     // const clean = true
     const clean = {
       keep(asset: string) {
-        const typesOutDir = store.config.build.typesOutDir.replace(
-          `${store.config.build.outDir}/`,
-          '',
-        );
-        // logger.debug('typesOutDir', typesOutDir)
+        const typesOutDir = (
+          store.config.ts.typesOutDir || TYPES_OUT_DIR
+        ).replace(`${store.config.build.outDir}/`, '');
         return asset.includes(typesOutDir);
       },
     };
-    /* const clean =
-      store.config.build.emptyOutDir && !this.isDev
-        ? {
-            keep: new RegExp(`${store.config.build.typesOutDir}\/`), // Keep these assets under 'ignored/dir'.
-          }
-        : false */
 
     const staticDir = store.config.build.staticDir
       ? `${store.config.build.staticDir}/`

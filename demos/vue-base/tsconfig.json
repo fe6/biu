@@ -1,5 +1,9 @@
 {
   "extends": "@fe6/biu/biu-tsconfig.json",
   "include": ["components.d.ts", "src"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
+  "compilerOptions": {
+    "types": ["@efox/emp/client"],
+    "baseUrl": "."
+  }
 }

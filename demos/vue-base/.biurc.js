@@ -8,6 +8,9 @@ module.exports = defineConfig(() => {
       port: 1900,
     },
     build: { target: 'es5' },
+    ts: {
+      dts: true,
+    },
     biuShare: {
       name: 'vueBase',
       exposes: {

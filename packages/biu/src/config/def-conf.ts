@@ -4,6 +4,7 @@ import path from 'path';
 import { RuleSetRule as WebpackRuleSetRule } from '@fe6/biu-deps-webpack/compiled/webpack';
 import { TConfigDebug } from '../types';
 import { initBuild } from './options/build';
+import { initTs } from './options/ts';
 import { initServer } from './options/server';
 import { initHtml } from './options/html';
 
@@ -20,8 +21,8 @@ export const mergeConfig = (opts: any = {}): TConfig => {
   const html = initHtml(opts.html);
   delete opts.html;
 
-  const dtsPath = opts.dtsPath ?? [];
-  delete opts.dtsPath;
+  const ts = initTs(opts.ts);
+  delete opts.ts;
 
   const debug: TConfigDebug = {
     clearLog: true,
@@ -65,7 +66,7 @@ export const mergeConfig = (opts: any = {}): TConfig => {
       // TODO  启用 ForkTsChecker or Eslint
       // jsCheck: true,
       typingsPath: path.resolve('src', 'biuShareTypes'),
-      dtsPath,
+      ts,
       moduleTransformExclude,
     },
     ...opts,
