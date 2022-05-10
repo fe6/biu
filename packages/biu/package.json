@@ -36,8 +36,7 @@
     "@fe6/biu-deps": "workspace:*",
     "@fe6/biu-deps-webpack": "workspace:*",
     "@fe6/biu-utils": "workspace:*",
-    "@swc/core": "^1.2.164",
-    "sockjs-client": "1.6.0"
+    "@swc/core": "^1.2.164"
   },
   "pnpm": {
     "peerDependencyRules": {
