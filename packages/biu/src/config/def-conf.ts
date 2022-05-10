@@ -65,7 +65,7 @@ export const mergeConfig = (opts: any = {}): TConfig => {
       appEntry: '',
       // TODO  启用 ForkTsChecker or Eslint
       // jsCheck: true,
-      typingsPath: path.resolve('src', 'biuShareTypes'),
+      typingsPath: path.resolve('src', 'biu-share-types'),
       ts,
       moduleTransformExclude,
     },

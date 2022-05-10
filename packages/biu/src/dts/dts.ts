@@ -78,7 +78,7 @@ class DTSEmitFile {
       logger.warn(filename, e);
     }
   }
-  createFile() {
+  createFile(appSrc: string) {
     fs.ensureDirSync(this.outDir);
 
     // TODO Lib
@@ -92,7 +92,9 @@ class DTSEmitFile {
     if (this.mf?.exposes) {
       const biuModName = this.mf.name || '';
       let biuCode = this.lib.code;
-      biuCode = transformLibName(biuModName, biuCode);
+      biuCode = transformLibName(appSrc, biuModName, biuCode);
+      const theExposes = new RegExp(`${biuModName}/exposes`, 'g');
+      biuCode = biuCode.replace(theExposes, biuModName);
       this.biuFilename = path.resolve(this.outDir, this.typesBiuName);
       fs.writeFileSync(this.biuFilename, biuCode, 'utf8');
     }
