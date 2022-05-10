@@ -39,7 +39,6 @@
     "@swc/core": "^1.2.164",
     "esbuild": "0.14.34",
     "events": "3.3.0",
-    "node-fetch": "2",
     "sockjs-client": "1.6.0"
   },
   "pnpm": {
