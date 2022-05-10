@@ -13,7 +13,7 @@ parentPort.on('message', async (payload: any) => {
     const dts = new DTSEmitFile();
     dts.setup(options);
     logger.warn('DTS build');
-    const dtslist = await glob([`${store.config.appSrc}/**/*.(ts|tsx)`]);
+    const dtslist = await glob([`${options.appSrc}/**/*.(ts|tsx)`]);
     dtslist.map((d: any) => {
       dts.emit(d, options.alias, options.typesOutDir);
     });

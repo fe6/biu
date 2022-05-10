@@ -14,3 +14,6 @@ export const SHORT_ENV = {
   test: 'test',
 };
 export const LOCAL_EXT = '.local';
+
+export const TYPES_OUT_DIR = 'dist/biu-share-types';
+export const TYPES_BIU_NAME = 'index.d.ts';

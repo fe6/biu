@@ -71,16 +71,16 @@ export type TBuildOptions = {
    * @default false
    */
   analyze?: boolean;
-  /**
-   * typesOutDir 类型生成目录
-   * @default dist/empShareTypes
-   */
-  typesOutDir?: string;
+  // /**
+  //  * typesOutDir 类型生成目录
+  //  * @default dist/empShareTypes
+  //  */
+  // typesOutDir?: string;
   /**
    * typesBiuName empShare d.ts 入口 [index.d.ts]
    * @default index
    */
-  typesBiuName?: string;
+  // typesBiuName?: string;
   // /**
   //  * typesLibName project d.ts 入口 [lib.d.ts]
   //  * @default lib
@@ -90,7 +90,7 @@ export type TBuildOptions = {
    * createTs
    * @default false
    */
-  createTs?: boolean;
+  // createTs?: boolean;
   /**
    * 支持在 js 中使用 jsx
    * @default false
@@ -112,9 +112,9 @@ export const initBuild = (op?: TBuildOptions): TRquireBuildOptions => {
       sync: false,
       target: 'es5',
       outDir: 'dist',
-      typesOutDir: 'dist/empShareTypes',
+      // typesOutDir: 'dist/empShareTypes',
       // typesLibName: 'lib.d.ts',
-      typesBiuName: 'index.d.ts',
+      // typesBiuName: 'index.d.ts',
       assetsDir: 'assets',
       staticDir: '',
       minify: true,
@@ -126,7 +126,7 @@ export const initBuild = (op?: TBuildOptions): TRquireBuildOptions => {
       emptyOutDir: true,
       chunkIds: false,
       analyze: false,
-      createTs: false,
+      // createTs: false,
       jsToJsx: false,
     },
     ...op,

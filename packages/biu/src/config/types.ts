@@ -13,6 +13,7 @@ import { WPChain } from '../shared/wp-chain';
 import { TExternals } from '../types/externals';
 import { TMFExport } from '../types/module-federation';
 import { TBuildOptions } from './options/build';
+import { TTsOptions } from './options/ts';
 import { TServerOptions } from './options/server';
 import { IHtmlOptions } from './options/html';
 import { TWebpackChain } from './options/chain';
@@ -85,6 +86,8 @@ export type TBiuConfig = {
    * dev server
    */
   server?: TServerOptions;
+
+  ts?: TTsOptions;
   /**
    * build options
    */
@@ -175,7 +178,6 @@ export type TConfig = TOverride<
     entries?: TEntries;
     debug: TConfigDebug;
     mode: TMode;
-    dtsPath: { [key: string]: string };
     moduleTransform: IModuleTransform;
     moduleTransformExclude: WebpackRuleSetRule['exclude'];
   }

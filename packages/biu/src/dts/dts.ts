@@ -16,9 +16,9 @@ import {
   transformLibName,
   transformPathImport,
 } from './transform';
+import { TYPES_OUT_DIR, TYPES_BIU_NAME } from '../contant';
 //
 export type DTSTLoadertype = {
-  build: TRquireBuildOptions;
   mf?: TMFOptions;
   needClear?: boolean;
 };
@@ -33,11 +33,16 @@ class DTSEmitFile {
   languageService: ts.LanguageService;
   lib: CodeObjType = { code: '', key: [] };
   tsconfig: ts.CompilerOptions;
-  empFilename = '';
-  libFilename = '';
+  biuFilename = '';
+  typesOutDir = '';
+  typesBiuName = '';
+  // TODO Lib
+  // libFilename = '';
   constructor() {
     this.tsconfig = getTSConfig(store.root) || {};
-    this.outDir = path.resolve(store.root, 'dist/empShareTypes');
+    this.typesOutDir = store.config?.ts?.typesOutDir || TYPES_OUT_DIR;
+    this.typesBiuName = store.config?.ts?.typesBiuName || TYPES_BIU_NAME;
+    this.outDir = path.resolve(store.root, this.typesOutDir);
     this.tsconfig = {
       ...this.tsconfig,
       declaration: true,
@@ -49,10 +54,9 @@ class DTSEmitFile {
     };
     this.languageService = getTSService(this.tsconfig, store.root);
   }
-  setup({ build, mf, needClear }: DTSTLoadertype) {
-    this.build = build;
+  setup({ mf, needClear }: DTSTLoadertype) {
     this.mf = mf;
-    const outDir = path.resolve(store.root, build.typesOutDir);
+    const outDir = path.resolve(store.root, this.typesOutDir);
     if (outDir != this.outDir) {
       this.outDir = outDir;
       this.tsconfig.outDir = outDir;
@@ -75,7 +79,6 @@ class DTSEmitFile {
     }
   }
   createFile() {
-    if (!this.build) return;
     fs.ensureDirSync(this.outDir);
 
     // TODO Lib
@@ -87,21 +90,18 @@ class DTSEmitFile {
     //   fs.writeFileSync(this.libFilename, libCode, 'utf8')
     // }
     if (this.mf?.exposes) {
-      const empModName = this.mf.name || '';
-      let empCode = this.lib.code;
-      empCode = transformLibName(empModName, empCode);
-      this.empFilename = path.resolve(this.outDir, this.build.typesBiuName);
-      fs.writeFileSync(this.empFilename, empCode, 'utf8');
+      const biuModName = this.mf.name || '';
+      let biuCode = this.lib.code;
+      biuCode = transformLibName(biuModName, biuCode);
+      this.biuFilename = path.resolve(this.outDir, this.typesBiuName);
+      fs.writeFileSync(this.biuFilename, biuCode, 'utf8');
     }
     this.destroy();
   }
 
   genCode(o: ts.OutputFile, alias: TConfigResolveAlias, typesOutDir: string) {
-    if (!this.build) return;
     if (!this.lib.key.includes(o.name)) {
-      let mod = o.name
-        .split(`/${this.build.typesOutDir}/`)[1]
-        .replace('.d.ts', '');
+      let mod = o.name.split(`/${this.typesOutDir}/`)[1].replace('.d.ts', '');
       if (mod.endsWith('/index')) {
         mod = mod.replace('/index', '');
       }

@@ -23,7 +23,7 @@ class DTSPlugin {
       emitDts(this.dtsThread);
     });
     const isTypeForOutDir =
-      store.config.build.outDir === store.config.build.typesOutDir;
+      store.config.build.outDir === store.config.ts.typesOutDir;
     isTypeForOutDir &&
       compiler.hooks.afterEmit.tap(plugin, (compilation) => {
         createDtsEmitThreadForBuild();
@@ -32,7 +32,7 @@ class DTSPlugin {
 }
 
 export function createDtsEmitThread() {
-  return new Worker(__dirname + '/dtsThread.js');
+  return new Worker(__dirname + '/dts-thread.js');
 }
 
 /**
@@ -50,13 +50,12 @@ export function createDtsEmitThreadForBuild() {
 export function emitDts(dtsThread: Worker) {
   dtsThread.postMessage(
     JSON.stringify({
+      appSrc: store.config.appSrc,
       build: store.config.build,
       mf: store.config.moduleFederation,
       alias: store.config.resolve.alias,
-      typesOutDir: store.config.build.typesOutDir,
-      needClear: !(
-        store.config.build.outDir === store.config.build.typesOutDir
-      ),
+      typesOutDir: store.config.ts.typesOutDir,
+      needClear: !(store.config.build.outDir === store.config.ts.typesOutDir),
     }),
   );
 }

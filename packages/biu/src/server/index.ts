@@ -448,6 +448,19 @@ class DevServer {
       options.static = [getStaticItem(options.static)];
     }
 
+    // dts 暴露 d.ts
+    options.static = (options.static as any).concat([
+      {
+        ...getStaticItem(store.outDir),
+        staticOptions: {
+          setHeaders: function (res: any, path: any) {
+            if (path.toString().endsWith('.d.ts'))
+              res?.set('Content-Type', 'application/javascript; charset=utf-8');
+          },
+        },
+      },
+    ]);
+
     if (typeof options.watchFiles === 'string') {
       options.watchFiles = [
         { paths: options.watchFiles, options: getWatchOptions() },
