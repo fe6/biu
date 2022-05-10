@@ -52,7 +52,6 @@
     "default-gateway": "6.0.3",
     "del": "6.0.0",
     "es-module-lexer": "0.10.5",
-    "esbuild": "0.14.27",
     "events": "3.3.0",
     "express": "4.17.3",
     "fast-glob": "3.2.11",
@@ -90,7 +89,6 @@
       "commander",
       "chalk",
       "fs-extra",
-      "esbuild",
       "yargs-parser",
       "cross-spawn",
       "pirates",
@@ -136,7 +134,6 @@
       "cross-spawn": "$$LOCAL",
       "yargs-parser": "$$LOCAL",
       "es-module-lexer": "$$LOCAL",
-      "esbuild": "$$LOCAL",
       "pirates": "$$LOCAL",
       "fast-glob": "$$LOCAL",
       "postcss": "postcss",
@@ -186,7 +183,6 @@
       "node-fetch"
     ],
     "extraDtsExternals": [
-      "esbuild",
       "uglify-js",
       "p-retry",
       "loader-utils",

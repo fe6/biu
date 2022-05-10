@@ -4,7 +4,7 @@ import { init, parse } from '@fe6/biu-deps/compiled/es-module-lexer';
 import {
   Loader as EsbuildLoader,
   transform as transformInternal,
-} from '@fe6/biu-deps/compiled/esbuild';
+} from 'esbuild';
 import { extname } from 'path';
 import type { LoaderContext } from '@fe6/biu-deps-webpack/compiled/webpack';
 import type { IEsbuildLoaderOpts } from './types';

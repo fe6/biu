@@ -1,7 +1,7 @@
 /** @format */
 
+import type { TransformOptions } from 'esbuild';
 import type { ImportSpecifier } from '@fe6/biu-deps/compiled/es-module-lexer';
-import type { TransformOptions } from '@fe6/biu-deps/compiled/esbuild';
 
 export enum Mode {
   development = 'development',
@@ -17,5 +17,5 @@ export interface IEsbuildLoaderHandlerParams {
 
 export interface IEsbuildLoaderOpts extends Partial<TransformOptions> {
   handler?: Array<(opts: IEsbuildLoaderHandlerParams) => string>;
-  implementation?: typeof import('@fe6/biu-deps/compiled/esbuild');
+  implementation?: typeof import('esbuild');
 }
