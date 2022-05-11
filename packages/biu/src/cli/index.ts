@@ -37,6 +37,22 @@ export const run = () => {
     });
 
   // TODO 打包 biu build
+  program
+    .command('build')
+    .description('Build 模式')
+    .option('-e, --env <env>', '部署环境 dev、test、prod')
+    .option('-a, --analyze', '生成分析报告 默认为 false')
+    .option('-t, --ts', '生成类型文件 默认为 false')
+    .option('-ps, --progress <progress>', '显示进度 默认为 true')
+    .option('-pr, --profile', '统计模块消耗')
+    .option('-cl, --clearLog <clearLog>', '清空日志 默认为 true')
+    .option(
+      '-wl, --wplogger [filename]',
+      '打印webpack配置 默认为 false,filename 为 输出webpack配置文件',
+    )
+    .action((options) => {
+      biuExec('build', ENUM_ENV['production'], options);
+    });
 
   // TODO 环境测试 biu serve
 

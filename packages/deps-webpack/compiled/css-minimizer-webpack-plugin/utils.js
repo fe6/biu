@@ -165,7 +165,7 @@ async function cssnanoMinify(input, sourceMap, minimizerOptions = {
   // eslint-disable-next-line global-require
 
 
-  const cssnano = require("cssnano"); // @ts-ignore
+  const cssnano = require('cssnano'); // @ts-ignore
   // Types are broken
 
 
@@ -189,7 +189,7 @@ async function cssnanoMinify(input, sourceMap, minimizerOptions = {
 
 async function cssoMinify(input, sourceMap, minimizerOptions) {
   // eslint-disable-next-line global-require,import/no-extraneous-dependencies
-  const csso = require("csso");
+  const csso = require('csso');
 
   const [[filename, code]] = Object.entries(input);
   const result = csso.minify(code, {
@@ -217,7 +217,7 @@ async function cssoMinify(input, sourceMap, minimizerOptions) {
 
 async function cleanCssMinify(input, sourceMap, minimizerOptions) {
   // eslint-disable-next-line global-require,import/no-extraneous-dependencies
-  const CleanCSS = require("clean-css");
+  const CleanCSS = require('clean-css');
 
   const [[name, code]] = Object.entries(input);
   const result = await new CleanCSS({
@@ -336,7 +336,7 @@ async function parcelCssMinify(input, sourceMap, minimizerOptions) {
   }; // eslint-disable-next-line import/no-extraneous-dependencies, global-require
 
 
-  const parcelCss = require("@parcel/css"); // Copy `esbuild` options
+  const parcelCss = require('@parcel/css'); // Copy `esbuild` options
 
 
   const parcelCssOptions = buildParcelCssOptions(minimizerOptions); // Let `esbuild` generate a SourceMap
