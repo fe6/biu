@@ -2,7 +2,6 @@
 
 // Fork from https://github.com/umijs/umi-next/blob/master/scripts/turbo.ts
 
-import { logger } from '@fe6/biu-utils';
 import spawn from '@fe6/biu-deps/compiled/cross-spawn';
 import yArgs from '@fe6/biu-deps/compiled/yargs-parser';
 import { join } from 'path';
@@ -36,7 +35,7 @@ async function cmd(command: string) {
   if (result.status !== 0) {
     // sub package command don't stop when execute fail.
     // display exit
-    logger.error(`Execute command error (${command})`);
+    console.log(`[BIU] Execute command error (${command})`);
     process.exit(1);
   }
   return result;

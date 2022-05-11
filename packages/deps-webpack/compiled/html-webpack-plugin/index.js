@@ -1054,7 +1054,7 @@ function hookIntoCompiler (compiler, options, plugin) {
       return html;
     }
     try {
-      return (__nccwpck_require__(83).minify)(html, options.minify);
+      return (__nccwpck_require__(68).minify)(html, options.minify);
     } catch (e) {
       const isParseError = String(e.message).indexOf('Parse Error') === 0;
       if (isParseError) {
@@ -2139,14 +2139,6 @@ module.exports = eval("require")("@fe6/biu-deps-webpack/compiled/tapable");
 
 /***/ }),
 
-/***/ 83:
-/***/ (function(module) {
-
-module.exports = eval("require")("html-minifier-terser");
-
-
-/***/ }),
-
 /***/ 829:
 /***/ (function(module) {
 
@@ -2168,6 +2160,14 @@ module.exports = require("console");
 
 "use strict";
 module.exports = require("fs");
+
+/***/ }),
+
+/***/ 68:
+/***/ (function(module) {
+
+"use strict";
+module.exports = require("html-minifier-terser");
 
 /***/ }),
 
