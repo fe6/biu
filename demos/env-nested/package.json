@@ -2,7 +2,8 @@
   "name": "env-nested",
   "description": "环境文件夹",
   "scripts": {
-    "start": "biu dev -e dev"
+    "start": "biu dev -e dev",
+    "build": "biu build"
   },
   "dependencies": {
     "vue": "^3.2.33"

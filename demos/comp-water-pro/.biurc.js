@@ -14,10 +14,15 @@ module.exports = defineConfig(() => {
             dayjs:
               'dayjs@https://cdn.jsdelivr.net/npm/dayjs@1.11.0/dayjs.min.js',
             '@fe6/water-pro':
-              'water@https://cdn.jsdelivr.net/npm/@fe6/water-pro@4.7.0/dist/water.min.js',
+              'water@https://cdn.jsdelivr.net/npm/@fe6/water-pro@4.11.2/dist/water.min.js',
           },
         });
       });
+    },
+    html: {
+      files: {
+        css: ['https://unpkg.com/@fe6/water-pro@4.11.2/dist/water.min.css'],
+      },
     },
     webpackChain(chain) {
       chain.plugin('components').use(

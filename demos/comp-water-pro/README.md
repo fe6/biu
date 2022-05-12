@@ -41,3 +41,13 @@ module.exports = defineConfig(() => {
   };
 });
 ```
+
+## 引入组件库样式
+
+```js
+html: {
+  files: {
+    css: ['https://unpkg.com/@fe6/water-pro@4.11.2/dist/water.min.css'],
+  }
+},
+```

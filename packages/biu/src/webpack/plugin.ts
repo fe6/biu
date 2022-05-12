@@ -60,7 +60,8 @@ class WPPlugin {
                 }
               }
             } catch (error) {
-              logger.errorExit(error);
+              logger.empty();
+              logger.errorExit('获取远程地址：' + theUrl + ' 失败');
             }
           }
         }

@@ -2,7 +2,8 @@
   "name": "cdn",
   "description": "cdn 项目",
   "scripts": {
-    "start": "biu dev"
+    "start": "biu dev",
+    "build": "biu build"
   },
   "dependencies": {
     "vue": "^3.2.31"

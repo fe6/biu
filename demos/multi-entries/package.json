@@ -2,7 +2,8 @@
   "name": "multi-entries",
   "description": "多入口",
   "scripts": {
-    "start": "biu dev"
+    "start": "biu dev",
+    "build": "biu build"
   },
   "dependencies": {
     "vue": "^3.2.33"

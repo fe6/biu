@@ -2,10 +2,11 @@
   "name": "comp-water-pro",
   "description": "Water Pro 项目",
   "scripts": {
-    "start": "biu dev"
+    "start": "biu dev",
+    "build": "biu build"
   },
   "dependencies": {
-    "@fe6/water-pro": "^4.7.1",
+    "@fe6/water-pro": "^4.11.2",
     "dayjs": "^1.11.0",
     "vue": "^3.2.31"
   },
