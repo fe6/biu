@@ -28,6 +28,7 @@
   "devDependencies": {
     "@commitlint/cli": "^16.2.1",
     "@commitlint/config-conventional": "^16.2.1",
+    "@fe6/biu": "workspace:^0.0.0",
     "@fe6/biu-deps": "workspace:*",
     "@fe6/biu-utils": "workspace:*",
     "@fe6/norm-git-cz-config": "^0.1.1",

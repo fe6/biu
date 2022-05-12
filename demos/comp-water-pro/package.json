@@ -7,12 +7,13 @@
   },
   "dependencies": {
     "@fe6/water-pro": "^4.11.2",
-    "dayjs": "^1.11.0",
-    "vue": "^3.2.31"
+    "dayjs": "^1.11.2",
+    "vue": "^3.2.33"
   },
   "devDependencies": {
     "@fe6/biu": "workspace:*",
     "@fe6/nvcr": "^0.1.1",
+    "@types/node": "^17.0.21",
     "unplugin-vue-components": "^0.18.5"
   }
 }
