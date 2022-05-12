@@ -3,12 +3,12 @@
 <template>
   <div>
     <h1>water pro demo</h1>
-    <a-button @click="btnClick">轻轻点一下</a-button>
+    <Button @click="btnClick">轻轻点一下</Button>
   </div>
 </template>
 
 <script lang="ts" setup>
-  import { Modal } from '@fe6/water-pro';
+  import { Modal, Button } from '@fe6/water-pro';
 
   const btnClick = () => {
     Modal.confirm({

@@ -139,9 +139,7 @@ class WPEntries {
 
     if (htmlConfig.urlTemplate && !htmlOptions.templateContent) {
       try {
-        logger.wait(
-          `Desperately requesting ${htmlConfig.urlTemplate} , just a moment, please~`,
-        );
+        logger.wait(`正在请求 ${htmlConfig.urlTemplate} , 请稍等 ~`);
         const response = await fetch(htmlConfig.urlTemplate);
         const htmlBody = await response.text();
         htmlOptions.templateContent = (webpackConfig) =>

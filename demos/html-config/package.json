@@ -2,7 +2,8 @@
   "name": "html-config",
   "description": "通过 CONFIG 文件定义 HTML",
   "scripts": {
-    "start": "biu dev"
+    "start": "biu dev",
+    "build": "biu build"
   },
   "dependencies": {
     "vue": "^3.2.31"

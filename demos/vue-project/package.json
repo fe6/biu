@@ -3,7 +3,8 @@
   "description": "Vue 项目使用 vue-base",
   "scripts": {
     "start": "biu dev",
-    "dts": "biu dts"
+    "dts": "biu dts",
+    "build": "biu build"
   },
   "dependencies": {
     "vue": "^3.2.31"
