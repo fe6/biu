@@ -60,6 +60,8 @@ class BiuCache {
    */
   public cacheDir = '';
   public biuShare = new BiuShare();
+  public isReact = false;
+  public isVue = false;
   // 是 vue 项目还是 react 项目
   public projectLibName = '';
   // 项目框架的版本号
@@ -108,15 +110,19 @@ class BiuCache {
     const theDepsKeys = Object.keys(dependencies);
     const theDevDepsKeys = Object.keys(devDependencies);
     if (theDepsKeys.indexOf('vue') > -1) {
+      this.isVue = true;
       this.projectLibName = 'vue';
       this.setProjectVersion(dependencies[this.projectLibName]);
     } else if (theDevDepsKeys.indexOf('vue') > -1) {
+      this.isVue = true;
       this.projectLibName = 'vue';
       this.setProjectVersion(devDependencies[this.projectLibName]);
     } else if (theDepsKeys.indexOf('react') > -1) {
+      this.isReact = true;
       this.projectLibName = 'react';
       this.setProjectVersion(dependencies[this.projectLibName]);
     } else if (theDevDepsKeys.indexOf('react') > -1) {
+      this.isReact = true;
       this.projectLibName = 'react';
       this.setProjectVersion(devDependencies[this.projectLibName]);
     } else {
