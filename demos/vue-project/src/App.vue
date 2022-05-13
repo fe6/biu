@@ -4,12 +4,9 @@
   <div>
     <h1>Vue Project App</h1>
     <p>vueBase 中的方法及常量： {{ moneyFormat(theMoney) }}</p>
+    <VueBaseTsxBtn />
     <VueBaseCompButton />
-    1<VueBaseTsxBtn />1 // TODO
-    <p>✅ 1. 暂时不支持路径引入( @vueBase/xxx )只支持根路径引入 (@vueBase)</p>
-    <p>2. vue 文件样式在使用的时候没了</p>
-    <p>3. tsx 还react编译呢</p>
-    <p>4. 有 remotes 不热刷新了</p>
+    <Content />
     <p>5. 'fs' 替换</p>
     <p>
       ERROR in ./src/App.vue Module build failed (from
@@ -35,6 +32,5 @@
     VueBaseCompButton,
     VueBaseTsxBtn,
   } from '@vueBase';
-  console.log(VueBaseCompButton, 'v');
-  console.log(VueBaseTsxBtn, 'VueBaseTsxBtn');
+  import Content from '@vueBase/Content';
 </script>

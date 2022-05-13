@@ -78,6 +78,28 @@ class DTSEmitFile {
       logger.warn(filename, e);
     }
   }
+
+  genCode(o: ts.OutputFile, alias: TConfigResolveAlias, typesOutDir: string) {
+    if (!this.lib.key.includes(o.name)) {
+      let mod = o.name.split(`/${this.typesOutDir}/`)[1].replace('.d.ts', '');
+      if (mod.endsWith('/index')) {
+        mod = mod.replace('/index', '');
+      }
+      o.text = transformPathImport(o, alias, typesOutDir);
+      const warpDeclareModuleResult = this.warpDeclareModule(
+        mod,
+        o.text.replace(/\/\*\* @format \*\//, ''),
+      );
+      this.lib.code = this.lib.code + warpDeclareModuleResult.code;
+      this.lib.code = transformImportExposesPath(
+        this.lib.code,
+        mod,
+        warpDeclareModuleResult.exposeName,
+      );
+      this.lib.key.push(o.name);
+    }
+  }
+
   createFile(appSrc: string) {
     fs.ensureDirSync(this.outDir);
 
@@ -101,31 +123,51 @@ class DTSEmitFile {
     this.destroy();
   }
 
-  genCode(o: ts.OutputFile, alias: TConfigResolveAlias, typesOutDir: string) {
-    if (!this.lib.key.includes(o.name)) {
-      let mod = o.name.split(`/${this.typesOutDir}/`)[1].replace('.d.ts', '');
-      if (mod.endsWith('/index')) {
-        mod = mod.replace('/index', '');
-      }
-      o.text = transformPathImport(o, alias, typesOutDir);
-      const warpDeclareModuleResult = this.warpDeclareModule(mod, o.text);
-      this.lib.code = this.lib.code + warpDeclareModuleResult.code;
-      this.lib.code = transformImportExposesPath(
-        this.lib.code,
-        mod,
-        warpDeclareModuleResult.exposeName,
-      );
-      this.lib.key.push(o.name);
+  vueEmit(filename: string) {
+    if (this.mf?.exposes) {
+      const filePath = filename.replace(/\.vue$/, '');
+      const { exposes } = this.mf;
+      const biuModName = this.mf.name || '';
+      Object.keys(exposes).forEach((exposesKey: any) => {
+        // 匹配路径声明的 dts
+        const exposeFilePath = (exposes as any)[exposesKey].replace(
+          /^\.\//,
+          '',
+        );
+        if (exposesKey !== '.' && filePath === exposeFilePath) {
+          const theName = exposesKey.replace(/^\./, biuModName);
+          const theVueO = {
+            name: `${this.outDir}/${filename}`,
+            writeByteOrderMark: false,
+            text: `
+  import type { DefineComponent } from 'vue';
+  const component: DefineComponent<
+    Record<string, never>,
+    Record<string, never>,
+    unknown
+  >;
+  export default component;
+`,
+          };
+          const warpDeclareModuleResult = this.warpDeclareModule(
+            theName,
+            theVueO.text,
+          );
+          this.lib.code = this.lib.code + warpDeclareModuleResult.code;
+          this.lib.key.push(theVueO.name);
+        }
+      });
     }
   }
   warpDeclareModule(module: string, code: string) {
     code = code.replace(/declare/g, '');
     const { newModule, isExpose } = transformExposesPath(module, this.mf);
     return {
-      code: `declare module '${newModule}' {\r\n${code}}\r\n`,
+      code: `declare module '${newModule}' {${code}}\r\r`,
       exposeName: isExpose ? newModule : '',
     };
   }
+
   destroy() {
     this.lib = { code: '', key: [] };
   }
