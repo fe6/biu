@@ -113,7 +113,7 @@ class BiuShare {
     }
 
     // FIX No.1
-    if (store.projectLibName === 'vue' && mf && externals.length < 1) {
+    if (store.isVue && mf && externals.length < 1) {
       externals.push(this.getExternalVue());
     }
 
@@ -138,7 +138,7 @@ class BiuShare {
       }
       list = list.concat(externals);
       // FIX No.1
-      if (store.projectLibName === 'vue' && list.length < 1) {
+      if (store.isVue && list.length < 1) {
         list.push(this.getExternalVue());
       }
       list.map((v) => {

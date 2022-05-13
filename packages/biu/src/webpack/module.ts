@@ -21,7 +21,7 @@ class WPModule {
   }
   private setConfig() {
     const theParser: any = {};
-    if (store.projectLibName === 'vue') {
+    if (store.isVue) {
       theParser.esbuild = {
         loader: store.biuResolve(
           path.resolve(store.biuSource, 'webpack/loader/esbuild'),
@@ -80,7 +80,9 @@ class WPModule {
     wpChain.merge(config);
   }
   private setVue() {
-    vueLoader(wpChain);
+    if (store.isVue) {
+      vueLoader(wpChain);
+    }
   }
   private setWebworker() {
     wpChain.module
