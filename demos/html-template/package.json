@@ -1,5 +1,5 @@
 {
-  "name": "html-template",
+  "name": "demo-html-template",
   "description": "通过远程链接配置 HTML 模板",
   "scripts": {
     "start": "biu dev",
@@ -9,6 +9,7 @@
     "vue": "^3.2.33"
   },
   "devDependencies": {
-    "@fe6/biu": "workspace:*"
+    "@fe6/biu": "workspace:^0.0.0",
+    "@types/node": "^17.0.21"
   }
 }
