@@ -1,6 +1,6 @@
 /** @format */
 
-import { existsSync } from 'fs';
+import { existsSync } from '@fe6/biu-deps/compiled/fs-extra';
 import { join } from 'path';
 import { fsExtra } from '@fe6/biu-deps';
 import { TCmdOptions, TMode } from '../types';
