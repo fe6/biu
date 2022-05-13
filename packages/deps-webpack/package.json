@@ -176,6 +176,8 @@
     ]
   },
   "dependencies": {
-    "http-proxy-middleware": "2.0.4"
+    "@pmmmwh/react-refresh-webpack-plugin": "0.5.6",
+    "http-proxy-middleware": "2.0.4",
+    "react-refresh": "0.13.0"
   }
 }

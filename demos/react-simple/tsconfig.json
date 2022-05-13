@@ -1,0 +1,9 @@
+{
+  "extends": "@fe6/biu/biu-tsconfig.json",
+  "include": ["src"],
+  "exclude": ["node_modules"],
+  "compilerOptions": {
+    "types": ["@fe6/biu/app"],
+    "baseUrl": "."
+  }
+}

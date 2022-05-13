@@ -3,10 +3,11 @@
 import { existsSync } from 'fs';
 import { join } from 'path';
 import { fsExtra } from '@fe6/biu-deps';
-import { TCmdOptions, TMode, ENUM_ENV } from '../types';
-import { DEFAULT_CONFIG_FILES, SHORT_ENV, LOCAL_EXT } from '../contant';
+import { TCmdOptions, TMode } from '../types';
+import { DEFAULT_CONFIG_FILES } from '../contant';
 import { TBiuConfigExport } from './types';
 import { mergeConfig } from './def-conf';
+import store from '../shared/cache';
 
 interface IOpts {
   cwd: string;
@@ -47,7 +48,14 @@ export class Config {
     if (fsExtra.existsSync(this.mainConfigFile)) {
       const configExport: TBiuConfigExport = require(this.mainConfigFile);
       if (typeof configExport === 'function') {
-        const conf = await configExport({ mode, ...cmdOptions });
+        const conf = await configExport({
+          mode,
+          libName: store.projectLibName,
+          libVersion: store.projectLibVersion,
+          devDeps: store.devDeps,
+          runDeps: store.runDeps,
+          ...cmdOptions,
+        });
         this.currentConfig = mergeConfig(conf);
       } else if (typeof configExport === 'object') {
         const conf: any = configExport;

@@ -1,6 +1,8 @@
 /** @format */
 
-export const vueLoader = (wpChain: any) => {
+import WPChain from '../compiled/webpack-5-chain';
+
+export const vueLoader = (wpChain: WPChain) => {
   wpChain.module
     .rule('vue-loader')
     .test(/\.vue$/)

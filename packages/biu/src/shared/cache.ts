@@ -69,6 +69,10 @@ class BiuCache {
   // vue: '^3.2' | '~3.2' | '^3.2.x' | '~3.2.x' => [3,2,*]
   // vue: '^3' | '~3' | '^3.x' | '~3.x' => [3,*,*]
   public projectLibVersion: string[] = [];
+  // 开发依赖
+  public devDeps: any = {};
+  // 运行依赖
+  public runDeps: any = {};
   /**
    * 获取项目 根目录绝对路径
    * @param relativePath
@@ -106,25 +110,25 @@ class BiuCache {
   }
 
   setProjectInfo() {
-    const { dependencies, devDependencies } = this.pkg;
-    const theDepsKeys = Object.keys(dependencies);
-    const theDevDepsKeys = Object.keys(devDependencies);
+    const { runDeps, devDeps } = this;
+    const theDepsKeys = Object.keys(runDeps);
+    const theDevDepsKeys = Object.keys(devDeps);
     if (theDepsKeys.indexOf('vue') > -1) {
       this.isVue = true;
       this.projectLibName = 'vue';
-      this.setProjectVersion(dependencies[this.projectLibName]);
+      this.setProjectVersion(runDeps[this.projectLibName]);
     } else if (theDevDepsKeys.indexOf('vue') > -1) {
       this.isVue = true;
       this.projectLibName = 'vue';
-      this.setProjectVersion(devDependencies[this.projectLibName]);
+      this.setProjectVersion(devDeps[this.projectLibName]);
     } else if (theDepsKeys.indexOf('react') > -1) {
       this.isReact = true;
       this.projectLibName = 'react';
-      this.setProjectVersion(dependencies[this.projectLibName]);
+      this.setProjectVersion(runDeps[this.projectLibName]);
     } else if (theDevDepsKeys.indexOf('react') > -1) {
       this.isReact = true;
       this.projectLibName = 'react';
-      this.setProjectVersion(devDependencies[this.projectLibName]);
+      this.setProjectVersion(devDeps[this.projectLibName]);
     } else {
       this.projectLibName = '';
     }
@@ -136,6 +140,8 @@ class BiuCache {
     // 项目 package.json
     const pkg = require(this.getProjectResolve('package.json'));
     this.pkg = { ...this.pkg, ...pkg };
+    this.runDeps = pkg.dependencies;
+    this.devDeps = pkg.devDependencies;
     // 设置项目的框架属性 vue or react
     this.setProjectInfo();
     // 设置配置
@@ -148,6 +154,8 @@ class BiuCache {
     this.isESM = ['es3', 'es5'].indexOf(this.config.build.target) === -1;
     //设置绝对路径
     this.setAbsPaths();
+    // 对 react 单独设置
+    this.checkAndSetReactVersion();
     // TODO Lib
     // if (!this.config.build.lib) {
     //   // lib 模式下 忽略 biuShare 设置
@@ -162,6 +170,11 @@ class BiuCache {
     this.outDir = this.resolve(this.config.build.outDir);
     this.publicDir = this.resolve(this.config.publicDir);
     this.cacheDir = this.resolve(this.config.cacheDir);
+  }
+  private checkAndSetReactVersion() {
+    if (this.isReact) {
+      this.config.reactRuntime = 'automatic';
+    }
   }
 }
 

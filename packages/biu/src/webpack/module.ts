@@ -2,8 +2,7 @@
 
 import path from 'path';
 import esbuild from 'esbuild';
-import { reactRefreshWebpack } from '@fe6/biu-deps';
-import { vueLoader } from '@fe6/biu-deps-webpack';
+import { vueLoader, reactRefresh } from '@fe6/biu-deps-webpack';
 import wpChain from '../shared/wp-chain';
 import store from '../shared/cache';
 
@@ -14,32 +13,57 @@ class WPModule {
   constructor() {}
   async setup() {
     this.setConfig();
-    this.setScriptReactLoader();
     this.setWebworker();
     // TODO react 的判断支持
     this.setVue();
+    this.setReact();
   }
   private setConfig() {
     const theParser: any = {};
     if (store.isVue) {
-      theParser.esbuild = {
-        loader: store.biuResolve(
-          path.resolve(store.biuSource, 'webpack/loader/esbuild'),
-        ),
-        options: {
-          target: 'esnext',
-          implementation: esbuild,
+      theParser.scripts = {
+        test: /\.(js|ts)$/,
+        exclude: /(packages)/,
+        use: {
+          swc: {
+            loader: store.biuResolve(
+              path.resolve(store.biuSource, 'webpack/loader/swc'),
+            ),
+            options: store.config.build,
+          },
+        },
+      };
+      theParser.sx = {
+        test: /\.(jsx|tsx)$/,
+        exclude: /(packages)/,
+        use: {
+          esbuild: {
+            loader: store.biuResolve(
+              path.resolve(store.biuSource, 'webpack/loader/esbuild'),
+            ),
+            options: {
+              target: 'esnext',
+              implementation: esbuild,
+            },
+          },
+        },
+      };
+    } else {
+      theParser.scripts = {
+        test: /\.(js|jsx|ts|tsx)$/,
+        exclude: store.config.moduleTransformExclude,
+        use: {
+          swc: {
+            loader: store.biuResolve(
+              path.resolve(store.biuSource, 'webpack/loader/swc'),
+            ),
+            options: store.config.build,
+          },
         },
       };
     }
     const config = {
       module: {
-        // mini-css-extract-plugin 编译不过！
-        /* generator: {
-          asset: {
-            publicPath: store.config.base,//:TODO 验证 publicPath auto 需要设置 '/' or ''
-          },
-        }, */
         rule: {
           // 解决 mjs 加载失败问题
           mjs: {
@@ -49,31 +73,7 @@ class WPModule {
             },
           },
           //
-          scripts: {
-            test: /\.(js|ts)$/,
-            exclude: /(packages)/, //不能加 exclude 否则会专程 arrow
-            // exclude: store.config.moduleTransformExclude,
-            use: {
-              // vue: {
-              //   loader: require.resolve('@fe6/biu-deps-webpack/compiled/vue-loader'),
-              // },
-              swc: {
-                loader: store.biuResolve(
-                  path.resolve(store.biuSource, 'webpack/loader/swc'),
-                ),
-                options: store.config.build,
-              },
-            },
-          },
-          sx: {
-            test: /\.(jsx|tsx)$/,
-            exclude: /(packages)/, //不能加 exclude 否则会专程 arrow
-            // exclude: store.config.moduleTransformExclude,
-            use: {
-              ...theParser,
-            },
-          },
-          // webworker: this.webworker,
+          ...theParser,
         },
       },
     };
@@ -82,6 +82,15 @@ class WPModule {
   private setVue() {
     if (store.isVue) {
       vueLoader(wpChain);
+    }
+  }
+  private setReact() {
+    if (store.isReact) {
+      const isDev = store.config.mode === 'development';
+      // 增加插件支持
+      if (isDev && store.config.server.hot && !!store.config.reactRuntime) {
+        reactRefresh(wpChain);
+      }
     }
   }
   private setWebworker() {
@@ -103,16 +112,6 @@ class WPModule {
       )
       .options(store.config.build)
       .end();
-  }
-  private setScriptReactLoader() {
-    const isDev = store.config.mode === 'development';
-    // 增加插件支持
-    if (isDev && store.config.server.hot && !!store.config.reactRuntime)
-      wpChain.plugin('reactRefresh').use(reactRefreshWebpack, [
-        {
-          overlay: false, // 切换到默认overlay
-        },
-      ]);
   }
 }
 export default WPModule;
