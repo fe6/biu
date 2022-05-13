@@ -8,7 +8,7 @@ import { join } from 'path';
 
 (async () => {
   const args = yArgs(process.argv.slice(2));
-  const scope = args.scope || '!@demos/*';
+  const scope = args.scope || '!demo-*';
   const extra = (args._ || []).join(' ');
 
   await turbo({
