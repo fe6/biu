@@ -3,7 +3,8 @@
   "description": "React 简单项目",
   "scripts": {
     "start": "biu dev",
-    "build": "biu build"
+    "build": "biu build",
+    "serve": "biu serve"
   },
   "dependencies": {
     "react": "^18.1.0",

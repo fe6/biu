@@ -55,6 +55,13 @@ export const run = () => {
     });
 
   // TODO 环境测试 biu serve
+  program
+    .command('serve')
+    .description('Server 模式')
+    .option('-cl, --clearLog <clearLog>', '清空日志 默认为 true')
+    .action((options) => {
+      biuExec('serve', 'none', options);
+    });
 
   // TODO 拉取远程类型文件 ( d.ts ) biu dts
   program
