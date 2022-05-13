@@ -4,6 +4,6 @@
     "start": "biu"
   },
   "devDependencies": {
-    "@fe6/biu": "workspace:^0.0.0"
+    "@fe6/biu": "workspace:*"
   }
 }

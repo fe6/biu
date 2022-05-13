@@ -6,7 +6,7 @@ importers:
     specifiers:
       '@commitlint/cli': ^16.2.1
       '@commitlint/config-conventional': ^16.2.1
-      '@fe6/biu': workspace:^0.0.0
+      '@fe6/biu': workspace:*
       '@fe6/biu-deps': workspace:*
       '@fe6/biu-utils': workspace:*
       '@fe6/norm-git-cz-config': ^0.1.1
@@ -56,13 +56,13 @@ importers:
 
   demos/biu:
     specifiers:
-      '@fe6/biu': workspace:^0.0.0
+      '@fe6/biu': workspace:*
     devDependencies:
       '@fe6/biu': link:../../packages/biu
 
   demos/cdn:
     specifiers:
-      '@fe6/biu': workspace:^0.0.0
+      '@fe6/biu': workspace:*
       '@types/node': ^17.0.21
       vue: ^3.2.33
     dependencies:
@@ -71,9 +71,24 @@ importers:
       '@fe6/biu': link:../../packages/biu
       '@types/node': registry.npmmirror.com/@types/node/17.0.21
 
+  demos/cdn-react:
+    specifiers:
+      '@fe6/biu': workspace:*
+      '@types/node': ^17.0.21
+      '@types/react-dom': ^18.0.4
+      react: ^18.1.0
+      react-dom: ^18.1.0
+    dependencies:
+      react: registry.npmmirror.com/react/18.1.0
+      react-dom: registry.npmmirror.com/react-dom/18.1.0_react@18.1.0
+    devDependencies:
+      '@fe6/biu': link:../../packages/biu
+      '@types/node': registry.npmmirror.com/@types/node/17.0.21
+      '@types/react-dom': registry.npmmirror.com/@types/react-dom/18.0.4
+
   demos/comp-water-pro:
     specifiers:
-      '@fe6/biu': workspace:^0.0.0
+      '@fe6/biu': workspace:*
       '@fe6/nvcr': ^0.1.1
       '@fe6/water-pro': ^3.54.0
       '@types/node': ^17.0.21
@@ -92,7 +107,7 @@ importers:
 
   demos/config:
     specifiers:
-      '@fe6/biu': workspace:^0.0.0
+      '@fe6/biu': workspace:*
       '@types/node': ^17.0.21
       vue: ^3.2.33
     dependencies:
@@ -103,7 +118,7 @@ importers:
 
   demos/env:
     specifiers:
-      '@fe6/biu': workspace:^0.0.0
+      '@fe6/biu': workspace:*
       '@types/node': ^17.0.21
       vue: ^3.2.33
     dependencies:
@@ -114,7 +129,7 @@ importers:
 
   demos/env-ajax:
     specifiers:
-      '@fe6/biu': workspace:^0.0.0
+      '@fe6/biu': workspace:*
       '@types/node': ^17.0.21
       vue: ^3.2.33
     dependencies:
@@ -125,7 +140,7 @@ importers:
 
   demos/env-nested:
     specifiers:
-      '@fe6/biu': workspace:^0.0.0
+      '@fe6/biu': workspace:*
       '@types/node': ^17.0.21
       vue: ^3.2.33
     dependencies:
@@ -136,7 +151,7 @@ importers:
 
   demos/html:
     specifiers:
-      '@fe6/biu': workspace:^0.0.0
+      '@fe6/biu': workspace:*
       '@types/node': ^17.0.21
       vue: ^3.2.33
     dependencies:
@@ -147,7 +162,7 @@ importers:
 
   demos/html-config:
     specifiers:
-      '@fe6/biu': workspace:^0.0.0
+      '@fe6/biu': workspace:*
       '@types/node': ^17.0.21
       vue: ^3.2.33
     dependencies:
@@ -158,7 +173,7 @@ importers:
 
   demos/html-template:
     specifiers:
-      '@fe6/biu': workspace:^0.0.0
+      '@fe6/biu': workspace:*
       '@types/node': ^17.0.21
       vue: ^3.2.33
     dependencies:
@@ -169,7 +184,7 @@ importers:
 
   demos/multi-entries:
     specifiers:
-      '@fe6/biu': workspace:^0.0.0
+      '@fe6/biu': workspace:*
       '@types/node': ^17.0.21
       vue: ^3.2.33
     dependencies:
@@ -178,9 +193,24 @@ importers:
       '@fe6/biu': link:../../packages/biu
       '@types/node': registry.npmmirror.com/@types/node/17.0.21
 
+  demos/react-simple:
+    specifiers:
+      '@fe6/biu': workspace:*
+      '@types/node': ^17.0.21
+      '@types/react-dom': ^18.0.4
+      react: ^18.1.0
+      react-dom: ^18.1.0
+    dependencies:
+      react: registry.npmmirror.com/react/18.1.0
+      react-dom: registry.npmmirror.com/react-dom/18.1.0_react@18.1.0
+    devDependencies:
+      '@fe6/biu': link:../../packages/biu
+      '@types/node': registry.npmmirror.com/@types/node/17.0.21
+      '@types/react-dom': registry.npmmirror.com/@types/react-dom/18.0.4
+
   demos/vue-base:
     specifiers:
-      '@fe6/biu': workspace:^0.0.0
+      '@fe6/biu': workspace:*
       '@types/node': ^17.0.21
       vue: ^3.2.33
     dependencies:
@@ -191,7 +221,7 @@ importers:
 
   demos/vue-project:
     specifiers:
-      '@fe6/biu': workspace:^0.0.0
+      '@fe6/biu': workspace:*
       '@types/node': ^17.0.21
       vue: ^3.2.33
     dependencies:
@@ -202,7 +232,7 @@ importers:
 
   demos/vue-simple:
     specifiers:
-      '@fe6/biu': workspace:^0.0.0
+      '@fe6/biu': workspace:*
       '@types/node': ^17.0.21
       vue: ^3.2.33
     dependencies:
@@ -228,7 +258,6 @@ importers:
   packages/deps:
     specifiers:
       '@fe6/biu-utils': workspace:*
-      '@pmmmwh/react-refresh-webpack-plugin': 0.5.4
       '@types/bonjour': 3.5.10
       '@types/cross-spawn': 6.0.2
       '@types/default-gateway': 3.0.1
@@ -282,7 +311,6 @@ importers:
       yargs-parser: 21.0.1
     dependencies:
       '@fe6/biu-utils': link:../utils
-      '@pmmmwh/react-refresh-webpack-plugin': registry.npmmirror.com/@pmmmwh/react-refresh-webpack-plugin/0.5.4_221f31bcc3c63054d3065352f2a019fb
     devDependencies:
       '@types/bonjour': registry.npmmirror.com/@types/bonjour/3.5.10
       '@types/cross-spawn': registry.npmmirror.com/@types/cross-spawn/6.0.2
@@ -401,6 +429,7 @@ importers:
   packages/deps-webpack:
     specifiers:
       '@parcel/css': 1.0.3
+      '@pmmmwh/react-refresh-webpack-plugin': 0.5.6
       '@types/compression': 1.7.2
       '@types/connect-history-api-fallback': 1.3.5
       '@types/html-minifier-terser': 6.0.0
@@ -437,6 +466,7 @@ importers:
       postcss: 8.4.12
       postcss-loader: 6.2.1
       pretty-error: 4.0.0
+      react-refresh: 0.13.0
       sass: 1.49.9
       sass-loader: 12.6.0
       style-loader: 3.3.1
@@ -455,7 +485,9 @@ importers:
       worker-loader: 3.0.8
       ws: 8.5.0
     dependencies:
+      '@pmmmwh/react-refresh-webpack-plugin': registry.npmmirror.com/@pmmmwh/react-refresh-webpack-plugin/0.5.6_616ee631965ba50fb54411b45ae45e02
       http-proxy-middleware: registry.npmmirror.com/http-proxy-middleware/2.0.4
+      react-refresh: registry.npmmirror.com/react-refresh/0.13.0
     devDependencies:
       '@parcel/css': registry.npmmirror.com/@parcel/css/1.0.3
       '@types/compression': registry.npmmirror.com/@types/compression/1.7.2
@@ -513,7 +545,7 @@ importers:
 
   packages/utils:
     specifiers:
-      '@fe6/biu-deps': workspace:^0.0.0
+      '@fe6/biu-deps': workspace:*
     dependencies:
       '@fe6/biu-deps': link:../deps
 
@@ -3194,11 +3226,11 @@ packages:
       '@parcel/css-win32-x64-msvc': registry.npmmirror.com/@parcel/css-win32-x64-msvc/1.0.3
     dev: true
 
-  registry.npmmirror.com/@pmmmwh/react-refresh-webpack-plugin/0.5.4_221f31bcc3c63054d3065352f2a019fb:
-    resolution: {integrity: sha512-zZbZeHQDnoTlt2AF+diQT0wsSXpvWiaIOZwBRdltNFhG1+I3ozyaw7U/nBiUwyJ0D+zwdXp0E3bWOl38Ag2BMw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@pmmmwh/react-refresh-webpack-plugin/-/react-refresh-webpack-plugin-0.5.4.tgz}
-    id: registry.npmmirror.com/@pmmmwh/react-refresh-webpack-plugin/0.5.4
+  registry.npmmirror.com/@pmmmwh/react-refresh-webpack-plugin/0.5.6_616ee631965ba50fb54411b45ae45e02:
+    resolution: {integrity: sha512-IIWxofIYt/AbMwoeBgj+O2aAXLrlCQVg+A4a2zfpXFNHgP8o8rvi3v+oe5t787Lj+KXlKOh8BAiUp9bhuELXhg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@pmmmwh/react-refresh-webpack-plugin/-/react-refresh-webpack-plugin-0.5.6.tgz}
+    id: registry.npmmirror.com/@pmmmwh/react-refresh-webpack-plugin/0.5.6
     name: '@pmmmwh/react-refresh-webpack-plugin'
-    version: 0.5.4
+    version: 0.5.6
     engines: {node: '>= 10.13'}
     peerDependencies:
       '@types/webpack': 4.x || 5.x
@@ -3225,15 +3257,15 @@ packages:
     dependencies:
       ansi-html-community: registry.npmmirror.com/ansi-html-community/0.0.8
       common-path-prefix: registry.npmmirror.com/common-path-prefix/3.0.0
-      core-js-pure: registry.npmmirror.com/core-js-pure/3.21.1
+      core-js-pure: registry.npmmirror.com/core-js-pure/3.22.5
       error-stack-parser: registry.npmmirror.com/error-stack-parser/2.0.7
       find-up: registry.npmmirror.com/find-up/5.0.0
       html-entities: registry.npmmirror.com/html-entities/2.3.2
       loader-utils: registry.npmmirror.com/loader-utils/2.0.2
-      react-refresh: registry.npmmirror.com/react-refresh/0.11.0
+      react-refresh: registry.npmmirror.com/react-refresh/0.13.0
       schema-utils: registry.npmmirror.com/schema-utils/3.1.1
-      sockjs-client: registry.npmmirror.com/sockjs-client/1.6.0
       source-map: registry.npmmirror.com/source-map/0.7.3
+      webpack: registry.npmmirror.com/webpack/5.70.0
     dev: false
 
   registry.npmmirror.com/@polka/url/1.0.0-next.21:
@@ -3778,6 +3810,12 @@ packages:
     version: 4.0.0
     dev: true
 
+  registry.npmmirror.com/@types/prop-types/15.7.5:
+    resolution: {integrity: sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/prop-types/-/prop-types-15.7.5.tgz}
+    name: '@types/prop-types'
+    version: 15.7.5
+    dev: true
+
   registry.npmmirror.com/@types/qs/6.9.7:
     resolution: {integrity: sha512-FGa1F62FT09qcrueBA6qYTrJPVDzah9a+493+o2PCXsesWHIn27G98TsSMs3WPNbZIEj4+VJf6saSFpvD+3Zsw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/qs/-/qs-6.9.7.tgz}
     name: '@types/qs'
@@ -3788,6 +3826,24 @@ packages:
     resolution: {integrity: sha512-EEhsLsD6UsDM1yFhAvy0Cjr6VwmpMWqFBCb9w07wVugF7w9nfajxLuVmngTIpgS6svCnm6Vaw+MZhoDCKnOfsw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/range-parser/-/range-parser-1.2.4.tgz}
     name: '@types/range-parser'
     version: 1.2.4
+    dev: true
+
+  registry.npmmirror.com/@types/react-dom/18.0.4:
+    resolution: {integrity: sha512-FgTtbqPOCI3dzZPZoC2T/sx3L34qxy99ITWn4eoSA95qPyXDMH0ALoAqUp49ITniiJFsXUVBtalh/KffMpg21Q==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/react-dom/-/react-dom-18.0.4.tgz}
+    name: '@types/react-dom'
+    version: 18.0.4
+    dependencies:
+      '@types/react': registry.npmmirror.com/@types/react/18.0.9
+    dev: true
+
+  registry.npmmirror.com/@types/react/18.0.9:
+    resolution: {integrity: sha512-9bjbg1hJHUm4De19L1cHiW0Jvx3geel6Qczhjd0qY5VKVE2X5+x77YxAepuCwVh4vrgZJdgEJw48zrhRIeF4Nw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/react/-/react-18.0.9.tgz}
+    name: '@types/react'
+    version: 18.0.9
+    dependencies:
+      '@types/prop-types': registry.npmmirror.com/@types/prop-types/15.7.5
+      '@types/scheduler': registry.npmmirror.com/@types/scheduler/0.16.2
+      csstype: registry.npmmirror.com/csstype/3.0.11
     dev: true
 
   registry.npmmirror.com/@types/relateurl/0.2.29:
@@ -3822,6 +3878,12 @@ packages:
     version: 1.43.1
     dependencies:
       '@types/node': registry.npmmirror.com/@types/node/17.0.21
+    dev: true
+
+  registry.npmmirror.com/@types/scheduler/0.16.2:
+    resolution: {integrity: sha512-hppQEBDmlwhFAXKJX2KnWLYu5yMfi91yazPb2l+lbJiwW+wdo1gNeRA+3RgNSO39WYX2euey41KEwnqesU2Jew==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/scheduler/-/scheduler-0.16.2.tgz}
+    name: '@types/scheduler'
+    version: 0.16.2
     dev: true
 
   registry.npmmirror.com/@types/serve-index/1.9.1:
@@ -5299,10 +5361,10 @@ packages:
       semver: registry.npmmirror.com/semver/7.0.0
     dev: true
 
-  registry.npmmirror.com/core-js-pure/3.21.1:
-    resolution: {integrity: sha512-12VZfFIu+wyVbBebyHmRTuEE/tZrB4tJToWcwAMcsp3h4+sHR+fMJWbKpYiCRWlhFBq+KNyO8rIV9rTkeVmznQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/core-js-pure/-/core-js-pure-3.21.1.tgz}
+  registry.npmmirror.com/core-js-pure/3.22.5:
+    resolution: {integrity: sha512-8xo9R00iYD7TcV7OrC98GwxiUEAabVWO3dix+uyWjnYrx9fyASLlIX+f/3p5dW5qByaP2bcZ8X/T47s55et/tA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/core-js-pure/-/core-js-pure-3.22.5.tgz}
     name: core-js-pure
-    version: 3.21.1
+    version: 3.22.5
     requiresBuild: true
     dev: false
 
@@ -5571,6 +5633,12 @@ packages:
     resolution: {integrity: sha512-/WwNkdXfckNgw6S5R125rrW8ez139lBHWouiBvX8dfMFtcn6V81REDqnH7+CRpRipfYlyU1CmOnOxrmGcFOjeA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/csstype/-/csstype-2.6.20.tgz}
     name: csstype
     version: 2.6.20
+
+  registry.npmmirror.com/csstype/3.0.11:
+    resolution: {integrity: sha512-sa6P2wJ+CAbgyy4KFssIb/JNMLxFvKF1pCYCSXS8ZMuqZnMsrxqI2E5sPyoTpxoPU/gVZMzr2zjOfg8GIZOMsw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/csstype/-/csstype-3.0.11.tgz}
+    name: csstype
+    version: 3.0.11
+    dev: true
 
   registry.npmmirror.com/cz-customizable/6.3.0:
     resolution: {integrity: sha512-MWGmWa45v4Ds3NJNNwQc3GCFdjtH3k4ypDWoWkwultMVLf7aOHR9VaXGYGZHLOQS4sMfbkBSjNUYoXCSmLuRSA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/cz-customizable/-/cz-customizable-6.3.0.tgz}
@@ -8067,7 +8135,6 @@ packages:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/js-tokens/-/js-tokens-4.0.0.tgz}
     name: js-tokens
     version: 4.0.0
-    dev: true
 
   registry.npmmirror.com/jsesc/0.5.0:
     resolution: {integrity: sha512-uZz5UnB7u4T9LvwmFqXii7pZSouaRPorGs5who1Ip7VO0wxanFvBL7GkM6dTHlgX+jhBApRetaWpnDabOeTcnA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/jsesc/-/jsesc-0.5.0.tgz}
@@ -8301,6 +8368,15 @@ packages:
       chalk: registry.npmmirror.com/chalk/5.0.1
       is-unicode-supported: registry.npmmirror.com/is-unicode-supported/1.2.0
     dev: true
+
+  registry.npmmirror.com/loose-envify/1.4.0:
+    resolution: {integrity: sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/loose-envify/-/loose-envify-1.4.0.tgz}
+    name: loose-envify
+    version: 1.4.0
+    hasBin: true
+    dependencies:
+      js-tokens: registry.npmmirror.com/js-tokens/4.0.0
+    dev: false
 
   registry.npmmirror.com/lower-case/2.0.2:
     resolution: {integrity: sha512-7fm3l3NAF9WfN6W3JOmf5drwpVqX78JtoGJ3A6W0a6ZnldM41w2fV5D490psKFTpMds8TJse/eHLFFsNHHjHgg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/lower-case/-/lower-case-2.0.2.tgz}
@@ -9856,12 +9932,44 @@ packages:
       unpipe: registry.npmmirror.com/unpipe/1.0.0
     dev: true
 
+  registry.npmmirror.com/react-dom/18.1.0_react@18.1.0:
+    resolution: {integrity: sha512-fU1Txz7Budmvamp7bshe4Zi32d0ll7ect+ccxNu9FlObT605GOEB8BfO4tmRJ39R5Zj831VCpvQ05QPBW5yb+w==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/react-dom/-/react-dom-18.1.0.tgz}
+    id: registry.npmmirror.com/react-dom/18.1.0
+    name: react-dom
+    version: 18.1.0
+    peerDependencies:
+      react: ^18.1.0
+    peerDependenciesMeta:
+      react:
+        optional: true
+    dependencies:
+      loose-envify: registry.npmmirror.com/loose-envify/1.4.0
+      react: registry.npmmirror.com/react/18.1.0
+      scheduler: registry.npmmirror.com/scheduler/0.22.0
+    dev: false
+
   registry.npmmirror.com/react-refresh/0.11.0:
     resolution: {integrity: sha512-F27qZr8uUqwhWZboondsPx8tnC3Ct3SxZA3V5WyEvujRyyNv0VYPhoBg1gZ8/MV5tubQp76Trw8lTv9hzRBa+A==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/react-refresh/-/react-refresh-0.11.0.tgz}
     name: react-refresh
     version: 0.11.0
     engines: {node: '>=0.10.0'}
     dev: true
+
+  registry.npmmirror.com/react-refresh/0.13.0:
+    resolution: {integrity: sha512-XP8A9BT0CpRBD+NYLLeIhld/RqG9+gktUjW1FkE+Vm7OCinbG1SshcK5tb9ls4kzvjZr9mOQc7HYgBngEyPAXg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/react-refresh/-/react-refresh-0.13.0.tgz}
+    name: react-refresh
+    version: 0.13.0
+    engines: {node: '>=0.10.0'}
+    dev: false
+
+  registry.npmmirror.com/react/18.1.0:
+    resolution: {integrity: sha512-4oL8ivCz5ZEPyclFQXaNksK3adutVS8l2xzZU0cqEFrE9Sb7fC0EFK5uEk74wIreL1DERyjvsU915j1pcT2uEQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/react/-/react-18.1.0.tgz}
+    name: react
+    version: 18.1.0
+    engines: {node: '>=0.10.0'}
+    dependencies:
+      loose-envify: registry.npmmirror.com/loose-envify/1.4.0
+    dev: false
 
   registry.npmmirror.com/read-pkg-up/7.0.1:
     resolution: {integrity: sha512-zK0TB7Xd6JpCLmlLmufqykGE+/TlOePD6qKClNW7hHDKFh/J7/7gCWGR7joEQEW1bKq3a3yUZSObOoWLFQ4ohg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/read-pkg-up/-/read-pkg-up-7.0.1.tgz}
@@ -10239,6 +10347,14 @@ packages:
     version: 1.2.4
     dev: true
     optional: true
+
+  registry.npmmirror.com/scheduler/0.22.0:
+    resolution: {integrity: sha512-6QAm1BgQI88NPYymgGQLCZgvep4FyePDWFpXVK+zNSUgHwlqpJy8VEh8Et0KxTACS4VWwMousBElAZOH9nkkoQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/scheduler/-/scheduler-0.22.0.tgz}
+    name: scheduler
+    version: 0.22.0
+    dependencies:
+      loose-envify: registry.npmmirror.com/loose-envify/1.4.0
+    dev: false
 
   registry.npmmirror.com/schema-utils/2.7.1:
     resolution: {integrity: sha512-SHiNtMOUGWBQJwzISiVYKu82GiV4QYGePp3odlY1tuKO7gPtphAT5R/py0fA6xtbgLL/RvtJZnU9b8s0F1q0Xg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/schema-utils/-/schema-utils-2.7.1.tgz}

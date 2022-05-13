@@ -30,6 +30,6 @@
     "./clog": "./dist/clog.js"
   },
   "dependencies": {
-    "@fe6/biu-deps": "workspace:^0.0.0"
+    "@fe6/biu-deps": "workspace:*"
   }
 }

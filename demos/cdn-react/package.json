@@ -1,0 +1,17 @@
+{
+  "name": "demo-cdn-react",
+  "description": "React cdn 项目",
+  "scripts": {
+    "start": "biu dev",
+    "build": "biu build"
+  },
+  "dependencies": {
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0"
+  },
+  "devDependencies": {
+    "@fe6/biu": "workspace:*",
+    "@types/node": "^17.0.21",
+    "@types/react-dom": "^18.0.4"
+  }
+}

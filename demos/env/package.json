@@ -10,7 +10,7 @@
     "vue": "^3.2.33"
   },
   "devDependencies": {
-    "@fe6/biu": "workspace:^0.0.0",
+    "@fe6/biu": "workspace:*",
     "@types/node": "^17.0.21"
   }
 }

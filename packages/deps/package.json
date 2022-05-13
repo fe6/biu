@@ -81,8 +81,7 @@
     "yargs-parser": "21.0.1"
   },
   "dependencies": {
-    "@fe6/biu-utils": "workspace:*",
-    "@pmmmwh/react-refresh-webpack-plugin": "0.5.4"
+    "@fe6/biu-utils": "workspace:*"
   },
   "compiledConfig": {
     "deps": [
