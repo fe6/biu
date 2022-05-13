@@ -51,6 +51,7 @@ export function emitDts(dtsThread: Worker) {
   dtsThread.postMessage(
     JSON.stringify({
       appSrc: store.config.appSrc,
+      isVue: store.isVue,
       build: store.config.build,
       mf: store.config.moduleFederation,
       alias: store.config.resolve.alias,

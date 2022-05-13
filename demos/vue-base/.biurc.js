@@ -16,6 +16,7 @@ module.exports = defineConfig(() => {
     biuShare: {
       name: 'vueBase',
       exposes: {
+        './Content': './src/components/Content',
         '.': './src/exposes/index',
       },
     },
