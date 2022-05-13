@@ -61,22 +61,20 @@ class WPEntries {
   }
 
   async setIndexEntry() {
+    const { appEntry, appSrc } = store.config;
     let entry = '';
-    if (!store.config.appEntry) {
-      const elist = await glob([`${store.config.appSrc}/main.{ts,tsx,jsx,js}`]);
-      if (!elist[0]) {
-        logger.empty();
-        logger.errorExit('找不到入口文件');
-      }
-      entry = elist[0];
-    } else {
-      entry = `${store.config.appSrc}/${store.config.appEntry}`;
+    const entryFiles = appEntry
+      ? `${appSrc}/${appEntry}`
+      : `${appSrc}/main.{ts,tsx,jsx,js}`;
+    const elist = await glob([entryFiles]);
+    if (!elist[0]) {
+      logger.empty();
+      logger.errorExit(`找不到入口文件：${appSrc}/main.ts`);
     }
+    entry = elist[0];
     //基于 src 为根目录 获取文件
     const extname = path.extname(entry);
-    const chunk: string = entry
-      .replace(extname, '')
-      .replace(`${store.config.appSrc}/`, '');
+    const chunk: string = entry.replace(extname, '').replace(`${appSrc}/`, '');
     this.wpConfig.entry[chunk] = [store.resolve(entry)];
   }
 
