@@ -1,6 +1,6 @@
 /** @format */
 
-import fs from 'fs';
+import fs from '@fe6/biu-deps/compiled/fs-extra';
 import path from 'path';
 import { logger } from '@fe6/biu-utils';
 import { Command } from '@fe6/biu-deps';
