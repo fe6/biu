@@ -1,5 +1,6 @@
 /** @format */
 
+import path from 'path';
 import { TOverride } from '../../types';
 import { TYPES_OUT_DIR, TYPES_BIU_NAME } from '../../contant';
 
@@ -10,6 +11,12 @@ export type TTsOptions = {
   dtsPath?: { [key: string]: string };
   typesOutDir?: string;
   typesBiuName?: string;
+  /**
+   * typingsPath
+   * @default ./src/empShareType
+   * emp dts 类型同步
+   */
+  typingsPath?: string;
 };
 export type TRquireTsOptions = TOverride<
   Required<TTsOptions>,
@@ -29,6 +36,7 @@ export const initTs = (op?: TTsOptions): TRquireTsOptions => {
       dtsPath: {},
       typesOutDir: TYPES_OUT_DIR,
       typesBiuName: TYPES_BIU_NAME,
+      typingsPath: path.resolve('src', 'biu-share-types'),
     },
     ...op,
   };

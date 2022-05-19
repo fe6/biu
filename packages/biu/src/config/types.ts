@@ -147,12 +147,6 @@ export type TBiuConfig = {
    */
   reactRuntime?: 'automatic' | 'classic';
   /**
-   * typingsPath
-   * @default ./src/empShareType
-   * emp dts 类型同步
-   */
-  typingsPath?: string;
-  /**
    * 模块编译
    * 如 node_modules 模块 是否加入编译
    */
