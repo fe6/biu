@@ -5,7 +5,7 @@ module.exports = {
   description: '可插拔的企业级应用程序框架',
   themeConfig: {
     repo: 'fe6/biu',
-    // logo: '/logo.svg',
+    logo: '/logo.png',
     docsDir: 'docs',
     docsBranch: 'next',
 
