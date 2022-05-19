@@ -96,7 +96,8 @@ class Dts {
           const dtsUrl = dtsPath?.[key] ? dtsPath[key] : defaultDtsUrl;
           await this.downloadFileAsync(
             dtsUrl,
-            store.config.typingsPath,
+            store.config.ts.typingsPath ||
+              path.resolve('src', 'biu-share-types'),
             `${key}.d.ts`,
             key,
             baseName,

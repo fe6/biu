@@ -10,7 +10,7 @@
     "docs:build": "vitepress build docs",
     "docs:start": "vitepress serve docs --host",
     "prebuild": "[[ $CI = true ]] && npx pnpm@6 install -r --store=node_modules/.pnpm-store || echo skiping pnpm install",
-    "lint": "pretty-quick",
+    "lint": "pretty-quick --staged",
     "preinstall": "npx only-allow pnpm",
     "postinstall": "esno scripts/postinstall.ts",
     "prepare": "husky install"

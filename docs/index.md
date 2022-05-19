@@ -2,10 +2,10 @@
 home: true
 # heroImage: /logo.svg
 actionText: Get Started
-actionLink: /develop/
+actionLink: /guide/
 
 altActionText: Learn More
-altActionLink: /guide/
+altActionLink: /guide/why
 
 features:
   - title: 🔑 可扩展
