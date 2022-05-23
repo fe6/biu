@@ -7,7 +7,6 @@ import chalk from '@fe6/biu-deps/compiled/chalk';
 import fs from '@fe6/biu-deps/compiled/fs-extra';
 import { logger } from '@fe6/biu-utils';
 import store from '../shared/cache';
-// import {clearConsole} from 'src/helper/utils'
 
 class Serve {
   public app: Express;
@@ -31,8 +30,6 @@ class Serve {
     logger.success(`Local: ${chalk.blue(urls)}`);
   }
   async setup() {
-    // if (store.config.debug.clearLog) clearConsole()
-    // logTag(`server running at:`)
     const staticRoot = store.resolve(store.config.build.outDir);
     this.app.use(express.static(staticRoot));
     const html = await fs.readFile(path.join(staticRoot, 'index.html'), 'utf8');

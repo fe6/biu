@@ -23,10 +23,8 @@ class Build {
 
     this.config = getConfig();
 
-    // TODO 打开清空
-    // if (store.config.debug.clearLog) clearConsole()
     logger.ready(`build mode ${store.config.mode}:`);
-    // await reporter.measureFileSizesBeforeBuild()
+
     webpack(this.config, (err: any, stats: any) => {
       if (err) {
         if (err.details) {

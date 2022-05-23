@@ -13,10 +13,6 @@ class devServer {
   }
   async setServer() {
     const config = getConfig();
-    // TODO 打开清空
-    // if (store.config.debug.clearLog) utils.clearConsole();
-    // logger.success(`dev server running at:`);
-
     const compiler = webpack(config);
     this.server = new Server(compiler);
     this.server.start();

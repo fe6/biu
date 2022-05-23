@@ -1847,17 +1847,6 @@ class DevServer {
       }
     }
 
-    if ((this.options.static as INormalizedStatic[]).length > 0) {
-      logger.successOnly(
-        `Content not from webpack is served from '${colors.info(
-          useColor,
-          (this.options.static as INormalizedStatic[])
-            .map((staticOption) => staticOption.directory)
-            .join(', '),
-        )}' directory`,
-      );
-    }
-
     if (this.options.historyApiFallback) {
       logger.info(
         `404s will fallback to '${colors.info(
