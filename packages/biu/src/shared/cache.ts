@@ -111,8 +111,8 @@ class BiuCache {
 
   setProjectInfo() {
     const { runDeps, devDeps } = this;
-    const theDepsKeys = Object.keys(runDeps);
-    const theDevDepsKeys = Object.keys(devDeps);
+    const theDepsKeys = runDeps ? Object.keys(runDeps) : [];
+    const theDevDepsKeys = devDeps ? Object.keys(devDeps) : [];
     if (theDepsKeys.indexOf('vue') > -1) {
       this.isVue = true;
       this.projectLibName = 'vue';

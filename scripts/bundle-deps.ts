@@ -339,13 +339,21 @@ Object.keys(exported).forEach(function (key) {
         JSON.parse(
           fs.readFileSync(path.join(pkgRoot, 'package.json'), 'utf-8'),
         );
+
+      let newtypes = undefined;
+      if (opts.pkgName === 'prompts') {
+        newtypes = {
+          types: 'index.d.ts',
+        };
+      }
+
       fs.writeJSONSync(path.join(target, 'package.json'), {
         ...{},
         ...{ name },
         ...(version ? { version } : undefined),
         ...(author ? { author } : undefined),
         ...(license ? { license } : undefined),
-        ...(types ? { types } : undefined),
+        ...(types ? { types } : newtypes),
         ...(typing ? { typing } : undefined),
         ...(typings ? { typings } : undefined),
       });

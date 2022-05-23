@@ -26,7 +26,7 @@ const debugChalk = chalk.hex(DEBUG_COLOR);
 const infoChalk = chalk.hex(INFO_COLOR);
 
 export const prefixes = {
-  wait: `${pkgName}${waitChalk('[wait]')} -`,
+  wait: (type: string = 'wait') => `${pkgName}${waitChalk(`[${type}]`)} -`,
   error: `${pkgName}${errorChalk('[error]')} -`,
   warn: `${pkgName}${warnChalk('[warn]')} -`,
   ready: (type: string = 'ready') =>
@@ -42,7 +42,7 @@ export function empty() {
 }
 
 export function wait(...message: any[]) {
-  console.log(prefixes.wait, ...message);
+  console.log(prefixes.wait(), ...message);
   empty();
 }
 
