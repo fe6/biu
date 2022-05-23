@@ -33,6 +33,7 @@
     "@types/default-gateway": "3.0.1",
     "@types/find-cache-dir": "3.2.1",
     "@types/node-fetch": "2.6.1",
+    "@types/prompts": "2.0.14",
     "@types/serve-index": "1.9.1",
     "@types/serve-static": "1.13.10",
     "@types/sockjs": "0.3.33",
@@ -67,6 +68,7 @@
     "p-retry": "5.1.0",
     "pirates": "4.0.5",
     "portfinder": "1.0.28",
+    "prompts": "2.4.2",
     "react-refresh": "0.11.0",
     "regenerator-runtime": "0.13.9",
     "schema-utils": "4.0.0",
@@ -124,7 +126,8 @@
       "utf-8-validate",
       "sockjs-client",
       "node-fetch",
-      "es-module-lexer"
+      "es-module-lexer",
+      "prompts"
     ],
     "externals": {
       "commander": "$$LOCAL",
@@ -164,7 +167,8 @@
       "spdy": "$$LOCAL",
       "strip-ansi": "$$LOCAL",
       "sockjs-client": "$$LOCAL",
-      "node-fetch": "$$LOCAL"
+      "node-fetch": "$$LOCAL",
+      "prompts": "$$LOCAL"
     },
     "excludeDtsDeps": [
       "make-dir",

@@ -263,6 +263,7 @@ importers:
       '@types/default-gateway': 3.0.1
       '@types/find-cache-dir': 3.2.1
       '@types/node-fetch': 2.6.1
+      '@types/prompts': 2.0.14
       '@types/serve-index': 1.9.1
       '@types/serve-static': 1.13.10
       '@types/sockjs': 0.3.33
@@ -297,6 +298,7 @@ importers:
       p-retry: 5.1.0
       pirates: 4.0.5
       portfinder: 1.0.28
+      prompts: 2.4.2
       react-refresh: 0.11.0
       regenerator-runtime: 0.13.9
       schema-utils: 4.0.0
@@ -317,6 +319,7 @@ importers:
       '@types/default-gateway': registry.npmmirror.com/@types/default-gateway/3.0.1
       '@types/find-cache-dir': registry.npmmirror.com/@types/find-cache-dir/3.2.1
       '@types/node-fetch': registry.npmmirror.com/@types/node-fetch/2.6.1
+      '@types/prompts': registry.npmmirror.com/@types/prompts/2.0.14
       '@types/serve-index': registry.npmmirror.com/@types/serve-index/1.9.1
       '@types/serve-static': registry.npmmirror.com/@types/serve-static/1.13.10
       '@types/sockjs': registry.npmmirror.com/@types/sockjs/0.3.33
@@ -351,6 +354,7 @@ importers:
       p-retry: registry.npmmirror.com/p-retry/5.1.0
       pirates: registry.npmmirror.com/pirates/4.0.5
       portfinder: registry.npmmirror.com/portfinder/1.0.28
+      prompts: registry.npmmirror.com/prompts/2.4.2
       react-refresh: registry.npmmirror.com/react-refresh/0.11.0
       regenerator-runtime: registry.npmmirror.com/regenerator-runtime/0.13.9
       schema-utils: registry.npmmirror.com/schema-utils/4.0.0
@@ -3808,6 +3812,14 @@ packages:
     resolution: {integrity: sha512-//oorEZjL6sbPcKUaCdIGlIUeH26mgzimjBB77G6XRgnDl/L5wOnpyBGRe/Mmf5CVW3PwEBE1NjiMZ/ssFh4wA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/parse-json/-/parse-json-4.0.0.tgz}
     name: '@types/parse-json'
     version: 4.0.0
+    dev: true
+
+  registry.npmmirror.com/@types/prompts/2.0.14:
+    resolution: {integrity: sha512-HZBd99fKxRWpYCErtm2/yxUZv6/PBI9J7N4TNFffl5JbrYMHBwF25DjQGTW3b3jmXq+9P6/8fCIb2ee57BFfYA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/prompts/-/prompts-2.0.14.tgz}
+    name: '@types/prompts'
+    version: 2.0.14
+    dependencies:
+      '@types/node': registry.npmmirror.com/@types/node/17.0.21
     dev: true
 
   registry.npmmirror.com/@types/prop-types/15.7.5:
@@ -8213,6 +8225,13 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
+  registry.npmmirror.com/kleur/3.0.3:
+    resolution: {integrity: sha512-eTIzlVOSUR+JxdDFepEYcBMtZ9Qqdef+rnzWdRZuMbOywu5tO2w2N7rqjoANZ5k9vywhL6Br1VRjUIgTQx4E8w==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/kleur/-/kleur-3.0.3.tgz}
+    name: kleur
+    version: 3.0.3
+    engines: {node: '>=6'}
+    dev: true
+
   registry.npmmirror.com/klona/2.0.5:
     resolution: {integrity: sha512-pJiBpiXMbt7dkzXe8Ghj/u4FfXOOa98fPW+bihOJ4SjnoijweJrNThJfd3ifXpXhREjpoF2mZVH1GfS9LV3kHQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/klona/-/klona-2.0.5.tgz}
     name: klona
@@ -9823,6 +9842,16 @@ packages:
     version: 2.0.1
     dev: true
 
+  registry.npmmirror.com/prompts/2.4.2:
+    resolution: {integrity: sha512-NxNv/kLguCA7p3jE8oL2aEBsrJWgAakBpgmgK6lpPWV+WuOmY6r2/zbAVnP+T8bQlA0nzHXSJSJW0Hq7ylaD2Q==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/prompts/-/prompts-2.4.2.tgz}
+    name: prompts
+    version: 2.4.2
+    engines: {node: '>= 6'}
+    dependencies:
+      kleur: registry.npmmirror.com/kleur/3.0.3
+      sisteransi: registry.npmmirror.com/sisteransi/1.0.5
+    dev: true
+
   registry.npmmirror.com/proxy-addr/2.0.7:
     resolution: {integrity: sha512-llQsMLSUDUPT44jdrU/O37qlnifitDP+ZwrmmZcoSKyLKvtZxpyV0n2/bD/N4tBAAZ/gJEdZU7KMraoK1+XYAg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/proxy-addr/-/proxy-addr-2.0.7.tgz}
     name: proxy-addr
@@ -10572,6 +10601,12 @@ packages:
       '@polka/url': registry.npmmirror.com/@polka/url/1.0.0-next.21
       mrmime: registry.npmmirror.com/mrmime/1.0.0
       totalist: registry.npmmirror.com/totalist/1.1.0
+    dev: true
+
+  registry.npmmirror.com/sisteransi/1.0.5:
+    resolution: {integrity: sha512-bLGGlR1QxBcynn2d5YmDX4MGjlZvy2MRBDRNHLJ8VI6l6+9FUiyTFNJ0IveOSP0bcXgVDPRcfGqA0pjaqUpfVg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/sisteransi/-/sisteransi-1.0.5.tgz}
+    name: sisteransi
+    version: 1.0.5
     dev: true
 
   registry.npmmirror.com/slash/3.0.0:
