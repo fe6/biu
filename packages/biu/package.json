@@ -17,7 +17,9 @@
   "scripts": {
     "build": "pnpm tsc",
     "build:deps": "pnpm esno ../../scripts/bundle-deps.ts",
-    "start": "pnpm build -- --watch"
+    "start": "pnpm build -- --watch",
+    "release": "pnpm esno ../../scripts/release.ts biu",
+    "changelog": "conventional-changelog -p angular -i changelog.md -s --commit-path . --lerna-package biu"
   },
   "repository": {
     "type": "git",
