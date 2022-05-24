@@ -4,7 +4,6 @@
   "description": "@fe6/biu-utils",
   "typings": "dist/index.d.ts",
   "files": [
-    "compiled",
     "dist"
   ],
   "scripts": {
