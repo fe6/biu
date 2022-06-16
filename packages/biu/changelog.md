@@ -1,3 +1,12 @@
+## [1.0.4](https://github.com/fe6/biu/compare/biu@1.0.3...biu@1.0.4) (2022-06-16)
+
+
+### Bug Fixes
+
+* **$biu:** run error ([3d6fc52](https://github.com/fe6/biu/commit/3d6fc5262ff0ed44a12bd39e6dc9b2da0c725e42))
+
+
+
 ## [1.0.3](https://github.com/fe6/biu/compare/biu@1.0.2...biu@1.0.3) (2022-06-16)
 
 
