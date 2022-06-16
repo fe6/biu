@@ -1,3 +1,12 @@
+## [1.0.5](https://github.com/fe6/biu/compare/biu@1.0.4...biu@1.0.5) (2022-06-16)
+
+
+### Bug Fixes
+
+* **$deps:** error ([0d271f4](https://github.com/fe6/biu/commit/0d271f44c2c6b77b20a588abdea1251397df30ea))
+
+
+
 ## [1.0.4](https://github.com/fe6/biu/compare/biu@1.0.3...biu@1.0.4) (2022-06-16)
 
 
