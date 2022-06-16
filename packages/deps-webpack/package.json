@@ -1,6 +1,6 @@
 {
   "name": "@fe6/biu-deps-webpack",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "@fe6/biu-deps-webpack",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
