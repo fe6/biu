@@ -81,9 +81,6 @@
     "utf-8-validate": "^5.0.9",
     "yargs-parser": "21.0.1"
   },
-  "dependencies": {
-    "@fe6/biu-utils": "workspace:*"
-  },
   "compiledConfig": {
     "deps": [
       "commander",

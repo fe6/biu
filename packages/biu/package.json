@@ -35,10 +35,10 @@
     "access": "public"
   },
   "dependencies": {
-    "@fe6/biu-deps": "workspace:*",
-    "@fe6/biu-deps-webpack": "workspace:*",
-    "@fe6/biu-utils": "workspace:*",
-    "@swc/core": "^1.2.164",
+    "@fe6/biu-deps": "workspace:^1.0.0",
+    "@fe6/biu-deps-webpack": "workspace:^1.0.0",
+    "@fe6/biu-utils": "workspace:^1.0.0",
+    "@swc/core": "1.2.164",
     "esbuild": "0.14.38"
   },
   "pnpm": {
