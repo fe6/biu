@@ -1,7 +1,7 @@
 /** @format */
 
 import { Options as WebpackHtmlPluginOption } from '@fe6/biu-deps-webpack/compiled/html-webpack-plugin';
-import { fsExtra } from '@fe6/biu-deps';
+import fsExtra from '@fe6/biu-deps/compiled/fs-extra';
 
 import store from '../../shared/cache';
 

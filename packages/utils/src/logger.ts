@@ -1,6 +1,6 @@
 /** @format */
 
-import { chalk } from '@fe6/biu-deps';
+import chalk from 'chalk';
 
 import {
   PKG_NAME,

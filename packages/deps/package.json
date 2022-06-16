@@ -2,14 +2,11 @@
   "name": "@fe6/biu-deps",
   "version": "0.0.0",
   "description": "@fe6/biu-deps",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
   "files": [
-    "compiled",
-    "dist"
+    "compiled"
   ],
   "scripts": {
-    "build": "pnpm tsc",
+    "build": "echo biu-deps build finish",
     "build:deps": "pnpm esno ../../scripts/bundle-deps.ts",
     "generate:webpackPackages": "zx ./scripts/generate-webpack-packages.mjs",
     "start": "pnpm build -- --watch",
