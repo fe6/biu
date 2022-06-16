@@ -1,3 +1,12 @@
+## [1.0.1](https://github.com/fe6/biu/compare/biu@1.0.0...biu@1.0.1) (2022-06-16)
+
+
+### Bug Fixes
+
+* **$deps:** workspace error ([443f630](https://github.com/fe6/biu/commit/443f630aae93731ea13887ea0446c930528eb163))
+
+
+
 # 1.0.0 (2022-06-16)
 
 
