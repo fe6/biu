@@ -35,9 +35,9 @@
     "access": "public"
   },
   "dependencies": {
-    "@fe6/biu-deps": "^1.0.0",
-    "@fe6/biu-deps-webpack": "^1.0.0",
-    "@fe6/biu-utils": "^1.0.0",
+    "@fe6/biu-deps": "^1.0.2",
+    "@fe6/biu-deps-webpack": "^1.0.3",
+    "@fe6/biu-utils": "^1.0.1",
     "@swc/core": "1.2.164",
     "esbuild": "0.14.38"
   },
