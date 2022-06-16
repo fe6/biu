@@ -3,6 +3,8 @@
 import webpack from '@fe6/biu-deps-webpack/compiled/webpack';
 import { getConfig } from '../shared/wp-chain';
 import Server from '../server';
+import store from '../shared/cache';
+import { clearConsole } from '../shared/utils';
 
 class devServer {
   server?: Server;
@@ -12,6 +14,7 @@ class devServer {
     this.setProcess();
   }
   async setServer() {
+    if (store.config.debug.clearLog) clearConsole();
     const config = getConfig();
     const compiler = webpack(config);
     this.server = new Server(compiler);

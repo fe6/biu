@@ -5,6 +5,7 @@ import { logger } from '@fe6/biu-utils';
 
 import { getConfig } from '../shared/wp-chain';
 import store from '../shared/cache';
+import { clearConsole } from '../shared/utils';
 import { createDtsEmitThreadForBuild } from '../dts';
 
 class Build {
@@ -23,6 +24,7 @@ class Build {
 
     this.config = getConfig();
 
+    if (store.config.debug.clearLog) clearConsole();
     logger.ready(`build mode ${store.config.mode}:`);
 
     webpack(this.config, (err: any, stats: any) => {
