@@ -123,7 +123,7 @@ export async function goRelease(version: string) {
   const confirmRunBeforeRelease = await prompts({
     type: 'confirm',
     name: 'yes',
-    message: `运行 pnpm build 命令了吗?`,
+    message: `运行 pnpm build:release 命令了吗?`,
   });
 
   if (!confirmRunBeforeRelease.yes) {

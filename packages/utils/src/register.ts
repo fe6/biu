@@ -2,7 +2,7 @@
 
 // Fork from https://github.com/umijs/umi-next/blob/master/packages/utils/src/register.ts
 import { extname } from 'path';
-import { addHook } from '@fe6/biu-deps/compiled/pirates';
+import { addHook } from 'pirates';
 
 const COMPILE_EXTS = ['.ts', '.tsx', '.js', '.jsx'];
 const HOOK_EXTS = [...COMPILE_EXTS, '.mjs'];

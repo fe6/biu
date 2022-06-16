@@ -6,6 +6,7 @@
     "start": "esno scripts/turbo.ts --cmd start",
     "build": "pnpm build:pkg",
     "build:pkg": "pnpm run --filter=@fe6/biu build && pnpm run --filter=@fe6/*  --filter=!@fe6/biu --parallel build",
+    "build:release": "esno scripts/turbo.ts --cmd build --no-cache -- --declarationMap false",
     "docs:dev": "vitepress dev docs --host",
     "docs:build": "vitepress build docs",
     "docs:start": "vitepress serve docs --host",
@@ -51,7 +52,7 @@
     "semver": "7.3.5",
     "ts-node": "^10.7.0",
     "ts-transform-paths": "^2.0.3",
-    "turbo": "^1.1.6",
+    "turbo": "^1.2.16",
     "typescript": "^4.6.2",
     "vitepress": "^0.22.3",
     "zx": "4.3.0"

@@ -31,6 +31,7 @@
     "./clog": "./dist/clog.js"
   },
   "dependencies": {
-    "@fe6/biu-deps": "workspace:*"
+    "chalk": "4.1.2",
+    "pirates": "4.0.5"
   }
 }

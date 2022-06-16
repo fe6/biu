@@ -55,7 +55,7 @@ async function turbo(opts: {
   const options = [
     opts.cmd,
     `--cache-dir=".turbo"`,
-    `--scope="${opts.scope}"`,
+    `--filter="${opts.scope}"`,
     `--no-deps`,
     `--include-dependencies`,
     cacheCmd,

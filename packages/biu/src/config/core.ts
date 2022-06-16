@@ -1,8 +1,7 @@
 /** @format */
 
-import { existsSync } from '@fe6/biu-deps/compiled/fs-extra';
+import fsExtra, { existsSync } from '@fe6/biu-deps/compiled/fs-extra';
 import { join } from 'path';
-import { fsExtra } from '@fe6/biu-deps';
 import { TCmdOptions, TMode } from '../types';
 import { DEFAULT_CONFIG_FILES } from '../contant';
 import { TBiuConfigExport } from './types';
